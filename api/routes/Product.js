@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const { restart } = require("nodemon");
 const Product = require("../models/Product");
-const User = require("../models/Product");
 const {
     verifyToken,
     verifyTokenAuth,
@@ -55,7 +54,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
     //GET 
 
-    router.delete("/find/:id", async (req, res)=>{
+    router.get("/find/:id", async (req, res)=>{
         try{
             const product = await Product.findById(req.params.id);
             res.status(200).json(product);
@@ -85,7 +84,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
                 products= await Product.find();
             }
            
-             res.status(200).json(users);
+             res.status(200).json(products);
         }catch(err){
             res.status(500).json.apply(err)
         }

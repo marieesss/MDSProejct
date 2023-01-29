@@ -46,7 +46,7 @@ router.put("/:id", verifyTokenAuth, async (req, res) => {
 
     //GET 
 
-    router.delete("/find/:id", verifyTokenAdmin, async (req, res)=>{
+    router.get("/find/:id", verifyTokenAdmin, async (req, res)=>{
         try{
             const user = await User.findById(req.params.id);
             const {password, ...others} = user._doc;
@@ -61,7 +61,7 @@ router.put("/:id", verifyTokenAuth, async (req, res) => {
 
          //GET All users
 
-    router.delete("/find", verifyTokenAdmin, async (req, res)=>{
+    router.get("/find", verifyTokenAdmin, async (req, res)=>{
         const query = req.query.new;
         try{
             const users = query?await User.find().sort({_id: -1}).limit(5):await User.find();
@@ -70,5 +70,27 @@ router.put("/:id", verifyTokenAuth, async (req, res) => {
             res.status(500).json.apply(err)
         }
       })
+
+//GET USER ROUTES 
+
+router.get("/stats", verifyTokenAdmin, async (req, res) => {
+    const date= new Date();
+    const lasterYear = new Date(date.setFullYear(date.getFullYear()-1));
+    try{
+        const data = await User.aggregate([
+            {$match: {createdAt: {$gte: lasterYear}} },
+            {$project: {month:{$month : "$createdAt"}}},
+            {$groupe :{
+                _id: "$month",
+                total: {$sum:1}
+            }}
+        ])
+        res.status(200).json(data);
+    }catch(err){
+        res.status(500).json(err);
+    }
+
+
+})
 
 module.exports = router

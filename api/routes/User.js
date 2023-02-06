@@ -66,26 +66,31 @@ router.delete("/:id", verifyTokenAuth, async (req, res) => {
         }
       })
 
-//GET USER ROUTES 
+//GET USER STATS
 
 router.get("/stats", verifyTokenAdmin, async (req, res) => {
-    const date= new Date();
-    const lasterYear = new Date(date.setFullYear(date.getFullYear()-1));
-    try{
-        const data = await User.aggregate([
-            {$match: {createdAt: {$gte: lasterYear}} },
-            {$project: {month:{$month : "$createdAt"}}},
-            {$groupe :{
-                _id: "$month",
-                total: {$sum:1}
-            }}
-        ])
-        res.status(200).json(data);
-    }catch(err){
-        res.status(500).json(err);
-    }
+  const date = new Date();
+  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 
-
-})
+  try {
+    const data = await User.aggregate([
+      { $match: { createdAt: { $gte: lastYear } } },
+      {
+        $project: {
+          month: { $month: "$createdAt" },
+        },
+      },
+      {
+        $group: {
+          _id: "$month",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(data)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router

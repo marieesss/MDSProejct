@@ -61,7 +61,7 @@ router.put("/:id", verifyTokenAuth, async (req, res) => {
 
          //GET All users
 
-    router.get("/find", verifyTokenAdmin, async (req, res)=>{
+    router.get("/", verifyTokenAdmin, async (req, res)=>{
         const query = req.query.new;
         try{
             const users = query?await User.find().sort({_id: -1}).limit(5):await User.find();

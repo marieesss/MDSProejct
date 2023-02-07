@@ -17,6 +17,7 @@ const OrderSchema = new mongoose.Schema(
         ],
         amount: {type:Number, required:true},
         adress: {type:Object, required:true},
+        Hub: {type:String, required:true},
         status: {type:String, default:"en Attente"},
 
 

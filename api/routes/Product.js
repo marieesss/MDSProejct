@@ -64,28 +64,35 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
          //GET All Product
 
-    router.get("/", async (req, res)=>{
-        const qNew = req.query.new;
-        const qCategorie = req.query.category;
-        try{
+         router.get("/", async (req, res) => {
+          const qNew = req.query.new;
+          const qCategory = req.query.category;
+          const qFermier= req.query.fermier;
+          try {
             let products;
-            //On récupère les 5 produits les plus récents
-            if(qNew){
-                 products = query?await Product.find().sort({_id: -1}).limit(5):await User.find();
-            //On récupère les produits qui correspondent à une catégorie
-            }else if (qCategorie){
-                products = await Product.find({categories:{
-                    $in: [qCategorie],
-                }})
-            //S'il n'y a pas les conditions précédentes on récupère tout les produits
-            }else {
-                products= await Product.find();
+        
+            if (qNew) {
+              products = await Product.find().sort({ createdAt: -1 }).limit(1);
+            } else if (qCategory) {
+              products = await Product.find({
+                categories: {
+                  $in: [qCategory],
+                },
+              });
+            } else if (qFermier) {
+              products = await Product.find({
+                fermierId: {
+                  $in: [qFermier],
+                },
+              });
+            } else {
+              products = await Product.find();
             }
-           
-             res.status(200).json(products);
-        }catch(err){
-            res.status(500).json.apply(err)
-        }
-      })
+        
+            res.status(200).json(products);
+          } catch (err) {
+            res.status(500).json(err);
+          }
+        });
 
 module.exports = router

@@ -8,6 +8,7 @@ const productRoute = require('./routes/Product');
 const cartRoute = require('./routes/Cart');
 const orderRoute = require('./routes/Order');
 const HubRoute = require('./routes/Hub');
+const FermierRoute = require('./routes/Fermier');
 const stripeRoute = require("./routes/stripe");
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/hub", HubRoute);
+app.use("/api/fermier", FermierRoute);
 app.use("/api/checkout", stripeRoute);
 
   

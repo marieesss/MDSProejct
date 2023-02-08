@@ -8,6 +8,7 @@ const ProductSchema = new mongoose.Schema(
         categories:{type:Array},
         price:{type:String},
         size:{type:Number, required:true},
+        fermierId:{type:String, required:true},
 
 
 

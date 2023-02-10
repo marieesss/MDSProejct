@@ -10,8 +10,7 @@ const {
 //UPDATE
 router.put("/:id", verifyTokenAdmin, async (req, res) => {
   if (req.body.password) {
-    req.body.password = 
-      req.body.password
+    req.body.password = req.body.password
   }
 
   try {

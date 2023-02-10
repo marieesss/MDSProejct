@@ -14,6 +14,9 @@ const Menu = () => {
     <NavLink to="/salut" className={(nav) => (nav.isActive ? "nav-active" : "")}>
         <li>salut</li>
     </NavLink>
+    <NavLink to="/inscription" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+        <li>inscription</li>
+    </NavLink>
 </ul>
 
       </div>

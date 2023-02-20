@@ -10,6 +10,7 @@ const orderRoute = require('./routes/Order');
 const HubRoute = require('./routes/Hub');
 const FermierRoute = require('./routes/Fermier');
 const stripeRoute = require("./routes/stripe");
+const cors = require('cors');
 
 dotenv.config();
 
@@ -21,11 +22,7 @@ dotenv.config();
     console.log(err);
   });
 
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
-
+  app.use(cors())
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);

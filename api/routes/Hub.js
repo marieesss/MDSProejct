@@ -64,7 +64,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
          //GET All Hubs
 
-router.get("/", verifyTokenAdmin, async (req, res) => {
+router.get("/", async (req, res) => {
     try{
         const hubs = await Hub.find();
         res.status(200).json(hubs);

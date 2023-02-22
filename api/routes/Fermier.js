@@ -67,7 +67,7 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 
          //GET All Fermiers
 
-router.get("/", verifyTokenAuth, async (req, res) => {
+router.get("/", async (req, res) => {
     try{
         const fermiers = await Fermier.find();
         res.status(200).json(fermiers);

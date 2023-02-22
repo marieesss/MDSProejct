@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
   // compare le mot de passe décrypté et le mot de passe entré
   const originalPassword = hashedPassword.toString(CryptoJS.enc.Utf8);
       if(originalPassword !== req.body.password){
-         res.status(401).json("Wrong Password");
+         return res.status(401).json("Wrong Password");
       }else{
         // crée un token en fonction de son statut Admin ou non
          const accessToken =jwt.sign({
@@ -56,13 +56,14 @@ router.post('/login', async (req, res) => {
               const {password, ...others} = user._doc;
             
          
-            res.status(200).json({...others, accessToken});
+            return res.status(200).json({...others, accessToken});
       }
              
         
 
   }catch(err){
-      res.status(500).json(err);
+      return res.json(err);
+      
   }
 
 });

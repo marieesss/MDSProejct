@@ -10,11 +10,13 @@ import ProductList from './pages/ProductList';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
+import { useSelector } from 'react-redux';
 
 
 
 
 const App = () => {
+  const user = useSelector((state)=> state.user.currentUser)
   return ( 
     <Routes>
       <Route path="/" element={<Home/>} />

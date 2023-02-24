@@ -8,20 +8,21 @@ const Menu = () => {
       <div className="navigation">
 <ul>
     <NavLink to="/"  className={(nav) => (nav.isActive ? "nav-active" : "")}>
-        <li>Accueil</li>
+        <li id ="menu">Accueil</li>
+    </NavLink>
+    <NavLink to="/productf" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu">product: </li>
     </NavLink>
     <NavLink to="/about" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-        <li>A propos</li>
-    </NavLink>
-    <NavLink to="/salut" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-        <li>salut</li>
+    <li id ="menu">A propos</li>
     </NavLink>
     <NavLink to="/inscription" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-        <li>inscription</li>
+    <li id ="menu">inscription</li>
     </NavLink>
     <NavLink to="/cart" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-        <li>Panier: {quantity}</li>
+    <li id ="menu">Panier: {quantity}</li>
     </NavLink>
+    
 </ul>
 
       </div>

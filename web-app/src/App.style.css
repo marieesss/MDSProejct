@@ -1,5 +1,17 @@
-.container {
+.navigation {
 
   text-align: center;
 }
 
+li#menu {
+  display: inline;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li#menu:hover {
+  color: rgb(240, 0, 0);
+}

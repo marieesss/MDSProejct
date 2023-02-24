@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
+import Menu from '../components/Menu';
+
 
 const Cart = () => {
   const [stripeToken, setStripeToken]= useState(null)
@@ -69,6 +71,8 @@ const Cart = () => {
 
   return (
     <div>
+
+      <Menu/>
       {cart.Product.map(product =>(
         <div> 
           <p> Produit {product.title}</p>
@@ -93,7 +97,7 @@ const Cart = () => {
 
       <StripeCheckout
       name="Nos producteurs locaux"
-      image="https://upload.wikimedia.org/wikipedia/fr/thumb/4/43/Logo_Olympique_de_Marseille.svg/1200px-Logo_Olympique_de_Marseille.svg.png"
+      image="https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
       billingAddress
       shippingAddress

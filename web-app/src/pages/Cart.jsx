@@ -75,11 +75,11 @@ const Cart = () => {
       <Menu/>
       {cart.Product.map(product =>(
         <div> 
-          <p> {product.title}</p>
-          <p> {product._id}</p>
-          <p> {product.quantity}</p>
-          <p> {product.price}</p>
-          <p> total {product.price*product.quantity}</p>
+          <p> Produit {product.title}</p>
+          <img src={product.img}/>
+          <p> Quantité {product.quantity} kg</p>
+          <p> Prix au kilo  {product.price} euros </p>
+          <p> Total {product.price*product.quantity} euros</p>
          </div>
       ))}
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { NavLink} from 'react-router-dom';
 import { logout } from '../redux/userRedux';
+import { resetCart } from '../redux/cartRedux';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -10,7 +11,8 @@ const Menu = () => {
     
     const logoutHandler = (e) =>{
       e.preventDefault();
-      dispatch(logout())
+      dispatch(logout());
+      dispatch(resetCart())
       }
 
     return (

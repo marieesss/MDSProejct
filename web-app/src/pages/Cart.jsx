@@ -9,8 +9,14 @@ import Menu from '../components/Menu';
 const Cart = () => {
   const [stripeToken, setStripeToken]= useState(null)
   const [hub, setHub]= useState([])
+  const [produits, setProduits]= useState([])
+  console.log(produits)
   const [hubChoisi, setHubChoisi]= useState({})
   const cart= useSelector(state=> state.cart)
+  const user = useSelector((state) => state.user.currentUser._id);
+  const userToken = useSelector((state) => state.user.currentUser.accessToken);
+  console.log(user)
+
   const navigate = useNavigate();
 
   const KEY = "pk_test_51MVYn2IzQZmuQaNoGP0suRknLYxQ1RWEmf7RkSkhkGciNL7RoL4jEsNZ9r2D02FOlNmKlFTdUffh0dslwwxgLpHO00xx3txkDh";
@@ -19,13 +25,40 @@ const Cart = () => {
     setStripeToken(token);
   };
 
+  const registerOrderFirst = async () => {
+    const config = {
+      headers: { token: `Bearer ${userToken}` }
+  };
+    const produitArray = []
+    for(let i = 0; i < cart.Product.length; i++){
+      produitArray.push(cart.Product[i]._id, )
+    }
+    try {
+      const res = await axios.post("http://localhost:5000/api/order", {
+          userId: user,
+          products: [{
+            productId : produitArray[0]
+          , 
+            quantity : 1
+          }
+            ],
+          amount: cart.total,
+          Hub: hub.id,
+          Status: "En attente de paiement"
+         }, 
+         config);
+         console.log(res.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  };
   const registerOrder = async () => {
     try {
       const res = await axios.post("http://localhost:5000/api/order", {
           products: cart.products,
           amount: cart.total,
-          Hub: hub,
-          adresse: "16 rue foncet"
+          Hub: hub
          });
          console.log(res.data)
       
@@ -63,6 +96,7 @@ const Cart = () => {
   }, [])
 
   const handleFilter = (e) => {
+    console.log(e.target.value)
     const value = e.target.value;
         let hubseul = hub.filter(hub=> hub._id.includes(value))
         setHubChoisi(hubseul)
@@ -105,7 +139,7 @@ const Cart = () => {
       token={onToken}
       stripeKey={KEY}
       >
-        <button>Paiement</button>
+        <button onClick={registerOrderFirst}>Paiement</button>
       </StripeCheckout>
     </div>
   )

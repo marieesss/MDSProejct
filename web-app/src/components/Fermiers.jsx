@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 const Fermiers = () => {
-   const  [Fermiers, SetFermiers]= useState();
-   const [products, setProducts]= useState();
+   const  [Fermiers, setFarmer]= useState({});
+   const [products, setProducts]= useState({});
    const[fermierId, setFermierId]= useState({});
 
 
@@ -12,7 +12,7 @@ const Fermiers = () => {
     const getFermiers = async ()=> {
       try{
         const res =  await axios.get("http://localhost:5000/api/fermier")
-        SetFermiers(res.data);
+        setFarmer(res.data[0]);
         setFermierId(res.data[0]);
       }catch(err){}
     }
@@ -25,20 +25,32 @@ const Fermiers = () => {
       try{
         console.log(fermierId)
         const res = await axios.get(`http://localhost:5000/api/product?fermier=${fermierId._id}` );
-        console.log(res.data)
         setProducts(res.data)
+        console.log(res)
       }catch(err){
         console.log(err)
       }
     };
     getProducts();
     
-}, [fermierId])
+}, [fermierId._id])
 
   return (
     <div>
         <div>
-
+           <img src={Fermiers.img}/>
+        </div>
+        <div>
+           {Fermiers.name}
+        </div>
+       <div>
+          {products.lenght > 0 ? products.map(item=>
+            <div> 
+              <div>
+                <img src={item._id}/>
+                </div>
+            </div>
+            ) : <div/>}
         </div>
     </div>
   )

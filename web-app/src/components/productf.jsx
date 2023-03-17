@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+
 import axios from 'axios';
 import Menu from './Menu';
 
@@ -12,6 +14,7 @@ function ProductListTest() {
         console.log(response)
         const productsData = response.data;
         const productsList = Object.keys(productsData).map(key => productsData[key]);
+        console.log(productsList)
         setProducts(productsList);
       })
       .catch(error => {
@@ -49,6 +52,9 @@ function ProductListTest() {
               <p>{product.price}</p>
               <p>{product.fermierId}</p>
               <p>{product.bio}</p>
+              <Link to={`/product/${product._id}`}>
+                <button> Acheter </button>
+            </Link>
 
             </div>
           ))
@@ -62,6 +68,9 @@ function ProductListTest() {
             <p>{product.fermierId}</p>
             <p>{product.bio}</p>
             <p>{product.price}</p>
+            <Link to={`/product/${product._id}`}>
+                <button> Acheter </button>
+            </Link>
 
             
           </div>

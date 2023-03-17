@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { NavLink} from 'react-router-dom';
-import { logout } from '../redux/apiCalls';
+import { logout } from '../redux/userRedux';
+import { resetCart } from '../redux/cartRedux';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -9,7 +10,9 @@ const Menu = () => {
     const user = useSelector((state) => state.user.currentUser);
     
     const logoutHandler = (e) =>{
-        logout(dispatch);
+      e.preventDefault();
+      dispatch(logout());
+      dispatch(resetCart())
       }
 
     return (
@@ -30,9 +33,10 @@ const Menu = () => {
     <NavLink to="/cart" className={(nav) => (nav.isActive ? "nav-active" : "")}>
     <li id ="menu">Panier: {quantity}</li>
     </NavLink>
-    {user && <div>
+    {user && 
+    <div>
             <li> Mon profil</li>
-            <NavLink to="/" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+            <NavLink to="/">
             <li onClick={logoutHandler}> Logout</li>
             </NavLink>
             </div>}

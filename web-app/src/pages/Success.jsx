@@ -20,9 +20,7 @@ const Success = () => {
                 headers: { token: `Bearer ${userToken}` }
              });
              setInformations(res.data)
-             console.log(informations)
-             setIdCart(res.data._id)
-             console.log(idCart)
+             setIdCart(res.data[0]._id)
 
           
         } catch (error) {
@@ -48,11 +46,11 @@ const Success = () => {
       
 useEffect(()=>{
     getOrder()
-}, [])
+}, [user, userToken])
 
 useEffect(()=>{
   putOrder()
-}, [informations])
+}, [idCart])
 
 
 

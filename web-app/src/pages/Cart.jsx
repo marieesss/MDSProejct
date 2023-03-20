@@ -15,7 +15,7 @@ const Cart = () => {
   const cart= useSelector(state=> state.cart)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
-  console.log(user)
+  console.log(userToken)
 
   const navigate = useNavigate();
 
@@ -37,8 +37,7 @@ const Cart = () => {
       const res = await axios.post("http://localhost:5000/api/order", {
           userId: user,
           products: [{
-            productId : produitArray[0]
-          , 
+            productId : produitArray[0], 
             quantity : 1
           }
             ],

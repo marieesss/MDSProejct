@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User= require("../models/user");
 const CryptoJS = require("crypto-js");
 const jwt =require("jsonwebtoken");
-// REGISTER
+// Inscription
 router.post("/register", async (req, res) => {
   const newUser = new User({
     username: req.body.username,
@@ -55,7 +55,6 @@ router.post('/login', async (req, res) => {
               {expiresIn : "3d"});
               const {password, ...others} = user._doc;
             
-         
             return res.status(200).json({...others, accessToken});
       }
              

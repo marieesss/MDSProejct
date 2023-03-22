@@ -13,7 +13,9 @@ const Fermiers = () => {
       try{
         const res =  await axios.get("http://localhost:5000/api/fermier")
         setFarmer(res.data[0]);
-        setFermierId(res.data[0]);
+        console.log(Fermiers)
+        setFermierId(res.data[0]._id);
+        console.log(fermierId)
       }catch(err){}
     }
     getFermiers();
@@ -24,16 +26,16 @@ const Fermiers = () => {
     const getProducts = async ()=> {
       try{
         console.log(fermierId)
-        const res = await axios.get(`http://localhost:5000/api/product?fermier=${fermierId._id}` );
+        const res = await axios.get(`http://localhost:5000/api/product?fermier=${fermierId}` );
         setProducts(res.data)
-        console.log(res)
+        console.log(products)
       }catch(err){
         console.log(err)
       }
     };
     getProducts();
     
-}, [fermierId._id])
+}, [fermierId])
 
   return (
     <div>
@@ -44,10 +46,11 @@ const Fermiers = () => {
            {Fermiers.name}
         </div>
        <div>
-          {products.lenght > 0 ? products.map(item=>
+          {products.length > 0 ? products.map(item=>
             <div> 
               <div>
-                <img src={item._id}/>
+              <img src={item.img}></img>
+                {item._id}
                 </div>
             </div>
             ) : <div/>}

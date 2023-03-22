@@ -31,7 +31,7 @@ const Product = () => {
      
     
       
-  }, [id])
+  }, [])
 
 
   useEffect(()=>{
@@ -49,7 +49,7 @@ const Product = () => {
    
   
     
-}, [FermierId])
+}, [])
 
 
   const handleQuantity = (type) => {

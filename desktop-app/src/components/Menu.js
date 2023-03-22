@@ -37,6 +37,9 @@ const Menu = () => {
       <li class="nav-item">
         <a class="nav-link" href="/product">product</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user">User</a>
+      </li>
       {user && 
             <li  class="nav-item"> <a class="nav-link"onClick={logoutHandler}> Logout </a></li>
             }

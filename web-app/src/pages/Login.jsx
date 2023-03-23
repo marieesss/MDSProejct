@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import Menu from '../components/Menu';
 import { login } from '../redux/apiCalls';
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
   return (
     
     <div>
+      <Menu/>
       <form>
         <input name="username" type="text" placeholder="email" onChange={(e)=> setEmail(e.target.value)}/>
         <input name="password" type="password" placeholder="Password"onChange={(e)=> setPassword(e.target.value)}/>

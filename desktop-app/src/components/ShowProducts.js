@@ -22,6 +22,7 @@ const ShowProducts = () => {
     const [desc, setdesc] = useState("");
     const [img, setImg] = useState("");
     const [price, setPrice] = useState("");
+    const [quantity, setQuantity] = useState("");
     const [idProduit, setIdproduit] = useState("");
      const config = {
         headers: { token: `Bearer ${userToken}` }
@@ -44,6 +45,18 @@ const ShowProducts = () => {
       try {
         const res = await axios.put(`http://localhost:5000/api/product/${idProduit}`, {
             img: img,
+           }, 
+           config);
+           console.log(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    };
+
+    const putQuantity = async () => {
+      try {
+        const res = await axios.put(`http://localhost:5000/api/product/${idProduit}`, {
+            quantity: quantity,
            }, 
            config);
            console.log(res.data)
@@ -117,6 +130,9 @@ const ShowProducts = () => {
               <Card.Text>
                 {product.price} euros
               </Card.Text>
+              <Card.Text>
+                {product.quantity} kg
+              </Card.Text>
               <Button variant="warning" value={product._id} onClick={deleteProduct}>Supprimer</Button> <br/>
               <Button onClick={() => { handleShow(); setIdproduit(product._id);}} variant="success" value={product._id}>Modifier</Button>
 
@@ -142,6 +158,11 @@ const ShowProducts = () => {
         <Form.Label>Prix</Form.Label>
         <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
         <Button onClick={putPrice} variant="primary" type="submit">
+        créer
+      </Button>
+      <Form.Label>Quantité</Form.Label>
+        <Form.Control min="0" type="number" placeholder="Enter text" onChange={(e)=>setQuantity(e.target.value)}/>
+        <Button onClick={putQuantity} variant="primary" type="submit">
         créer
       </Button>
 

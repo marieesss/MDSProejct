@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Menu from "../components/Menu";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -92,6 +93,7 @@ const Inscription = () => {
 
     return (
         <>
+            <Menu/>
             {success ? (
                 navigate("/login")
             ) : (

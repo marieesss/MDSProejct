@@ -10,12 +10,11 @@ const Cart = () => {
   const [stripeToken, setStripeToken]= useState(null)
   const [hub, setHub]= useState([])
   const [produits, setProduits]= useState([])
-  console.log(produits)
   const [hubChoisi, setHubChoisi]= useState({})
+  const [stripe, setStripe]= useState({})
   const cart= useSelector(state=> state.cart)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
-  console.log(userToken)
 
   const navigate = useNavigate();
 
@@ -29,36 +28,28 @@ const Cart = () => {
     const config = {
       headers: { token: `Bearer ${userToken}` }
   };
-    const produitArray = []
-    for(let i = 0; i < cart.Product.length; i++){
-      produitArray.push(cart.Product[i]._id, )
-    }
+
+    const produitarray= []
+    console.log(produitarray)
+      for(let i = 0; i < cart.Product.length; i++){
+        const array= {
+          productId : cart.Product[i]._id,
+          quantity: cart.Product[i].quantity
+        }
+        produitarray.push(array)
+      }
+      console.log(produitarray)
+    
+
     try {
       const res = await axios.post("http://localhost:5000/api/order", {
           userId: user,
-          products: [{
-            productId : produitArray[0], 
-            quantity : 1
-          }
-            ],
+          products: produitarray,
           amount: cart.total,
           Hub: hub.id,
           Status: "En attente de paiement"
          }, 
          config);
-         console.log(res.data)
-      
-    } catch (error) {
-      console.log(error)
-    }
-  };
-  const registerOrder = async () => {
-    try {
-      const res = await axios.post("http://localhost:5000/api/order", {
-          products: cart.products,
-          amount: cart.total,
-          Hub: hub
-         });
          console.log(res.data)
       
     } catch (error) {
@@ -71,18 +62,26 @@ const Cart = () => {
         try{
          const res = await axios.post("http://localhost:5000/api/checkout/payment", {
           tokenId: stripeToken.id,
-          amount:500,
+          amount:cart.total*100,
          });
+         let data= res.data
+         console.log(data)
+         setStripe(data)
+         console.log(stripe)
          navigate("/success", {
-          stripeData: res.data,
           products: cart, });
-          registerOrder();
+          
+        
         }catch(err){
             console.log(err.response.data)
         }
       }
       stripeToken && makeRequest();
   },  [stripeToken, cart.total, navigate,])
+
+  useEffect(()=>{
+    console.log(stripe[0])
+  }, [stripe])
 
   useEffect (()=>{
     const getHub = async ()=> {
@@ -95,7 +94,6 @@ const Cart = () => {
   }, [])
 
   const handleFilter = (e) => {
-    console.log(e.target.value)
     const value = e.target.value;
         let hubseul = hub.filter(hub=> hub._id.includes(value))
         setHubChoisi(hubseul)
@@ -121,7 +119,7 @@ const Cart = () => {
 
       
 
-<select name="_id" onChange={handleFilter}>
+<select name="_id" onClick={handleFilter}>
           <option value="rien">Choisir un point de livraison</option>
           {hub.map(hub =>(
         <option value={hub._id}>{hub.name}</option>
@@ -134,7 +132,7 @@ const Cart = () => {
       description='Votre total est de'
       billingAddress
       shippingAddress
-      amount={500}
+      amount={cart.total*100}
       token={onToken}
       stripeKey={KEY}
       >

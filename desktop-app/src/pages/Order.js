@@ -7,31 +7,38 @@ import axios from 'axios';
 
 const Order = () => {
     const [order, setOrder] = useState([]);
-    const [productId, setProductId] = useState([]);
+    const [productId, setProductId] = useState({});
     const [product, setProduct] = useState([]);
     const [OrderListe, setOrderListe] = useState([]);
     const [UserId, setUserId] = useState([]);
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
-    
-  useEffect(() => {
-    const config = {
+     const config = {
         headers: { token: `Bearer ${userToken}` }
     };
 
+
+  useEffect(() => {
     axios.get(`http://localhost:5000/api/order`, config)
       .then(response => {
         console.log(response)
         const OrderListe = response.data;
         setOrderListe(OrderListe);
-        console.log(OrderListe.length)
-        const Product = response.data[2].products[0].productId;
-        setProductId(Product);
-        // getProduct()
+        setProductId(response.data)
+        console.log(productId)
+        // rechercheProduct()
+        
       })
       .catch(error => {
         console.log(error);
       });
+      if(productId.length >0){
+        getUser(productId)
+        console.log(123)
+        console.log(productId)
+      }else{
+        console.log(456)
+      }
   }, []);
 
 
@@ -75,26 +82,62 @@ const Order = () => {
 
   }
 
-//   const getProduct= () => {
-//     const config = {
-//         headers: { token: `Bearer ${userToken}` }
-//     };
-//     var productListe = [];
-//      for(const i=0; i< OrderListe.length;){
-//         axios.get(`http://localhost:5000/api/product/find/${OrderListe[i].products[0].productsId}`, config)
-//       .then(response => {
-//         console.log(response)
-//         const ProductListe = response.data;
-//         setProduct(ProductListe);
-//         productListe.push(response.data);
+  
+  const getUser =(productIdd)=> {
+    if(productIdd){
+       productIdd.map(item=>{
+      console.log("user", item.userId)
+        axios.get(`http://localhost:5000/api/user/find/${item.userId}`, config)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      
+    })
+    }
+   
+    
+  }
+
+
+//   useEffect(()=>{
+//     console.log(productId)
+//     productId.map(order => {
+//       const orderProduct= []
+//       order.products.map(product=>{
+//         console.log(product)
+//         axios.get(`http://localhost:5000/api/product/find/${product.productId}`, config)
+//         .then(response => {
+//           console.log(response.data)
+//         })
+//         .catch(error => {
+//           console.log(error);
+//         });
+        
 //       })
-//       .catch(error => {
-//         console.log(error);
-//       });
-//       i= i+1;
-//      }
-//      console.log(productListe)
-//   }
+//     })
+//   }, [productId ])
+
+//  const rechercheProduct = () => {
+//     console.log(productId)
+//     productId.map(order => {
+//       const orderProduct= []
+//       order.products.map(product=>{
+//         console.log(product)
+//         // axios.get(`http://localhost:5000/api/product/find/${product}`, config)
+//         // .then(response => {
+//         //   console.log(response.data)
+//         // })
+//         // .catch(error => {
+//         //   console.log(error);
+//         // });
+        
+//       })
+//     })
+//  }
+    
 
 
 

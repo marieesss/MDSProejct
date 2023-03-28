@@ -1,7 +1,8 @@
 import React from 'react'
 import Menu from '../components/Menu'
 import { useEffect, useState} from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
+import "../css/app.css";
 
 import axios from 'axios';
 
@@ -10,7 +11,6 @@ const Order = () => {
     const [productId, setProductId] = useState({});
     const [product, setProduct] = useState([]);
     const [OrderListe, setOrderListe] = useState([]);
-    const [UserId, setUserId] = useState([]);
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
      const config = {
@@ -19,26 +19,16 @@ const Order = () => {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/order`, config)
+    axios.get(`http://localhost:5000/api/order/adminall`, config)
       .then(response => {
         console.log(response)
-        const OrderListe = response.data;
-        setOrderListe(OrderListe);
-        setProductId(response.data)
-        console.log(productId)
-        // rechercheProduct()
+        setOrderListe(response.data)
+        
         
       })
       .catch(error => {
         console.log(error);
       });
-      if(productId.length >0){
-        getUser(productId)
-        console.log(123)
-        console.log(productId)
-      }else{
-        console.log(456)
-      }
   }, []);
 
 
@@ -82,91 +72,49 @@ const Order = () => {
 
   }
 
-  
-  const getUser =(productIdd)=> {
-    if(productIdd){
-       productIdd.map(item=>{
-      console.log("user", item.userId)
-        axios.get(`http://localhost:5000/api/user/find/${item.userId}`, config)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-      
-    })
-    }
-   
-    
-  }
-
-
-//   useEffect(()=>{
-//     console.log(productId)
-//     productId.map(order => {
-//       const orderProduct= []
-//       order.products.map(product=>{
-//         console.log(product)
-//         axios.get(`http://localhost:5000/api/product/find/${product.productId}`, config)
-//         .then(response => {
-//           console.log(response.data)
-//         })
-//         .catch(error => {
-//           console.log(error);
-//         });
-        
-//       })
-//     })
-//   }, [productId ])
-
-//  const rechercheProduct = () => {
-//     console.log(productId)
-//     productId.map(order => {
-//       const orderProduct= []
-//       order.products.map(product=>{
-//         console.log(product)
-//         // axios.get(`http://localhost:5000/api/product/find/${product}`, config)
-//         // .then(response => {
-//         //   console.log(response.data)
-//         // })
-//         // .catch(error => {
-//         //   console.log(error);
-//         // });
-        
-//       })
-//     })
-//  }
-    
-
-
-
 
   return (
     <div>
         <Menu/>
+        <h1>Commandes</h1>
+        <div class="row justify-content-center">
         {OrderListe.map(order=>(
-            <div class="card" style={{width: '18rem'}}>
+            <div class="card m-5" style={{width: '25rem'}}>
                 <div class="card-header">
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">{order._id} </li>
-                
+                <li class="list-group-item"><div class="fa-solid fa-user padding-right"/>{order.user[0].email} </li>
+                <li class="list-group-item">{order.hub} </li>
                 <li class="list-group-item">
-                    {order.status !== "envoyé" ? <button value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
+                  <div class="row justify-content-center">
+                  {order.products.map(product=>(
+                
+                    <div class="col-6" >
+                    <img src={product.img} class="img-order"/>
+                    <div>{product.title}</div>
+                  </div>
+                
+                ))}</div> </li>
+                
+                
+                </ul>
+                <div> <i class="fa-solid fa-check padding-right"></i> {order.status} </div>
+                <div><i class="fa-solid fa-euro-sign padding-right"></i> Total {order.amount} euros </div>
+                <div class=" row justify-content-center">
+                    {order.status !== "envoyé" ? <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
                       <div>
                       <div>Commande envoyée</div>
-                      <button value={order._id} onClick={handleDelete}>Supprimer</button>
+                      <button  class="button-green"value={order._id} onClick={handleDelete}>Supprimer</button>
                       </div>}
                     
-                </li>
-                </ul>
+                </div>
                 </div>
             
-            <div> {order.status} </div>
+            
             </div>
         ))}
 
       
+    </div>
     </div>
   )
 }

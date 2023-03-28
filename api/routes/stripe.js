@@ -8,7 +8,7 @@ router.post("/payment", (req, res) => {
   stripe.charges.create(
     {
       source: req.body.tokenId,
-      amount: 500,
+      amount: req.body.amount,
       currency: "eur",
     },
     (stripeErr, stripeRes) => {

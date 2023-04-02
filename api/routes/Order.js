@@ -67,7 +67,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 
          router.get("/", verifyTokenAdmin, async (req, res) => {
           try {
-            const orders = await Order.find();
+            const orders = await Order.find().sort({createdAt:-1}) ;
             res.status(200).json(orders);
           } catch (err) {
             res.status(500).json(err);
@@ -97,6 +97,34 @@ router.put("/:id", verifyToken, async (req, res) => {
               res.status(500).json(err);
             }
           });
+
+          //GET Order Admin limit 3
+router.get("/adminhomepage", verifyTokenAdmin, async (req, res) => {
+  try {
+    const orders = await Order.aggregate([
+      {
+        $addFields: {
+          user_id: { $toObjectId: "$userId" },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user_id",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $limit: 3 // Limite les résultats à 3
+      }
+    ]).exec();
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
     //Recupérer les utilisateurs et les produits de chaque commande
     router.get("/adminall", verifyTokenAdmin, async (req, res) => {

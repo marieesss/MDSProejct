@@ -26,8 +26,8 @@ const ShowProducts = () => {
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const [idProduit, setIdproduit] = useState("");
-    const [product, setProduct] = useState();
     const [IdFermier, setIdFermier] = useState("");
+    const [Fermier, setFermier] = useState("");
      const config = {
         headers: { token: `Bearer ${userToken}` }
     };
@@ -68,20 +68,24 @@ const ShowProducts = () => {
         console.log(error)
       }
     };
-    // useEffect(() => {
-    //     const config = {
-    //         headers: { token: `Bearer ${userToken}` }
-    //     };
+    useEffect(() => {
+        const config = {
+            headers: { token: `Bearer ${userToken}` }
+        };
     
-    //     axios.get(`http://localhost:5000/api/product`, config)
-    //       .then(response => {
-    //         console.log(response.data)
-    //         setProducts(response.data);
-    //       })
-    //       .catch(error => {
-    //         console.log(error);
-    //       });
-    //   }, []);
+        axios.get(`http://localhost:5000/api/fermier`, config)
+          .then(response => {
+            console.log(response.data)
+            setFermier(response.data)
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+
+      useEffect(()=>{
+        console.log(Fermier)
+      }, [Fermier])
 
       useEffect(() => {
         const config = {
@@ -108,8 +112,7 @@ const ShowProducts = () => {
     
         axios.delete(`http://localhost:5000/api/product/${id}`,config)
           .then(response => {
-            console.log(response)
-            setMessagedelete(true)
+            window.location.reload();
     
           })
           .catch(error => {
@@ -132,11 +135,6 @@ const ShowProducts = () => {
     
   return (
     <div class="row align-content-center">
-        {messageDelete ? 
-                <Alert key={'success'} variant={'success'}>
-                    Ton produit a bien été supprimé merci d'actualiser la page
-              </Alert> :
-              <></>}
         {products.map(product =>(
         <div class="col-4 margin-50 row justify-content-center" > 
             <div class="card" style={{ width: '18rem' }}>
@@ -167,9 +165,6 @@ const ShowProducts = () => {
               
               </Card.Text>
               
-              <Card.Text>
-                {product.quantity} kg
-              </Card.Text>
               </Card.Body>
               </div>
               <div class="row justify-content-center">
@@ -201,10 +196,20 @@ const ShowProducts = () => {
         créer
       </Button>
       <Form.Label>Id du fermier</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setIdFermier(e.target.value)}/>
+        <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
+        <option>Choisir un fermier</option>
+            {Fermier.map(item=>(
+              <option value={item._id}>{item.name}</option>
+            ))
+
+            }
+        </Form.Select>
+
         <Button onClick={putFermier} variant="primary" type="submit">
         créer
       </Button>
+
+      
 
       </Form.Group>
     </Form>

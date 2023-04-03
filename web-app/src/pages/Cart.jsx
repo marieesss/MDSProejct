@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
+import { useSelector, useDispatch} from 'react-redux'
+import { delProduct } from '../redux/cartRedux';
+
 
 
 const Cart = () => {
@@ -11,12 +14,14 @@ const Cart = () => {
   const [hub, setHub]= useState([])
   const [produits, setProduits]= useState([])
   const [hubChoisi, setHubChoisi]= useState({})
-  const [stripe, setStripe]= useState({})
+  const [stripe, setStripe]= useState("")
+  const [stripeMessage, setStripeMessage] = useState("");
   const cart= useSelector(state=> state.cart)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const KEY = "pk_test_51MVYn2IzQZmuQaNoGP0suRknLYxQ1RWEmf7RkSkhkGciNL7RoL4jEsNZ9r2D02FOlNmKlFTdUffh0dslwwxgLpHO00xx3txkDh";
 
@@ -46,7 +51,6 @@ const Cart = () => {
           userId: user,
           products: produitarray,
           amount: cart.total,
-          Hub: hub.id,
           Status: "En attente de paiement"
          }, 
          config);
@@ -65,13 +69,9 @@ const Cart = () => {
           amount:cart.total*100,
          });
          let data= res.data
-         console.log(data)
-         setStripe(data)
-         console.log(stripe)
-         navigate("/success", {
-          products: cart, });
-          
-        
+         setStripe(res.data)
+         setStripeMessage(data.message)
+         console.log(res.data)
         }catch(err){
             console.log(err.response.data)
         }
@@ -79,15 +79,23 @@ const Cart = () => {
       stripeToken && makeRequest();
   },  [stripeToken, cart.total, navigate,])
 
-  useEffect(()=>{
-    console.log(stripe[0])
-  }, [stripe])
+  useEffect(() => {
+    console.log(stripe);
+    if (stripe && stripe.status === "succeeded") {
+      navigate("/success", {
+        state: {
+          stripe: stripe,
+        }
+      });
+    }
+  }, [stripe, cart, navigate]);
 
   useEffect (()=>{
     const getHub = async ()=> {
       try{
         const res =  await axios.get("http://localhost:5000/api/hub")
         setHub(res.data);
+        console.log(hub)
       }catch(err){}
     }
     getHub();
@@ -111,6 +119,7 @@ const Cart = () => {
           <p> Quantité {product.quantity} kg</p>
           <p> Prix au kilo  {product.price} euros </p>
           <p> Total {product.price*product.quantity} euros</p>
+          <button onClick={()=> dispatch(delProduct(product._id))}> Supprimer </button>
          </div>
       ))}
 

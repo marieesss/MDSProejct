@@ -13,3 +13,6 @@ li#menu {
 
 /* Change the link color to #111 (black) on hover */
 
+.container {
+  width: 100%;
+}

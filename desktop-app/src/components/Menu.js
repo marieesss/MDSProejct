@@ -34,6 +34,12 @@ const Menu = () => {
       <li class="li-menu margin-right">
         <a class="nav-link" href="/user">User</a>
       </li>
+      <li class="li-menu margin-right">
+        <a class="nav-link" href="/hub">Hub</a>
+      </li>
+      <li class="li-menu margin-right">
+        <a class="nav-link" href="/fermier">Fermier</a>
+      </li>
       {user && 
             <li  class="nav-item"> <div onClick={logoutHandler} class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/></li>
             }

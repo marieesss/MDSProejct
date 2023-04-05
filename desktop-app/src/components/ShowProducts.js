@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
+import "../css/app.css";
+
 
 
 import axios from 'axios';
@@ -24,6 +26,8 @@ const ShowProducts = () => {
     const [price, setPrice] = useState("");
     const [quantity, setQuantity] = useState("");
     const [idProduit, setIdproduit] = useState("");
+    const [IdFermier, setIdFermier] = useState("");
+    const [Fermier, setFermier] = useState("");
      const config = {
         headers: { token: `Bearer ${userToken}` }
     };
@@ -52,18 +56,6 @@ const ShowProducts = () => {
         console.log(error)
       }
     };
-
-    const putQuantity = async () => {
-      try {
-        const res = await axios.put(`http://localhost:5000/api/product/${idProduit}`, {
-            quantity: quantity,
-           }, 
-           config);
-           console.log(res.data)
-      } catch (error) {
-        console.log(error)
-      }
-    };
   
     const putPrice= async (e) => {
       try {
@@ -81,10 +73,29 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://localhost:5000/api/product`, config)
+        axios.get(`http://localhost:5000/api/fermier`, config)
           .then(response => {
             console.log(response.data)
-            setProducts(response.data);
+            setFermier(response.data)
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, []);
+
+      useEffect(()=>{
+        console.log(Fermier)
+      }, [Fermier])
+
+      useEffect(() => {
+        const config = {
+            headers: { token: `Bearer ${userToken}` }
+        };
+    
+        axios.get(`http://localhost:5000/api/product/all`, config)
+          .then(response => {
+            console.log(response.data)
+            setProducts(response.data)
           })
           .catch(error => {
             console.log(error);
@@ -101,8 +112,7 @@ const ShowProducts = () => {
     
         axios.delete(`http://localhost:5000/api/product/${id}`,config)
           .then(response => {
-            console.log(response)
-            setMessagedelete(true)
+            window.location.reload();
     
           })
           .catch(error => {
@@ -110,32 +120,57 @@ const ShowProducts = () => {
           });
     
       }
+
+      const putFermier= async (e) => {
+        try {
+          const res = await axios.put(`http://localhost:5000/api/product/${idProduit}`, {
+              fermierId: IdFermier,
+             }, 
+             config);
+             console.log(res.data)
+        } catch (error) {
+          console.log(error)
+        }
+      };
     
   return (
-    <div>
-        {messageDelete ? 
-                <Alert key={'success'} variant={'success'}>
-                    Ton produit a bien été supprimé merci d'actualiser la page
-              </Alert> :
-              <></>}
+    <div class="row align-content-center">
         {products.map(product =>(
-        <div> 
-            <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={product.img}/>
+        <div class="col-4 margin-50 row justify-content-center" > 
+            <div class="card" style={{ width: '18rem' }}>
+            <div class ="card-header">
+            <Card.Img variant="top" src={product.img} class="img-products"/>
             <Card.Body>
-              <Card.Title>{product.title}</Card.Title>
+              <div class="row justify-content-between">
+                <Card.Title class="col-5">{product.title}</Card.Title>
+                <Card.Text class="col-5">
+                {product.price} euros
+              </Card.Text>
+              </div>
+              
               <Card.Text>
                 {product.desc}
               </Card.Text>
+              
               <Card.Text>
-                {product.price} euros
+              <div>
+                {product.fermier.map(fermier=>(
+                  <div> 
+                    {fermier.name}
+                  </div>
+                ))}
+              </div>
+              
+              
+              
               </Card.Text>
-              <Card.Text>
-                {product.quantity} kg
-              </Card.Text>
-              <Button variant="warning" value={product._id} onClick={deleteProduct}>Supprimer</Button> <br/>
-              <Button onClick={() => { handleShow(); setIdproduit(product._id);}} variant="success" value={product._id}>Modifier</Button>
-
+              
+              </Card.Body>
+              </div>
+              <div class="row justify-content-center">
+              <button class="col-5 button-green margin-right"  value={product._id} onClick={deleteProduct}>Supprimer</button> 
+              <button class="col-5 button-green" onClick={() => { handleShow(); setIdproduit(product._id);}}value={product._id}>Modifier</button>
+              </div>
               <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modifier un Produit
@@ -160,22 +195,31 @@ const ShowProducts = () => {
         <Button onClick={putPrice} variant="primary" type="submit">
         créer
       </Button>
-      <Form.Label>Quantité</Form.Label>
-        <Form.Control min="0" type="number" placeholder="Enter text" onChange={(e)=>setQuantity(e.target.value)}/>
-        <Button onClick={putQuantity} variant="primary" type="submit">
+      <Form.Label>Id du fermier</Form.Label>
+        <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
+        <option>Choisir un fermier</option>
+            {Fermier.map(item=>(
+              <option value={item._id}>{item.name}</option>
+            ))
+
+            }
+        </Form.Select>
+
+        <Button onClick={putFermier} variant="primary" type="submit">
         créer
       </Button>
+
+      
 
       </Form.Group>
     </Form>
         </Modal.Body> 
       </Modal> 
-            </Card.Body>
-          </Card>
+            
+          </div>
             </div>
         ))}
-      
-    </div>
+      </div>
   )
 }
 

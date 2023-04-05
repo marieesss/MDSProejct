@@ -1,6 +1,11 @@
+// Importe la fonction 'configureStore' et 'combineReducers' depuis le package Redux Toolkit
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+
+// Importe les reducers pour chaque slice
 import cartReducer from "./cartRedux";
 import userReducer from "./userRedux";
+
+// Importe les fonctions et constantes pour la persistance des données
 import {
   persistStore,
   persistReducer,
@@ -13,24 +18,29 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
+// Configuration pour la persistance des données
 const persistConfig = {
-  key: "root",
-  version: 1,
-  storage,
+  key: "root", // Clé pour accéder aux données persistées
+  version: 1, // Version de la configuration de persistance
+  storage, // Type de stockage utilisé pour les données persistées (localStorage)
 };
 
+// Combine les reducers de chaque slice en un seul reducer global
 const rootReducer = combineReducers({ user: userReducer, cart: cartReducer });
 
+// Applique la configuration de persistance aux reducers combinés
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Configure le store Redux
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: persistedReducer, // Utilise le reducer combiné avec persistance
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], // Ignore certaines actions pour éviter des erreurs de serialisation
       },
     }),
 });
 
+// Crée le persistor pour le store Redux
 export let persistor = persistStore(store);

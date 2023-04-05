@@ -11,6 +11,7 @@ const PutProduct = (idProduct) => {
   const [price, setPrice] = useState("");
   const [idProduit, setIdproduit] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [IdFermier, setIdFermier] = useState("");
   setIdproduit(idProduct)
   console.log(idProduit)
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
@@ -67,6 +68,19 @@ const PutProduct = (idProduct) => {
       console.log(error)
     }
   };
+
+  const putFermier= async (e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+          fermierId: IdFermier,
+         }, 
+         config);
+         console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  };
   return (
     <div>
       <Form>
@@ -87,11 +101,12 @@ const PutProduct = (idProduct) => {
         créer
       </Button>
 
-      <Form.Label>Quantité</Form.Label>
-        <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setQuantity(e.target.value)}/>
-        <Button onClick={putQuantity} variant="primary" type="submit">
+      <Form.Label>Fermier Id</Form.Label>
+        <Form.Control  type="text" placeholder="Enter text" onChange={(e)=>setIdFermier(e.target.value)}/>
+        <Button onClick={putFermier} variant="primary" type="submit">
         créer
       </Button>
+
 
       </Form.Group>
     </Form>

@@ -6,16 +6,19 @@ import Login from './pages/Login';
 import Order from './pages/Order';
 import Product from './pages/Product';
 import User from './pages/User';
+import { useSelector } from 'react-redux';
+
 
 function App() {
+  const user = useSelector((state)=> state.user.currentUser)
   return (
     <Routes>
-      <Route path="/" element={<Home/>} />
+      {user ? <Route path="/" element={<Home/>} /> : <Route path="/" element={<Login/>}/>}
       <Route path="*" element={<Home/>} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/order" element={<Order/>} />
-      <Route path="/product" element={<Product/>} />
-      <Route path="/user" element={<User/>} />
+      {user ? <Route path="/login" element={<Login/>} />: <Route path="/login" element={<Login/>}/>}
+      {user ? <Route path="/order" element={<Order/>} />: <Route path="/order" element={<Login/>}/>}
+      {user ? <Route path="/product" element={<Product/>} />: <Route path="/product" element={<Login/>}/>}
+      {user ? <Route path="/user" element={<User/>} />: <Route path="/user" element={<Login/>}/>}
     </Routes>
   );
 }

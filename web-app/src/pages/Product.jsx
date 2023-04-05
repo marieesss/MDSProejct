@@ -21,7 +21,7 @@ const Product = () => {
         try{
           const res = await publicRequest.get("/product/find/" + id);
           setProduct(res.data)
-          setFermierId(res.data.fermierId)
+          setFermierId(res.data[0].fermierId)
           
         }catch{
 

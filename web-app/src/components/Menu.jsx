@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { NavLink} from 'react-router-dom';
 import { logout } from '../redux/userRedux';
 import { resetCart } from '../redux/cartRedux';
+import './menu.css';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -16,34 +17,59 @@ const Menu = () => {
       }
 
     return (
-      <div className="navigation">
-<ul>
-    <NavLink to="/"  className={(nav) => (nav.isActive ? "nav-active" : "")}>
+      <div>
+   <nav class="navbar navbar-expand-lg navbar-light bg-success ">
+   <div class="d-flex flex-row">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+  
+      <div class ="nav-item item-menu"> 
+      
+    <NavLink to="/"  class="nav-link">
         <li id ="menu">Accueil</li>
     </NavLink>
-    <NavLink to="/productf" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-    <li id ="menu">product: </li>
+    </div>
+    <div class ="nav-item item-menu"> 
+    <NavLink to="/productf" class="nav-link">
+    <li id ="menu">Produits </li>
     </NavLink>
-    <NavLink to="/about" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-    <li id ="menu">A propos</li>
+    </div>
+   
+    <div class ="nav-item item-menu"> 
+    <NavLink to="/inscription" class="nav-link">
+    <li id ="menu">Inscription</li>
     </NavLink>
-    <NavLink to="/inscription" className={(nav) => (nav.isActive ? "nav-active" : "")}>
-    <li id ="menu">inscription</li>
-    </NavLink>
-    <NavLink to="/cart" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    </div>
+    <div class ="nav-item item-menu"> 
+    <NavLink to="/cart" class="nav-link">
     <li id ="menu">Panier: {quantity}</li>
     </NavLink>
+    </div>
     {user && 
-    <div>
-            <li> Mon profil</li>
-            <NavLink to="/">
+    <div>    
+          <div class ="nav-item item-menu"> 
+            <NavLink to="/" class=" nav-link">
             <li onClick={logoutHandler}> Logout</li>
             </NavLink>
+            </div>
             </div>}
-</ul>
+            
+    </div>
+  </div>
+  </div>
+</nav>
 
 
-      </div>
+      
+
+
+</div>
+
+
     );
 };
 

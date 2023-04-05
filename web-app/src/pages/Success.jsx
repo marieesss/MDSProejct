@@ -3,17 +3,20 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Menu from '../components/Menu';
+import { useLocation } from "react-router-dom";
+
 
 
 const Success = () => {
-  const user = useSelector((state) => state.user.currentUser._id);
+    const user = useSelector((state) => state.user.currentUser._id);
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
     const [informations, setInformations]= useState({})
     const [idCart, setIdCart]= useState()
     const [productsId, setproductsId]= useState()
     const [products, setproducts]= useState()
-
-
+    const location = useLocation();
+    let stripe = location.state.stripe;
+    console.log(stripe.receipt_url)
 
     const getOrder = async () => {
   
@@ -53,10 +56,20 @@ const Success = () => {
       };
 
       const putOrder = async () => {
-
         try {
           const res = await axios.put(`http://localhost:5000/api/order/${idCart}`,{
-            status: "payé"
+            status: "payé",
+            stripeStatus : stripe.status, 
+            billingAdress : {
+              adress : {
+                city : stripe.billing_details.address.city,
+                country : stripe.billing_details.address.country,
+                adress : stripe.billing_details.address.line1,
+                postal_code : stripe.billing_details.address.postal_code
+              }
+            },
+            receipt_url: stripe.receipt_url
+
           }, 
              {
                 headers: { token: `Bearer ${userToken}` }

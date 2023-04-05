@@ -14,6 +14,7 @@ const Home = () => {
   const [dataOrder, setDataOrder] = useState([]);
   const [dataUser, setDataUser] = useState([]);
   const [orderStats, setorderStats] = useState([]);
+  const [LastOrders, setLastOrders] = useState([]);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
   const MONTHS = useMemo(
@@ -44,7 +45,7 @@ const Home = () => {
         console.log(res.data)
         setDataUser(res.data)
         console.log(dataUser)
-        dataUserTableau()
+  
       } catch(err){
         console.log(err)
       }
@@ -71,10 +72,6 @@ const Home = () => {
   }, [dataUser])
 
 
-  const dataUserTableau = () =>{
-       
-
-  }
   useEffect(() => {
     const getStats = async () => {
       try {
@@ -89,29 +86,73 @@ const Home = () => {
   }, [MONTHS]);
 
 
+  useEffect(() => {
 
-  
+    axios.get("http://localhost:5000/api/order/adminhomepage", config)
+      .then(response => {
+        console.log(response.data)
+        setLastOrders(response.data)
+        
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(()=>{
+    console.log(LastOrders)
+  },[LastOrders])
+ 
+
 
 
   return (
     <div>
       <Menu/>
-      <div className="container-c margin-50"> 
-        <div className="container-y">
+      <div class="title-home-container">
+        <h1 class="title-home-content">Nos producteur locaux</h1>
+      </div>  
+      <div class="title-home-container">
+        <h3>Administrateur</h3>
+      </div>
+      
+      <div className="container-c justify-content-around margin-50"> 
+        
+        <div className="container-y container-stats">
         <ChartUI
         data={userStats}
         dataKey={"value"}
         title={"Utilisateurs créés ces trois derniers mois"}
       />
       </div>
-      <div class="container-y">
+      <div class="container-y container-stats">
       <ChartUI
               data={orderStats}
               dataKey={"value"}
               title={"Commandes créés ces trois derniers mois"}
             />
       </div>     
-      </div>   
+      </div> 
+
+      <div className="container-c justify-content-around margin-50"> 
+      <div class="container-y container-stats">
+          <h3> Dernières commandes </h3>
+          <div className="container-c justify-content-around"> 
+          {LastOrders.map(order=>(
+            <div class="card" style={{width:"12rem"}}>
+            <div class="card-body">
+              <h5 class="card-title">{order.status}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{order.user[0].email}</h6>
+              <p class="card-text">{order.amount} euros</p>
+            </div>
+          </div>
+          ))}
+          </div>
+          <div className="container-c justify-content-around margin-50"> 
+          <button class="button-green"><a href="/order">Voir toute les commandes</a></button>
+          </div>
+      </div>
+      </div>  
       
     </div>
   )

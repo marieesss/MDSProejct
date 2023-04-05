@@ -1,6 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/userRedux';
+import "../css/app.css";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -13,41 +14,31 @@ const Menu = () => {
     }
   return (
 
+   <ul class=" container-c background-green menu">
+
+  <a class="navbar-brand" href="#">LOGO</a>
     
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
+     {!user ? <li class="nav-item">
+        <a class="nav-link" href="/login">Login</a>
+      </li> : <div></div> }
+      
+      <li class="li-menu margin-right">
         <a class="nav-link" href="/">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/inscription">Inscription</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      <li class="nav-item">
+      <li class="li-menu margin-right">
         <a class="nav-link" href="/order">Order</a>
       </li>
-      <li class="nav-item">
+      <li class="li-menu margin-right">
         <a class="nav-link" href="/product">product</a>
       </li>
-      <li class="nav-item">
+      <li class="li-menu margin-right">
         <a class="nav-link" href="/user">User</a>
       </li>
       {user && 
-            <li  class="nav-item"> <a class="nav-link"onClick={logoutHandler}> Logout </a></li>
+            <li  class="nav-item"> <div onClick={logoutHandler} class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/></li>
             }
     </ul>
-  </div>
-</nav>
       
-    </div>
   )
 }
 

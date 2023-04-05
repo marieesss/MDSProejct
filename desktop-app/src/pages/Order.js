@@ -44,7 +44,7 @@ const Order = () => {
         status : "envoyé"
     },config)
       .then(response => {
-        console.log(response)
+        window.location.reload();
 
       })
       .catch(error => {
@@ -63,7 +63,7 @@ const Order = () => {
 
     axios.delete(`http://localhost:5000/api/order/${id}`,config)
       .then(response => {
-        console.log(response)
+        window.location.reload();
 
       })
       .catch(error => {
@@ -98,14 +98,17 @@ const Order = () => {
                 
                 </ul>
                 <div> <i class="fa-solid fa-check padding-right"></i> {order.status} </div>
+                <div> <i class="fa-solid fa-check padding-right"></i> Retour stripe : {order.stripeStatus} </div>
                 <div><i class="fa-solid fa-euro-sign padding-right"></i> Total {order.amount} euros </div>
                 <div class=" row justify-content-center">
-                    {order.status !== "envoyé" ? <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
+                    {order.status !== "envoyé" ? 
+                    <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
                       <div>
                       <div>Commande envoyée</div>
-                      <button  class="button-green"value={order._id} onClick={handleDelete}>Supprimer</button>
+                      <div class="button-green"value={order._id} onClick={handleDelete}>Supprimer</div>
                       </div>}
-                    
+                      {order.receipt_url ? <a href={order.receipt_url}><div class="button-green">  reçu  </div></a> : <div> </div>}
+                      
                 </div>
                 </div>
             

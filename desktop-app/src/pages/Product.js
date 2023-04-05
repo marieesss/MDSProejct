@@ -15,9 +15,9 @@ const Product = () => {
   return (
     <div>
         <Menu/>
-<Button variant="primary" onClick={handleShow}>
+<button class="button-green margin-50 margin-left" onClick={handleShow}>
         créer un produit
-      </Button>
+      </button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

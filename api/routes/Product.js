@@ -95,4 +95,29 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
           }
         });
 
+        
+           //GET All products with farmers
+           router.get("/all", async (req, res) => {
+            try {
+              const products = await Product.aggregate([
+                {
+                  $addFields: {
+                    fermier_id: { $toObjectId: "$fermierId" },
+                  },
+                },
+                {
+                  $lookup: {
+                    from: "fermiers",
+                    localField: "fermier_id",
+                    foreignField: "_id",
+                    as: "fermier",
+                  },
+                },
+              ]).exec();
+              res.status(200).json(products);
+            } catch (err) {
+              res.status(500).json(err);
+            }
+          });
+
 module.exports = router

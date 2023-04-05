@@ -1,32 +1,58 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+
 import StripeCheckout from "react-stripe-checkout";
 import { useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
+import { useSelector, useDispatch} from 'react-redux'
+import { delProduct } from '../redux/cartRedux';
+
 
 
 const Cart = () => {
   const [stripeToken, setStripeToken]= useState(null)
   const [hub, setHub]= useState([])
   const [hubChoisi, setHubChoisi]= useState({})
+  const [stripe, setStripe]= useState("")
   const cart= useSelector(state=> state.cart)
-  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.currentUser._id);
+  const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
-  const KEY = "pk_test_51MVYn2IzQZmuQaNoGP0suRknLYxQ1RWEmf7RkSkhkGciNL7RoL4jEsNZ9r2D02FOlNmKlFTdUffh0dslwwxgLpHO00xx3txkDh";
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const KEY = process.env.REACT_APP_REACT_STRIPE;
 
   const onToken = (token) => {
+    // récupère le token de Stripe contenant les informations
     setStripeToken(token);
   };
 
-  const registerOrder = async () => {
+  const registerOrderFirst = async () => {
+    const config = {
+      headers: { token: `Bearer ${userToken}` }
+  };
+
+    const produitarray= []
+    console.log(produitarray)
+      for(let i = 0; i < cart.Product.length; i++){
+        const array= {
+          productId : cart.Product[i]._id,
+          quantity: cart.Product[i].quantity
+        }
+        produitarray.push(array)
+      }
+      console.log(produitarray)
+    
+
     try {
       const res = await axios.post("http://localhost:5000/api/order", {
-          products: cart.products,
+          userId: user,
+          products: produitarray,
           amount: cart.total,
-          Hub: hub,
-          adresse: "16 rue foncet"
-         });
+          Status: "En attente de paiement"
+         }, 
+         config);
          console.log(res.data)
       
     } catch (error) {
@@ -35,28 +61,43 @@ const Cart = () => {
   };
 
   useEffect(()=>{
-      const makeRequest = async ()=>{
-        try{
-         const res = await axios.post("http://localhost:5000/api/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount:500,
-         });
-         navigate("/success", {
-          stripeData: res.data,
-          products: cart, });
-          registerOrder();
-        }catch(err){
-            console.log(err.response.data)
-        }
+    // fonction qui envoie une requête de paiement à notre backend
+    const makeRequest = async ()=>{
+      try{
+        // envoie une requête POST avec les informations de paiement au backend
+        const res = await axios.post("http://localhost:5000/api/checkout/payment", {
+          tokenId: stripeToken.id, // identifiant du token de paiement
+          amount:cart.total*100, // montant total de la commande en centimes (pour Stripe)
+        });
+        // met à jour l'état avec les informations de paiement renvoyées par le backend
+        setStripe(res.data)
+      }catch(err){
+        // si une erreur se produit lors de la demande de paiement, affiche l'erreur dans la console
+        console.log(err.response.data)
       }
-      stripeToken && makeRequest();
-  },  [stripeToken, cart.total, navigate,])
+    }
+    // appelle uniquement si un token de paiement est disponible et que le montant total du panier a changé
+    stripeToken && makeRequest();
+  },  [stripeToken, cart.total])
+  
 
+  useEffect(() => {
+    // si stripe n'est pas vide et que le statut est égale à succeded
+    if (stripe && stripe.status === "succeeded") {
+      navigate("/success", {
+        state: {
+          // passe en paramètres le state stripe
+          stripe: stripe,
+        }
+      });
+    }
+  }, [stripe, navigate]);
   useEffect (()=>{
     const getHub = async ()=> {
       try{
         const res =  await axios.get("http://localhost:5000/api/hub")
         setHub(res.data);
+        console.log(hub)
       }catch(err){}
     }
     getHub();
@@ -75,11 +116,12 @@ const Cart = () => {
       <Menu/>
       {cart.Product.map(product =>(
         <div> 
-          <p> {product.title}</p>
-          <p> {product._id}</p>
-          <p> {product.quantity}</p>
-          <p> {product.price}</p>
-          <p> total {product.price*product.quantity}</p>
+          <p> Produit {product.title}</p>
+          <img src={product.img}/>
+          <p> Quantité {product.quantity} kg</p>
+          <p> Prix au kilo  {product.price} euros </p>
+          <p> Total {product.price*product.quantity} euros</p>
+          <button onClick={()=> dispatch(delProduct(product._id))}> Supprimer </button>
          </div>
       ))}
 
@@ -88,7 +130,7 @@ const Cart = () => {
 
       
 
-<select name="_id" onChange={handleFilter}>
+<select name="_id" onClick={handleFilter}>
           <option value="rien">Choisir un point de livraison</option>
           {hub.map(hub =>(
         <option value={hub._id}>{hub.name}</option>
@@ -100,12 +142,11 @@ const Cart = () => {
       image="https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
       billingAddress
-      shippingAddress
-      amount={500}
+      amount={cart.total*100}
       token={onToken}
       stripeKey={KEY}
       >
-        <button>Paiement</button>
+        <button onClick={registerOrderFirst}>Paiement</button>
       </StripeCheckout>
     </div>
   )

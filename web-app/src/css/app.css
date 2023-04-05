@@ -1,0 +1,84 @@
+body{
+    margin: 0px;
+  }
+  /*menu */
+  .navigation {
+    text-align: center;
+    padding-bottom: 5%;
+    padding-top: 2%;
+  }
+  
+  li#menu {
+    display: inline;
+    color: #485E1B;
+    text-align: center;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 8px;
+  
+  }
+  
+  .navbar-connection {
+    float: right;
+    margin-right: 2%;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li#menu:hover {
+    color: rgb(240, 0, 0);
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  img.companylogo {
+    width: 200px;
+    float: left;
+    margin-left: 5% ;
+  }
+  img.panier {
+    width: 24px;
+  }
+  .bandeaux {
+    text-align: center;
+    padding: 20px;
+    background-color: #485E1B;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+  }
+  
+  /* Home */
+  
+  h1#home {
+    color: #485E1B;
+    font-weight: 600;
+    font-size: 55px;
+  }
+  p#home {  
+    color: #0755ad;
+    font-weight: 600;
+    font-size: 20px;
+    white-space: pre-line;
+  }
+  
+  .container-home {
+    padding-top: 5%;
+  }
+  
+  
+  .row {
+    display: flex;
+   margin-left: 15%;
+  }
+  
+  .column {
+    flex: 50%;
+    padding: 10px;
+    height: 300px; 
+  }
+  
+  .container {
+    width: 100%;
+  }

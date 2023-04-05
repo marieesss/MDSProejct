@@ -8,7 +8,9 @@ import Inscription from './pages/Inscription';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import ProductListTest from './components/productf';
+import Product from './pages/Product';
 import { useSelector } from 'react-redux';
+import Success from './pages/Success';
 
 
 
@@ -19,10 +21,12 @@ const App = () => {
       <Route path="/" element={<Home/>} />
       <Route path="*" element={<Home/>} />
       <Route path="/inscription" element={<Inscription/>} />
-      <Route path="/cart" element={<Cart/>} />
+      
+      {user ? <Route path="/cart" element={<Cart/>} /> : <Route path="/cart" element={<Login/>}/>}
       <Route path="/login" element={<Login/>} />
       <Route path="/productf" element={<ProductListTest/>} />
-      <Route path="/product" element={<product/>} />
+      <Route path="/product/:id" element={<Product/>} />
+      <Route path="/success" element={<Success/>} />
 
   
   

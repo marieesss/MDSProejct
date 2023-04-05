@@ -62,6 +62,19 @@ router.put("/:id", verifyToken, async (req, res) => {
         }
       });
 
+       //GET USER Order TO modify
+
+       router.get("/find/last/:userId", verifyToken, async (req, res) => {
+        try {
+          const orders = await Order.find({ userId: req.params.userId })
+            .sort({ createdAt: -1 })
+            .limit(1);
+          res.status(200).json(orders);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      });
+
 
          //GET All Order
 

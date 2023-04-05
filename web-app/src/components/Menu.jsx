@@ -3,7 +3,9 @@ import { useSelector,useDispatch } from 'react-redux';
 import { NavLink} from 'react-router-dom';
 import { logout } from '../redux/userRedux';
 import { resetCart } from '../redux/cartRedux';
-import './menu.css';
+import companyLogo from '../assets/logo.png';
+import panier from '../assets/panier.png';
+import loop from '../assets/loop.png';
 
 const Menu = () => {
     const dispatch = useDispatch();
@@ -18,58 +20,46 @@ const Menu = () => {
 
     return (
       <div>
-   <nav class="navbar navbar-expand-lg navbar-light bg-success ">
-   <div class="d-flex flex-row">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-  
-      <div class ="nav-item item-menu"> 
+    <div className='bandeaux'>
+      Livrais offerte à parti de 50€ d'achat 
+    </div>
+      <div className="navigation">
+      <img class ="companylogo" src={companyLogo} alt="BigCo Inc. logo"/>
+<ul>
+    <NavLink to="/"  className={(nav) => (nav.isActive ? "nav-active" : "")}>
+        <li id ="menu">ACCUEIL</li>
+    </NavLink>
+    <NavLink to="/about" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu">A PROPOS </li>
+    </NavLink>
+    <NavLink to="/productf" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu">NOS PRODUITS  </li>
+    </NavLink>
+
+    <div className='navbar-connection'>
+
+    <NavLink to="/cart" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu"><img class ="panier" src={loop} alt="BigCo Inc. logo"/></li>
+    </NavLink>
       
-    <NavLink to="/"  class="nav-link">
-        <li id ="menu">Accueil</li>
+    <NavLink to="/cart" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu"><img class ="panier" src={panier} alt="BigCo Inc. logo"/>{quantity}</li>
     </NavLink>
-    </div>
-    <div class ="nav-item item-menu"> 
-    <NavLink to="/productf" class="nav-link">
-    <li id ="menu">Produits </li>
+    <NavLink to="/inscription" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+    <li id ="menu">SE CONNECTER </li>
     </NavLink>
-    </div>
-   
-    <div class ="nav-item item-menu"> 
-    <NavLink to="/inscription" class="nav-link">
-    <li id ="menu">Inscription</li>
-    </NavLink>
-    </div>
-    <div class ="nav-item item-menu"> 
-    <NavLink to="/cart" class="nav-link">
-    <li id ="menu">Panier: {quantity}</li>
-    </NavLink>
-    </div>
+      </div>
     {user && 
-    <div>    
-          <div class ="nav-item item-menu"> 
-            <NavLink to="/" class=" nav-link">
+    <div>
+            <li> Mon profil</li>
+            <NavLink to="/">
             <li onClick={logoutHandler}> Logout</li>
             </NavLink>
-            </div>
             </div>}
-            
-    </div>
-  </div>
-  </div>
-</nav>
-
-
-      
-
+</ul>
 
 </div>
-
-
+      </div>
     );
 };
 

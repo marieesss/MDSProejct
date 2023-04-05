@@ -21,12 +21,12 @@ const Success = () => {
     const getOrder = async () => {
   
         try {
-          const res = await axios.get(`http://localhost:5000/api/order/find/${user}`, 
+          const res = await axios.get(`http://localhost:5000/api/order/find/last/${user}`, 
              {
                 headers: { token: `Bearer ${userToken}` }
              });
              setInformations(res.data)
-             
+             console.log(res.data)
              setIdCart(res.data[0]._id)
 
         } catch (error) {
@@ -111,6 +111,8 @@ return (
         </div>
       ))
    : <div> </div>}
+
+   <a href={stripe.receipt_url}><button > Voir le reçu </button></a>
    
   </div>
 )

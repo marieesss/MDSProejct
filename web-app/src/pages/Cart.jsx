@@ -12,9 +12,12 @@ import { delProduct } from '../redux/cartRedux';
 const Cart = () => {
   const [stripeToken, setStripeToken]= useState(null)
   const [hub, setHub]= useState([])
+  const [livraisonFees, setLivraisonFees]= useState(false)
+  const [total, setTotal]= useState()
   const [hubChoisi, setHubChoisi]= useState({})
   const [stripe, setStripe]= useState("")
   const cart= useSelector(state=> state.cart)
+  console.log(cart.total)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
@@ -59,6 +62,18 @@ const Cart = () => {
       console.log(error)
     }
   };
+
+  useEffect(()=> {
+    if(cart.total<50){
+      setLivraisonFees(true);
+      setTotal(cart.total + 3.99)
+      console.log(total)
+
+    }else{
+      setTotal(cart.total)
+    }
+  })
+
 
   useEffect(()=>{
     // fonction qui envoie une requête de paiement à notre backend
@@ -126,7 +141,8 @@ const Cart = () => {
       ))}
 
       <h1> TOTAL </h1>
-      <div>$ {cart.total}</div>
+      <div>$ {total}</div>
+      {livraisonFees ? <div> Frais de livraison de 3,99 euros compris </div> : <div> Livraison gratuite </div>}
 
       
 
@@ -142,7 +158,7 @@ const Cart = () => {
       image="https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
       billingAddress
-      amount={cart.total*100}
+      amount={total*100}
       token={onToken}
       stripeKey={KEY}
       >

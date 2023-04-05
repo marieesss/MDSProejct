@@ -5,10 +5,10 @@ import ProductDetail from './screens/details/ProductDetail';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
+import Menu from './components/menu/Menu';
 
 export default function App() {
 
-  
 
   return (
        <NavigationContainer>

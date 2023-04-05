@@ -7,6 +7,7 @@ import Menu from './Menu';
 function ProductListTest() {
   const [produitsFiltres, setProduitsFiltres] = useState([]);
   const [products, setProducts] = useState ([]) // championSort, setChampionsSort
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/product`)
@@ -29,6 +30,20 @@ function ProductListTest() {
     setProduitsFiltres(products.filter(product => product.categories.includes(document.getElementById("select").value))); // results championSort
   }
 
+const searchItems = (searchValue) => {
+  setSearchInput(searchValue)
+  if (searchInput !== '') {
+      const filteredData = products.filter((item) => {
+          return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setProduitsFiltres(filteredData)
+  }
+  else{
+    setProduitsFiltres(products)
+  }
+}
+
+
 
   return (
     <div>
@@ -38,6 +53,12 @@ function ProductListTest() {
           <option value="legume">Légume</option>
           <option value="fruit">Fruit</option>
       </select>
+
+      <input icon='search'
+                placeholder='Search...'
+                onChange={(e) => searchItems(e.target.value)}
+            />
+
       
 
       <div className="products">

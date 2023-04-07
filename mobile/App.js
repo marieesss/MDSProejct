@@ -13,6 +13,7 @@ import { useFonts } from 'expo-font';
 export default function App() {
   const [fontsLoaded] = useFonts({
     'Josefin': require('./assets/fonts/JosefinSans-Regular.ttf'),
+    'Avenir': require('./assets/fonts/Avenir-Regular.ttf'),
   });
 
   if (!fontsLoaded) {

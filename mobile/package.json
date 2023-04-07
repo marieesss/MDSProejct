@@ -23,5 +23,11 @@
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
+  "expo": {
+    "splash": {
+    "image": "./assets/logo.png"
+    }
+    },
+
   "private": true
 }

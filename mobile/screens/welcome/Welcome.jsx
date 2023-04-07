@@ -13,7 +13,7 @@ const Welcome = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    axios.get(`http://192.168.1.20:5000/api/product`)
+    axios.get(`http://10.57.132.20:5000/api/product`)
       .then(response => {
         console.log(response.data)
         Setdata(response.data);
@@ -25,7 +25,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://192.168.1.20:5000/api/product?category=fruit`)
+    axios.get(`http://10.57.132.20:5000/api/product?category=fruit`)
       .then(response => {
         console.log(response.data)
         SetdataFruit(response.data);
@@ -37,7 +37,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://192.168.1.20:5000/api/product?category=legume`)
+    axios.get(`http://10.57.132.20:5000/api/product?category=legume`)
       .then(response => {
         console.log(response.data)
         SetDataLegume(response.data);
@@ -50,7 +50,9 @@ const Welcome = () => {
 
 const renderItemFruit = (data) => {
   return (
-      <TouchableOpacity style={{height: 150}}>
+      <TouchableOpacity style={{height: 150}} onPress={() => {
+        navigation.navigate("ProductDetail", {_id : data.item._id});
+      }}>
         <View style={styles.split}>
           <Image source={{uri: data.item.img}}
             style={{width: 100, height: 100}}
@@ -69,12 +71,13 @@ const renderItemFruit = (data) => {
   return (
     <View>
     <Header/>
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} >
   <View style={styles.container}>
-  <Text style={styles.userName}> Salut Toi</Text>
-  <Text style={styles.welcomeMessage}> Fais tes emplettes</Text>
+  <Text style={styles.welcomeMessage}> Catalogue</Text>
   
-  <Text>Fruits</Text>
+  <View style={styles.banner}>
+  <Text style={styles.textBanner}>Fruits</Text>
+  </View>
   <FlatList
     data={dataFruit}
     horizontal={true}
@@ -82,9 +85,12 @@ const renderItemFruit = (data) => {
     keyExtractor={item => item._id.toString()}
     showsVerticalScrollIndicator={false}
     showsHorizontalScrollIndicator={false}
+    style={styles.categorie}
   />
 
-<Text>Légumes</Text>
+<View style={styles.banner}>
+  <Text style={styles.textBanner}>Légumes</Text>
+  </View>
   <FlatList
     data={dataLegume}
     horizontal={true}
@@ -92,8 +98,13 @@ const renderItemFruit = (data) => {
     keyExtractor={item => item._id.toString()}
     showsVerticalScrollIndicator={false}
     showsHorizontalScrollIndicator={false}
+    style={styles.categorie}
   />
 
+
+<View style={styles.banner}>
+  <Text style={styles.textBanner}>Tout les produits</Text>
+  </View>
 
   <View style={{
     flexDirection: 'row',
@@ -107,9 +118,8 @@ const renderItemFruit = (data) => {
     <View style={styles.product}  > 
       
       <Image source={{uri: data.img}}
-            style={{width: 100, height: 100}}
+            style={{width: 80, height: 80}}
             />
-      <Text> {data.title}</Text>
     </View>
     </TouchableOpacity>
   ))}

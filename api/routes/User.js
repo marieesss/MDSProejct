@@ -65,7 +65,7 @@ router.delete("/:id", verifyTokenAuth, async (req, res) => {
         }
       })
 
-//GET USER ROUTES 
+//GET USER Stats
 
 router.get("/stats", verifyTokenAdmin, async (req, res) => {
  //récupération de la date actuelle

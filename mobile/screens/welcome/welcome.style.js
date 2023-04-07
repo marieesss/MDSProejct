@@ -15,14 +15,17 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 40,
     textAlign: "center",
-    fontFamily: 'Josefin'
-    
+    fontFamily: 'Josefin',
+    marginRight: 20    
   },
   product: {
     flexDirection: "row",
     justifyContent: 'center',
-    backgroundColor: 'pink',
-    margin: 15
+    margin: 15,
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   }, 
   split:{
     width: 150
@@ -43,6 +46,16 @@ const styles = StyleSheet.create({
     color:"white",
     fontSize:20,
     fontFamily: 'Josefin'
+  },
+  titleRow:{
+    justifyContent:"center",
+    flexDirection: "row",
+    alignItems:"center",
+    padding:30
+  },
+  img:{
+    width: 50,
+    height : 50
   }
 
 });

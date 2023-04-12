@@ -10,40 +10,29 @@ const Menu = () => {
   const logoutHandler = (e) =>{
     e.preventDefault();
     dispatch(logout());
-
     }
   return (
 
-   <ul class=" container-c background-green menu">
-
-  <a class="navbar-brand" href="#">LOGO</a>
+    <div class="container-fluid">
+    <div class="row mt-5 justify-content-between">
     
-     {!user ? <li class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li> : <div></div> }
-      
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/">Home</a>
-      </li>
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/order">Order</a>
-      </li>
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/product">product</a>
-      </li>
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/user">User</a>
-      </li>
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/hub">Hub</a>
-      </li>
-      <li class="li-menu margin-right">
-        <a class="nav-link" href="/fermier">Fermier</a>
-      </li>
-      {user && 
-            <li  class="nav-item"> <div onClick={logoutHandler} class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/></li>
-            }
-    </ul>
+      <a href="/" class="col-6">
+          <img src={require('../img/logo.png')} width={150}/>
+      </a>
+
+      <div class="col-6 row justify-content-end">
+      <a  class="ml-4 col-1" href="/">Home</a>&ensp;
+      <a class="ml-4 col-1" href="/order">Order</a>&ensp;
+      <a class="ml-4 col-1" href="/product">Product</a>&ensp;
+      <a class="ml-4 col-1" href="/user">User</a>&ensp;
+      <a class="ml-4 col-1" href="/hub">Hub</a>&ensp;
+      <a class="ml-4 col-1" href="/fermier">Fermier</a>&ensp;
+      {user && <a onClick={logoutHandler}  class="col-1"> <div  class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/></a>}
+</div>
+
+
+  </div>
+</div>
       
   )
 }

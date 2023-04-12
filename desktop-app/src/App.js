@@ -22,7 +22,7 @@ function App() {
       {user ? <Route path="/product" element={<Product/>} />: <Route path="/product" element={<Login/>}/>}
       {user ? <Route path="/user" element={<User/>} />: <Route path="/user" element={<Login/>}/>}
       {user ? <Route path="/hub" element={<Hub/>} />: <Route path="/user" element={<Login/>}/>}
-      {user ? <Route path="/fermier" element={<Fermier/>} />: <Route path="/user" element={<Login/>}/>}
+      {user ? <Route path="/fermier" element={<Fermier/>} />: <Route path="/fermier" element={<Login/>}/>}
     </Routes>
   );
 }

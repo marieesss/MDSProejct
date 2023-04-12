@@ -1,16 +1,15 @@
+@font-face {
+    font-family: "Josefin";   /*Can be any text*/
+    src: local("JosefinSans-Regular"),
+      url("../fonts/JosefinSans-Regular.ttf") format("truetype");
+  }
+
 .container-c{
       /* We first create a flex layout context */
   display: flex;
   
-  /* Then we define the flow direction 
-     and if we allow the items to wrap 
-   * Remember this is the same as:
-   * flex-direction: row;
-   * flex-wrap: wrap;
-   */
+
   flex-flow: row wrap;
-  
-  /* Then we define how is distributed the remaining space */
   align-items: center;
   vertical-align: center;
   
@@ -30,7 +29,7 @@
 .container-y{
     width: 45%;
     padding: 50px !important; 
-    border: 1px solid #5CB85C;
+    border: 1px solid #475E1B;
     
 }
 
@@ -55,7 +54,7 @@
 
 .button-green{
     padding : 10px;
-    background-color: #5CB85C;
+    background-color: #475E1B;
     color: white;
     border: 1px solid white;
     border-radius: 15px;
@@ -63,16 +62,20 @@
 
 .button-green:hover{
     background-color: white;
-    color: #5CB85C;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.212);
+    color:#475E1B
 }
 
 .padding-right{
     padding-right: 15px;
 }
 
-.background-green{
-    background-color: #5CB85C;
+.background-white{
+    background-color: #FFFDFA;
+}
+
+.text-menu{
+    color: #475E1B
 }
 
 .li-menu  a:link, a:visited{
@@ -81,7 +84,6 @@
     padding-top: 3px;
     padding-bottom: 0px;
     background-color: #5CB85C;
-    color: white;
     border: 1px solid white;
     border-radius: 15px;
     height: 30px;
@@ -91,17 +93,18 @@
 
 a:link, a:visited, a:hover{
     text-decoration: none !important;
+    color:#475E1B
 }
 
 .li-menu:hover{
     background-color: white;
-    color: #5CB85C;
+    color: #5CB85C !important;
     text-decoration: none !important;
     border-radius: 15px;
 }
 
 .menu{
-    height: 60px;
+    height: 100px;
     padding:10px;
 }
 
@@ -116,6 +119,7 @@ a:link, a:visited, a:hover{
     width: 20%;
     border-radius: 20px;
     margin-top: 150px;
+    border:none
 }
 
 .connexion-title{
@@ -126,6 +130,10 @@ a:link, a:visited, a:hover{
 
 .page{
     height: 100vh;
+    background : url(https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80);
+    object-fit: cover;
+    background-size: cover;
+
 }
 .login-form-container{
     justify-content: center;
@@ -151,8 +159,90 @@ center{
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: end;
+}
+
+.title-home-content{
+    font-family: Josefin;
+    color:#475E1B;
+    margin-right: 15px
 }
 
 .margin-left{
     margin-left : 90px;
+}
+
+.product-title{
+    font-family: Josefin;
+}
+
+.margin-left-4000{
+    margin-right: 4000 !important;
+}
+
+
+.modal-body{
+    background-color: #bac100;
+    padding :10px;
+    color:white
+}
+
+.modal-header{
+    background-color: #475E1B;
+    color:white;
+    font-family: Josefin;
+}
+
+.button-modal{
+    background-color: #475E1B;
+    font-family: Josefin;
+    border-radius: 15px;
+    color:white;
+}
+
+.modal-title{
+    margin-top: 10px;
+}
+
+.button-delete{
+    background-color: #DB2323 !important;
+    border-radius: 15px !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 0px;
+    padding:10px;
+    color:white;
+    transition: all 0.5s ease;
+}
+
+.button-delete:hover{
+    background-color: #681d1d !important;
+
+}
+
+.button-not-admin{
+    background-color: #475E1B;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 0px;
+    padding:10px;
+    color:white;
+    transition: all 0.5s ease;
+}
+
+.button-not-admin:hover{
+    background-color: #5CB85C;
+}
+
+.button-admin{
+        background-color: #5CB85C;
+        border-radius: 15px !important;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border: 0px;
+        padding:10px;
+        color:white;
+        transition: all 0.5s ease; 
+}
+
+.button-admin:hover{
+    background-color: #475E1B;
 }

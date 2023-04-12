@@ -15,7 +15,7 @@ const Login = () => {
     login(dispatch, {email, password});
   }
   return (
-    <div class="page" style={{backgroundColor: "#5CB85C"}}>
+    <div class="page">
     <div class="container-c login-form-container" >
       
       <form class="form-login container-y">

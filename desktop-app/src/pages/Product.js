@@ -15,27 +15,26 @@ const Product = () => {
   return (
     <div>
         <Menu/>
-<button class="button-green margin-50 margin-left" onClick={handleShow}>
+
+
+      <div class="title-home-container">
+        <h1 class="title-home-content">Nos produits</h1>
+        <img src={require('../img/logo2.png')} width={100} />
+      </div>  
+
+      <button class="button-green margin-50 margin-left" onClick={handleShow}>
         créer un produit
       </button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>créer un produit
+        <Modal.Header closeButton class="modal-header">
+          <Modal.Title>Créer un produit
 </Modal.Title>
         </Modal.Header>
         <newProduct/>
-        <Modal.Body>
+        <Modal.Body class="modal-body">
         <NewProduct/>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
       </Modal>
       <ShowProducts/>
   </div>

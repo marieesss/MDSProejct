@@ -142,21 +142,22 @@ const ShowProducts = () => {
             <Card.Img variant="top" src={product.img} class="img-products"/>
             <Card.Body>
               <div class="row justify-content-between">
-                <Card.Title class="col-5">{product.title}</Card.Title>
-                <Card.Text class="col-5">
-                {product.price} euros
+                <Card.Title>
+                <i class="fa-solid fa-tag padding-right" style={{color:" #bac100"}}></i> {product.title}</Card.Title>
+                <Card.Text>
+                <i class="fa-solid fa-euro-sign padding-right" style={{color: "#bac100"}}></i>{product.price} euros
               </Card.Text>
               </div>
               
               <Card.Text>
-                {product.desc}
+              <i class="fa-solid fa-pen-to-square padding-right" style={{color: "#bac100"}}></i>{product.desc}
               </Card.Text>
               
               <Card.Text>
               <div>
                 {product.fermier.map(fermier=>(
                   <div> 
-                    {fermier.name}
+                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{fermier.name}
                   </div>
                 ))}
               </div>

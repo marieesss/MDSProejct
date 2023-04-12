@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux'
 import axios from 'axios';
+import "../css/app.css";
 
 const NewProduct = () => {
   const [show, setShow] = useState(false);
@@ -70,23 +71,23 @@ const NewProduct = () => {
     <div>
       <Form>
       <Form.Group className="mb-3">
-        <Form.Label>Titre</Form.Label>
+        <Form.Label class="modal-title">Titre</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setTitle(e.target.value)}/>
-        <Form.Label>Description</Form.Label>
+        <Form.Label class="modal-title">Description</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setdesc(e.target.value)}/>
-        <Form.Label>Image</Form.Label>
+        <Form.Label class="modal-title">Image</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
-        <Form.Label>Categorie</Form.Label>
+        <Form.Label class="modal-title">Categorie</Form.Label>
         <Form.Select onClick={(e)=>setCategorie(e.target.value)}>
           <option value="fruit" >Fruit</option>
           <option value="legume">Légume</option>
         </Form.Select>
-        <Form.Label>Prix</Form.Label>
+        <Form.Label class="modal-title">Prix</Form.Label>
         <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
-        <Form.Label>Taille</Form.Label>
+        <Form.Label class="modal-title">Taille</Form.Label>
         <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setSize(e.target.value)}/>
         
-      <label>fermier</label>
+      <label class="modal-title">fermier</label>
         <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
         <option>Choisir un fermier</option>
             {fermier.map(item=>(
@@ -97,7 +98,7 @@ const NewProduct = () => {
         </Form.Select>
 
       </Form.Group>
-      <Button onClick={newProduct} variant="primary" type="submit">
+      <Button onClick={newProduct} type="submit" class="button-modal">
         créer
       </Button>
     </Form>

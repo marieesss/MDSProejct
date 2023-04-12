@@ -110,7 +110,8 @@ const Home = () => {
     <div>
       <Menu/>
       <div class="title-home-container">
-        <h1 class="title-home-content">Nos producteur locaux</h1>
+        <h1 class="title-home-content">Nos producteurs locaux</h1>
+        <img src={require('../img/logo2.png')} width={100} />
       </div>  
       <div class="title-home-container">
         <h3>Administrateur</h3>
@@ -134,7 +135,7 @@ const Home = () => {
       </div>     
       </div> 
 
-      <div className="container-c justify-content-around margin-50"> 
+      {/* <div className="container-c justify-content-around margin-50"> 
       <div class="container-y container-stats">
           <h3> Dernières commandes </h3>
           <div className="container-c justify-content-around"> 
@@ -152,7 +153,7 @@ const Home = () => {
           <button class="button-green"><a href="/order">Voir toute les commandes</a></button>
           </div>
       </div>
-      </div>  
+      </div>   */}
       
     </div>
   )

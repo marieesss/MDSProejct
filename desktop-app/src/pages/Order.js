@@ -76,7 +76,10 @@ const Order = () => {
   return (
     <div>
         <Menu/>
-        <h1>Commandes</h1>
+        <div class="title-home-container">
+        <h1 class="title-home-content">Commandes</h1>
+        <img src={require('../img/logo2.png')} width={100} />
+      </div>  
         <div class="row justify-content-center">
         {OrderListe.map(order=>(
             <div class="card m-5" style={{width: '25rem'}}>
@@ -85,12 +88,14 @@ const Order = () => {
                 <li class="list-group-item"><div class="fa-solid fa-user padding-right"/>{order.user[0].email} </li>
                 <li class="list-group-item">{order.hub} </li>
                 <li class="list-group-item">
-                  <div class="row justify-content-center">
+                  <div class="row justify-content-center product-title">
                   {order.products.map(product=>(
                 
                     <div class="col-6" >
                     <img src={product.img} class="img-order"/>
-                    <div>{product.title}</div>
+                      <div class="row justify-content-center">
+                        {product.title}
+                      </div>
                   </div>
                 
                 ))}</div> </li>
@@ -100,14 +105,17 @@ const Order = () => {
                 <div> <i class="fa-solid fa-check padding-right"></i> {order.status} </div>
                 <div> <i class="fa-solid fa-check padding-right"></i> Retour stripe : {order.stripeStatus} </div>
                 <div><i class="fa-solid fa-euro-sign padding-right"></i> Total {order.amount} euros </div>
+                {order.receipt_url ? <div> <i class="fa-solid fa-link padding-right" style={{color: "#475E1B;"}}></i> 
+                <a href={order.receipt_url}>Voir le reçu</a></div> : <div/>}
+                
                 <div class=" row justify-content-center">
                     {order.status !== "envoyé" ? 
                     <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
                       <div>
                       <div>Commande envoyée</div>
-                      <div class="button-green"value={order._id} onClick={handleDelete}>Supprimer</div>
+                      <button class="button-green"value={order._id} onClick={handleDelete}>Supprimer</button>
                       </div>}
-                      {order.receipt_url ? <a href={order.receipt_url}><div class="button-green">  reçu  </div></a> : <div> </div>}
+
                       
                 </div>
                 </div>

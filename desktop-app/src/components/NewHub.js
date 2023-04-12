@@ -41,9 +41,9 @@ const NewHub = () => {
         <Form.Label>adresse</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setAdress(e.target.value)}/>
       </Form.Group>
-      <Button onClick={newHub} variant="primary" type="submit">
+      <button onClick={newHub} variant="primary" type="submit" class="button-modal">
         créer
-      </Button>
+      </button>
     </Form>
     </div>
   )

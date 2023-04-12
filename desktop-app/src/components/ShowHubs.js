@@ -8,12 +8,9 @@ import Modal from 'react-bootstrap/Modal';
 import NewHub from '../components/NewHub';
 import Form from 'react-bootstrap/Form';
 import "../css/app.css";
-import ShowHubs from '../components/ShowHubs';
+import Table from 'react-bootstrap/Table';
 
-
-
-
-const Hub = () => {
+const ShowHubs = () => {
     const [Hubs, setHub] = useState([]);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -65,37 +62,56 @@ const Hub = () => {
           console.log(error)
         }
       };
-
-
-
   return (
-
     <div>
-    <Menu/>
 
-
-  <div class="title-home-container">
-    <h1 class="title-home-content">Nos hubs</h1>
-    <img src={require('../img/logo2.png')} width={100} />
-  </div>  
-
-  <button class="button-green margin-50 margin-left" onClick={handleShow}>
-    créer un produit
-  </button>
-
-  <Modal show={show} onHide={handleClose}>
-    <Modal.Header closeButton class="modal-header">
-      <Modal.Title>Créer un produit
-</Modal.Title>
-    </Modal.Header>
-    <newProduct/>
-    <Modal.Body class="modal-body">
-    <NewHub/>
-    </Modal.Body>
-  </Modal>
-  <ShowHubs/>
-</div>
+        <Table striped bordered hover>
+                 <thead>
+                     <tr>
+                         <th>Nom</th>
+                         <th>Adresse</th>
+                         <th>Actions</th>
+                     </tr>
+                 </thead>
+             <tbody>
+                
+                 { Hubs.map(hub=> (
+                 <tr>
+                     <td>{hub.name}</td>
+                     <td>{hub.adress}</td>
+                     <td><button  onClick={() => { handleShow(); setIdproduit(hub._id);}}value={hub._id} class="button-modal">Modifier</button></td>
+                 </tr>
+             ))}  
+             </tbody>
+         </Table>
+         <Modal show={show} onHide={handleClose}>
+         <Modal.Header closeButton>
+           <Modal.Title>Modifier un Hub
+ </Modal.Title>
+         </Modal.Header>
+         <newProduct/>
+         <Modal.Body>
+         <Form>
+       <Form.Group className="mb-3">
+         <Form.Label class="mt-3">Name</Form.Label>
+         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setName(e.target.value)}/>
+         <button onClick={putName} type="submit" class="button-modal mt-3">
+         Modifier
+       </button><br/>
+         <Form.Label class="mt-3">Adress</Form.Label>
+         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setAdress(e.target.value)}/>
+         
+         <button onClick={putAdress} type="submit" class="button-modal mt-3">
+         Modifier
+       </button>
+    
+       </Form.Group>
+     </Form>
+         </Modal.Body> 
+       </Modal> 
+      
+    </div>
   )
 }
 
-export default Hub
+export default ShowHubs

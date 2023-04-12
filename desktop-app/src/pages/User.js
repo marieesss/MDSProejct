@@ -6,6 +6,8 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
+import "../css/app.css";
+
 
 
 const User = () => {
@@ -46,6 +48,7 @@ const User = () => {
             console.log(response)
             setMessage("User bien supprimé")
             handleShow()
+            window.location.reload()
     
           })
           .catch(error => {
@@ -101,9 +104,18 @@ const User = () => {
   return (
     <div>
         <Menu/>
-    <div className={'col-6'}>
+        <div class="row justify-content-center">
+
+        
+    <div className={'col-8'}>
+
+    <div class="title-home-container mb-5">
+        <h1 class="title-home-content">Nos Utilisateurs</h1>
+        <img src={require('../img/logo2.png')} width={100} />
+      </div>  
+
          
-        <Table striped bordered hover className={"col-5"}>
+        <Table striped bordered hover>
       <thead>
         <tr>
           <th>username</th>
@@ -124,11 +136,11 @@ const User = () => {
             <div> Pas Admin</div> 
             }</td>
             <td>
-                <Button value={user._id} onClick={handleDelete} variant="warning" className={'m-3'}>Supprimer</Button>
+                <button value={user._id} onClick={handleDelete} class="button-delete m-3" >Supprimer</button>
             {user.isAdmin ? 
-            <Button value={user._id} onClick={DeleteAdmin} variant="primary">Enlever admin</Button>
+            <button value={user._id} onClick={DeleteAdmin} class="button-not-admin">Enlever admin</button>
             :
-            <Button value={user._id} onClick={handleAdmin} variant="success">Attribuer admin</Button>
+            <button value={user._id} onClick={handleAdmin} class="button-admin">Attribuer admin</button>
             }
             </td>
             </tr>
@@ -158,6 +170,7 @@ const User = () => {
         </Modal.Footer>
       </Modal>
       
+    </div>
     </div>
     </div>
   )

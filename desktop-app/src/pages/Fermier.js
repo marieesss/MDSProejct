@@ -8,6 +8,7 @@ import Modal from 'react-bootstrap/Modal';
 import NewHub from '../components/NewHub';
 import Form from 'react-bootstrap/Form';
 import NewFermier from '../components/NewFermier';
+import ShowFermier from '../components/ShowFermier';
 
 
 
@@ -84,71 +85,17 @@ const Fermier = () => {
     <div>
         <Menu/>
 
-        <button onClick={handleShow}>Ajouter un hub</button>
+        <button onClick={handleShow} class="button-modal">Ajouter un fermier</button>
         <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>créer un produit
+        <Modal.Header closeButton class="modal-header">
+          <Modal.Title>Ajouter un fermier
 </Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <NewFermier/>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
-        <table>
-                <thead>
-                    <tr>
-                        <th>image</th>
-                        <th>Nom</th>
-                        <th>Descrption</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-            <tbody>
-                
-                { Fermier.map(fermier=> (
-                <tr>
-                <td><img src={fermier.img} style={{width: "100px"}}/></td>
-                    <td>{fermier.name}</td>
-                    <td>{fermier.desc}</td>
-                    <td><button  onClick={() => { handleShow(); setIdFermier(fermier._id);}}value={fermier._id}>Modifier</button></td>
-                </tr>
-            ))}  
-            </tbody>
-        </table>
-        <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modifier un Produit
-</Modal.Title>
-        </Modal.Header>
-        <newProduct/>
-        <Modal.Body>
-        <Form>
-      <Form.Group className="mb-3">
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setName(e.target.value)}/>
-        <Button onClick={putName} variant="primary" type="submit">
-        créer
-      </Button>
-        <Form.Label>Description</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setDesc(e.target.value)}/>
-        <Button onClick={putDesc} variant="primary" type="submit">
-        créer
-      </Button>
-      <Form.Label>Image</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
-        <Button onClick={putImg} variant="primary" type="submit">
-        créer
-      </Button>
-      </Form.Group>
-    </Form>
-        </Modal.Body> 
-      </Modal> 
-        
+      <ShowFermier/>
       
     </div>
   )

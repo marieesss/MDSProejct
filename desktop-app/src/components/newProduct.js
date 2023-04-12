@@ -98,9 +98,11 @@ const NewProduct = () => {
         </Form.Select>
 
       </Form.Group>
-      <Button onClick={newProduct} type="submit" class="button-modal">
+      <div class="row justify-content-center">
+      <button onClick={newProduct} type="submit" class="button-modal">
         créer
-      </Button>
+      </button>
+      </div>
     </Form>
     </div>
   )

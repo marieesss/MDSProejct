@@ -45,7 +45,7 @@ const NewFermier = () => {
         <Form.Label>image</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
       </Form.Group>
-      <Button onClick={newFermier} variant="primary" type="submit">
+      <Button onClick={newFermier}  type="submit" class="button-modal">
         créer
       </Button>
     </Form>

@@ -197,7 +197,19 @@ center{
     background-color: #475E1B;
     font-family: Josefin;
     border-radius: 15px;
+    padding: 10px;
     color:white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border:none;
+    width:100px;
+    transition: all 0.5s ease;
+}
+
+.button-modal:hover{
+    background-color: white;
+    font-family: Josefin;
+    color:#475E1B;  
+
 }
 
 .modal-title{

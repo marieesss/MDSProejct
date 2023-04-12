@@ -181,22 +181,22 @@ const ShowProducts = () => {
         <Modal.Body>
         <Form>
       <Form.Group className="mb-3">
-        <Form.Label>Description</Form.Label>
+        <Form.Label class="mt-3">Description</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setdesc(e.target.value)}/>
-        <Button onClick={putDesc} variant="primary" type="submit">
-        créer
-      </Button>
-        <Form.Label>Image</Form.Label>
+        <Button onClick={putDesc} type="submit" class="button-modal mt-3">
+        Modifier
+      </Button><br/>
+        <Form.Label class="mt-3">Image</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
-        <Button onClick={putImg} variant="primary" type="submit">
-        créer
-      </Button>
-        <Form.Label>Prix</Form.Label>
+        <Button onClick={putImg} class="button-modal mt-3" type="submit">
+        Modifier
+      </Button><br/>
+        <Form.Label class="mt-3">Prix</Form.Label>
         <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
-        <Button onClick={putPrice} variant="primary" type="submit">
-        créer
-      </Button>
-      <Form.Label>Id du fermier</Form.Label>
+        <Button onClick={putPrice} class="button-modal mt-3" type="submit">
+        Modifier
+      </Button><br/>
+      <Form.Label class="mt-3">Id du fermier</Form.Label>
         <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
         <option>Choisir un fermier</option>
             {Fermier.map(item=>(
@@ -206,9 +206,9 @@ const ShowProducts = () => {
             }
         </Form.Select>
 
-        <Button onClick={putFermier} variant="primary" type="submit">
-        créer
-      </Button>
+        <button onClick={putFermier} type="submit" class="button-modal mt-3">
+        Modifier
+      </button>
 
       
 

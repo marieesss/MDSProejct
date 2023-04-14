@@ -9,6 +9,7 @@ import NewHub from '../components/NewHub';
 import Form from 'react-bootstrap/Form';
 import NewFermier from '../components/NewFermier';
 import ShowFermier from '../components/ShowFermier';
+import "../css/app.css";
 
 
 
@@ -41,51 +42,17 @@ const Fermier = () => {
             console.log(error);
           });
       }, []);
-    
-  
-    const putName = async () => {
-      try {
-        const res = await axios.put(`http://localhost:5000/api/fermier/${idFermier}`, {
-            name: name,
-           }, 
-           config);
-           console.log(res.data)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-
-    const putDesc = async () => {
-        try {
-          const res = await axios.put(`http://localhost:5000/api/fermier/${idFermier}`, {
-              desc: desc,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
-
-      const putImg = async () => {
-        try {
-          const res = await axios.put(`http://localhost:5000/api/fermier/${idFermier}`, {
-              img: img,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
-
-
 
   return (
     <div>
         <Menu/>
 
-        <button onClick={handleShow} class="button-modal">Ajouter un fermier</button>
+        <div class="title-home-container">
+    <h1 class="title-home-content">Nos fermiers</h1>
+    <img src={require('../img/logo2.png')} width={100} />
+  </div>  
+
+        <button onClick={handleShow} class="button-green margin-50 margin-left">Ajouter un fermier</button>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton class="modal-header">
           <Modal.Title>Ajouter un fermier

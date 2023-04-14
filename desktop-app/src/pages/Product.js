@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import ShowProducts from '../components/ShowProducts';
 import Menu from '../components/Menu';
+import "../css/app.css";
 
 const Product = () => {
     const [show, setShow] = useState(false);

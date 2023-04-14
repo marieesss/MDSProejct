@@ -63,8 +63,9 @@ const ShowHubs = () => {
         }
       };
   return (
-    <div>
+    <div class='row justify-content-center margin-50'>
 
+    <div class="col-10">
         <Table striped bordered hover>
                  <thead>
                      <tr>
@@ -109,7 +110,7 @@ const ShowHubs = () => {
      </Form>
          </Modal.Body> 
        </Modal> 
-      
+       </div>
     </div>
   )
 }

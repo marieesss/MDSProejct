@@ -40,34 +40,6 @@ const Hub = () => {
             console.log(error);
           });
       }, []);
-    
-  
-    const putName = async () => {
-      try {
-        const res = await axios.put(`http://localhost:5000/api/hub/${idProduit}`, {
-            name: name,
-           }, 
-           config);
-           console.log(res.data)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-
-    const putAdress = async () => {
-        try {
-          const res = await axios.put(`http://localhost:5000/api/hub/${idProduit}`, {
-              adress: adress,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
-
-
-
   return (
 
     <div>
@@ -80,7 +52,7 @@ const Hub = () => {
   </div>  
 
   <button class="button-green margin-50 margin-left" onClick={handleShow}>
-    créer un produit
+    créer un Hub
   </button>
 
   <Modal show={show} onHide={handleClose}>

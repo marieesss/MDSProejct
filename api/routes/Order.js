@@ -6,14 +6,26 @@ const {
     verifyToken,
     verifyTokenAuth,
     verifyTokenAdmin,
+    verifyTokenUser
   } = require("./verifyToken");
 
 
 // CREATE 
 
-router.post("/", verifyToken, async (req, res) => {
-    const newOrder= new Order(req.body);
+router.post("/", verifyTokenAuth, async (req, res) => {
+  const authHeader = req.headers.userid;
+  const userId = authHeader.split(" ")[1];
 
+    const newOrder= new Order({
+      userId: userId,
+      products: req.body.products,
+      amount: req.body.amount,
+      Status: req.body.Status
+    }
+    );
+
+    console.log(newOrder)
+    
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);
@@ -24,7 +36,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //UPDATE
 
-router.put("/:id", verifyToken, async (req, res) => {
+router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => {
   
     try {
       const updatedOrder = await Order.findByIdAndUpdate(
@@ -36,6 +48,7 @@ router.put("/:id", verifyToken, async (req, res) => {
       );
       res.status(200).json(updatedOrder);
     } catch (err) {
+      console.log(err)
       res.status(500).json(err);
     }
   });
@@ -53,7 +66,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 
     //GET USER Order
 
-    router.get("/find/:userId", verifyToken, async (req, res) => {
+    router.get("/find/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
         try {
           const orders = await Order.find({ userId: req.params.userId });
           res.status(200).json(orders);
@@ -62,9 +75,10 @@ router.put("/:id", verifyToken, async (req, res) => {
         }
       });
 
-       //GET USER Order TO modify
+       //GET USER Order TO modifyr
 
-       router.get("/find/last/:userId", verifyToken, async (req, res) => {
+       router.get("/find/last/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
+        console.log(req.params.userId)
         try {
           const orders = await Order.find({ userId: req.params.userId })
             .sort({ createdAt: -1 })
@@ -191,7 +205,7 @@ router.get("/adminhomepage", verifyTokenAdmin, async (req, res) => {
 
 //GET MONTHLY STATS
 
-router.get("/stats", verifyTokenAuth, async (req, res) => {
+router.get("/stats", verifyTokenAdmin, async (req, res) => {
   //récupération de la date actuelle
     const date = new Date();
     // récupération de la date mais le mois dernier

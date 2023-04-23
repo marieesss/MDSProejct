@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User= require("../models/user");
 const CryptoJS = require("crypto-js");
 const jwt =require("jsonwebtoken");
+
 // Inscription
 router.post("/register", async (req, res) => {
   const newUser = new User({
@@ -58,11 +59,13 @@ router.post("/login", async (req, res) => {
           { expiresIn: "3d" }
       );
 
-      // Supprimer le mot de passe du résultat de la requête et envoyer une réponse avec le reste des informations utilisateur et le jeton d'accès
+      // Supprimer le mot de passe du résultat de la 
+      //requête et envoyer une réponse avec le reste 
+      //des informations utilisateur et le jeton d'accès
       const { password, ...others } = user._doc;
       res.status(200).json({ ...others, accessToken });
   } catch (err) {
-      // Si une erreur se produit pendant le traitement de la requête, renvoyer une réponse avec un code de statut 500 (erreur interne du serveur)
+      // Erreur
       res.status(500).json(err);
   }
 });

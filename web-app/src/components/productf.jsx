@@ -24,7 +24,6 @@ function ProductListTest() {
   }, []);
 
 
-  console.log(products);
 
   const sort = () => {
     setProduitsFiltres(products.filter(product => product.categories.includes(document.getElementById("select").value))); // results championSort

@@ -11,6 +11,7 @@ import ProductListTest from './components/productf';
 import Product from './pages/Product';
 import { useSelector } from 'react-redux';
 import Success from './pages/Success';
+import Fermier from './pages/Fermier';
 
 
 
@@ -26,6 +27,7 @@ const App = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/productf" element={<ProductListTest/>} />
       <Route path="/product/:id" element={<Product/>} />
+      <Route path="/fermier" element={<Fermier/>} />
       {user ? <Route path="/success" element={<Success/>} /> : <Route path="/success" element={<Login/>}/>}
       
 

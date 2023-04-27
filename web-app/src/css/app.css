@@ -6,12 +6,15 @@
 
 body{
     margin: 0px;
+    box-sizing: border-box;
   }
+
   /*menu */
   .navigation {
     text-align: center;
     padding-bottom: 5%;
     padding-top: 2%;
+    width: 100%
   }
   
   li#menu {
@@ -19,14 +22,14 @@ body{
     color: #485E1B;
     text-align: center;
     font-weight: 600;
-    font-size: 25px;
-    margin: 8px;
+    font-size: 22px;
+    margin: 5px;
   
   }
   
   .navbar-connection {
     float: right;
-    margin-right: 2%;
+    margin-right: 10px;
   }
   
   /* Change the link color to #111 (black) on hover */
@@ -59,23 +62,17 @@ body{
   
   h1#home {
     color: #485E1B;
-    font-weight: 600;
     font-size: 55px;
   }
   p#home {  
     color: #0755ad;
-    font-weight: 600;
     font-size: 20px;
     white-space: pre-line;
   }
   
   .container-home {
     padding-top: 5%;
-  }
-  
-  
-  .row {
-    display: flex;
+    margin-bottom: 100px;
   }
   
   .column {
@@ -88,6 +85,38 @@ body{
     width: 100%;
   }
 
+
+.filter{
+  width: 200px;
+  height: 30px;
+  margin-left:5px
+}
+
+.ligne-verte-espace{
+  padding-top: 50px;
+  height: 10px;
+  margin-bottom: 100px;
+   
+}
+
+.ligne-verte{
+  height: 1px;
+  background-color: #485E1B;
+   
+}
+
+
+  .button-item{
+    width:250px;
+    height: 50;
+    font-weight: 600;
+    color:#485E1B;
+    border-color: #485E1B;
+    border-width: 1px;
+    background-color: white;
+    padding: 10px;
+    font-size: 10px;
+  }
   .box-homepage-text{
     height: 150px;
     border: solid 3px  #485E1B ;
@@ -95,7 +124,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 150px;
   }
 
   .text-box-homepage{
@@ -104,12 +132,224 @@ body{
   }
 
   .card-product{
-    width:  18rem;
+    width:  250px;
     margin-right:15px;
     
+  }
+
+  .product-card-title{
+    font-weight: 800;
+    color: #485E1B;
+  }
+
+  .options-carroussel{
+    padding-left: 250px;
+    padding-right: 250px;
+    margin-top:50px;
+    margin-bottom:20px;
   }
 
   .card-img-product{
     height: 200px;
     object-fit: cover;
+  }
+
+  .legume_img{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .Josefin {
+    font-family: Josefin
+  }
+  .box-homepage-text2{
+    height: 500px;
+    padding: 100px 10px 30px 40px;
+    background-color: #485E1B;
+    color: white
+  }
+
+  .box-homepage-imgs2{
+    padding: 0px
+  }
+
+  .img_product{
+    height: 170px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .container-homepage-text{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+
+  .line-green{
+    background-color: #485E1B;
+    height: 10px;
+  }
+
+  .line-white{
+    background-color: white;
+    height: 1px
+  }
+
+  /* footer */
+
+  .footer{
+    background-color: #485E1B;
+    color:white;
+    padding: 80px 0px 0px 50px
+  }
+
+  img.companylogo_footer {
+    width: 200px;
+  }
+
+  .container-flex-wrap{
+    display: flex !important;
+    flex-wrap: wrap; /* add this */
+  }
+
+  a.droits-link{
+    color:white
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+p.offscreen {
+    display: none;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+
+.img-product{
+  height: 300px;
+  width:400px;
+  object-fit: cover;
+}
+
+h1{
+  font-family: "grenadine-mvb", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+}
+.title-product{
+  font-family: "grenadine-mvb", sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 40px;
+line-height: 1px;
+color:#485E1B
+}
+
+.title-product-fermier{
+  font-size: 18px;
+  color:#485E1B
+}
+
+.title-product-fermier-2{
+  font-size: 30px;
+  color:#485E1B
+}
+
+.title-product-price{
+  color: #bac100;
+  font-weight: 800;
+}
+
+.row-product-quantity{
+  margin: 0px;
+}
+
+.product-quantity{
+  height: 40px;
+  width:40px;
+  padding:1px;
+  font-size:18px;
+  background-color: #fff;
+  border-color: #485E1B;
+  border-width: 2px;
+}
+
+.product-img-fermier{
+  width:400px;
+  height: 300px;
+  object-fit: cover;
+}
+.column{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+  @media only screen and (max-width: 1200px) {
+    
+    li#menu {
+      display: inline;
+      color: #485E1B;
+      text-align: center;
+      font-weight: 600;
+      font-size: 12px;
+      margin: 5px;
+    
+    }
+
+    img.companylogo {
+      width: 100px;
+      float: left;
+      margin-left: 5% ;
+    }
+
+
+
   }

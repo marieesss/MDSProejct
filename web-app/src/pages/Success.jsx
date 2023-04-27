@@ -16,18 +16,20 @@ const Success = () => {
     const [products, setproducts]= useState()
     const location = useLocation();
     let stripe = location.state.stripe;
-    console.log(stripe.receipt_url)
 
     const getOrder = async () => {
   
         try {
           const res = await axios.get(`http://localhost:5000/api/order/find/last/${user}`, 
              {
-                headers: { token: `Bearer ${userToken}` }
+                headers: { token: `Bearer ${userToken}`,
+                userid: `Bearer ${user}`}
              });
              setInformations(res.data)
+             
              console.log(res.data)
              setIdCart(res.data[0]._id)
+             setproductsId(res.data[0].products)
 
         } catch (error) {
           console.log(error)
@@ -56,8 +58,9 @@ const Success = () => {
       };
 
       const putOrder = async () => {
+        console.log(informations[0].userId)
         try {
-          const res = await axios.put(`http://localhost:5000/api/order/${idCart}`,{
+          const res = await axios.put(`http://localhost:5000/api/order/${idCart}/${informations[0].userId}`,{
             status: "payé",
             stripeStatus : stripe.status, 
             billingAdress : {
@@ -72,10 +75,10 @@ const Success = () => {
 
           }, 
              {
-                headers: { token: `Bearer ${userToken}` }
+                headers: { token: `Bearer ${userToken}`,
+                userid: `Bearer ${user}`},
              });
              console.log(res.data)
-             setproductsId(res.data.products)
           
         } catch (error) {
           console.log(error)
@@ -88,7 +91,7 @@ useEffect(()=>{
 
 useEffect(()=>{
   putOrder()
-}, [idCart])
+}, [informations])
 
 useEffect(()=>{
   getProducts()

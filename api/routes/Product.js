@@ -78,13 +78,13 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
                 categories: {
                   $in: [qCategory],
                 },
-              });
+              }).sort({ createdAt: -1 });
             } else if (qFermier) {
               products = await Product.find({
                 fermierId: {
                   $in: [qFermier],
                 },
-              });
+              }).sort({ createdAt: -1 });
             } else {
               products = await Product.find().sort({ createdAt: -1 });
             }

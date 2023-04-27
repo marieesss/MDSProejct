@@ -33,7 +33,8 @@ const Cart = () => {
 
   const registerOrderFirst = async () => {
     const config = {
-      headers: { token: `Bearer ${userToken}` }
+      headers: { token: `Bearer ${userToken}`,
+      userid: `Bearer ${user}` }
   };
 
     const produitarray= []

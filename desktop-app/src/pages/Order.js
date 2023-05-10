@@ -12,6 +12,7 @@ const Order = () => {
     const [product, setProduct] = useState([]);
     const [OrderListe, setOrderListe] = useState([]);
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
+    const user = useSelector((state) => state.user.currentUser._id);
 
      const config = {
         headers: { token: `Bearer ${userToken}` }
@@ -37,10 +38,11 @@ const Order = () => {
     const id= e.target.value
 
     const config = {
-        headers: { token: `Bearer ${userToken}` }
+        headers: { token: `Bearer ${userToken}`,
+        userid: `Bearer ${user}` }
     };
 
-    axios.put(`http://localhost:5000/api/order/${id}`, {
+    axios.put(`http://localhost:5000/api/order/${id}/${user}`, {
         status : "envoyé"
     },config)
       .then(response => {

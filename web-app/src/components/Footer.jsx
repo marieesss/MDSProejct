@@ -27,8 +27,8 @@ const Footer = () => {
                 <div class="col-lg-3 col-md-12">
                 <h3> A propos</h3><br/>
                 <p>Nous contacter</p><br/>
-                <Link to={`/hub`} >
-                <p>Nos Hubs</p><br/>
+                <Link to={`/hub`}>
+                <p class="link">Nos Hubs</p><br/>
                 </Link>
                     
                 </div>

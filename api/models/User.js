@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema(
             required:true},
         password:{
             type:String, 
-            match: [/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, 'password invalide'], 
             required:true},
         isAdmin:{type:Boolean, default:false},
     },

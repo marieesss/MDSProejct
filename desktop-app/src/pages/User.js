@@ -71,6 +71,7 @@ const User = () => {
             console.log(response)
             setMessage("User bien modifié")
             handleShow()
+            window.location.reload()
     
           })
           .catch(error => {

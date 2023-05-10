@@ -58,7 +58,6 @@ const Home = () => {
     dataOrder.map(data =>
       tableau.push({"month": MONTHS[data._id -1], "value": data.total})
       )
-      console.log(tableau)
       setorderStats(tableau)
   },[dataOrder])
 

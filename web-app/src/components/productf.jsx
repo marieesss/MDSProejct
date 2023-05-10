@@ -20,7 +20,7 @@ function ProductListTest() {
 
   
   const url= location.state?.fermierId;
-  console.log(url)
+ 
 
   useEffect(() => {
     
@@ -88,11 +88,11 @@ const searchItems = (searchValue) => {
 
       <div className="container-home">
         <div class="row m-4">
-            <div class="column">
+            <div class="column col-lg-6 col-md-12">
                 <h1 id='home'>Faites le plein de fraîcheur !</h1>
                 <p id='home'> Nos producteurs se chargent de préparer votre panier personnalisé avec soin, en respectant vos choix et en privilégiant toujours les produits de saison. </p>
             </div>
-            <div class="column" >
+            <div class="column col-lg-6 col-md-12" >
                 <img class ="panierhome" src={panierhome} alt="BigCo Inc. logo"/>
             </div>
         </div>

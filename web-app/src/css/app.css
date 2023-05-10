@@ -72,6 +72,7 @@ body{
   
   .container-home {
     padding-top: 5%;
+    height:400px;
     margin-bottom: 100px;
   }
   
@@ -154,6 +155,10 @@ body{
     object-fit: cover;
   }
 
+  .panierhome{
+    height: 400px;
+    object-fit: cover;
+  }
   .legume_img{
     height: 500px;
     width: 100%;
@@ -230,7 +235,7 @@ body{
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
-    background: #000;
+    background-color: #485E1B;
     color: #fff;
     padding: 0.25rem;
     position: relative;
@@ -330,6 +335,13 @@ color:#485E1B
   display: flex;
   flex-direction: column;
   align-self: flex-end;
+}
+
+.button-auth{
+  background-color: #485E1B;
+  color:white;
+  border:none;
+  padding:5px
 }
 
   @media only screen and (max-width: 1200px) {

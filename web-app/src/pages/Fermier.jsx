@@ -3,6 +3,7 @@ import Menu from '../components/Menu';
 import axios from 'axios';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
@@ -23,9 +24,6 @@ const Fermier = () => {
           });
       }, []);
 
-      const handleClick=(id)=>{
-        navigate('/productf', {state : {fermierId :id}})
-      }
 
   return (
 <div class="container-fluid p-0 overflow-hidden">
@@ -38,7 +36,9 @@ const Fermier = () => {
                 <div class="card-body">
                     <h5 class="card-title">{fermier.name}</h5>
                     <p class="card-text">{fermier.desc}</p>
-                    <button onClick={() => handleClick(fermier._id)}> Ajouter au panier </button>
+                    <Link to="/productf" state={{fermierId : fermier._id}}>
+                    <button> Ajouter au panier </button>
+                    </Link>
                     
                 </div>
                 </div>

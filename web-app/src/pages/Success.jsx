@@ -58,7 +58,6 @@ const Success = () => {
       };
 
       const putOrder = async () => {
-        console.log(informations[0].userId)
         try {
           const res = await axios.put(`http://localhost:5000/api/order/${idCart}/${informations[0].userId}`,{
             status: "payé",
@@ -78,7 +77,6 @@ const Success = () => {
                 headers: { token: `Bearer ${userToken}`,
                 userid: `Bearer ${user}`},
              });
-             console.log(res.data)
           
         } catch (error) {
           console.log(error)

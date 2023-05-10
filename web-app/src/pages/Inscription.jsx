@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Menu from "../components/Menu";
 import "../css/app.css"
@@ -51,42 +52,42 @@ const Inscription = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = EMAIL_REGEX.test(email);
         const v2 = PWD_REGEX.test(password);
-        if (!v1 || !v2) {
-            setErrMsg("Invalid Entry");
-            return;
+        const v3 = USER_REGEX.test(username);
+        if (!v1 || !v2 || !v3) {
+            window.alert("entrées invalides")
         
+          }else{
+
+            try {
+                const response = await axios.post("http://localhost:5000/api/auth/register",
+                  { username
+                      , password
+                      , email},
+                    
+                );
+                setUsername('');
+                setPassword('');
+                setMatchPwd('');
+                window.alert(`Votre compte a bien été créé ${response.data.username}`)
+                navigate("/login")
+    
+            } catch (err) {
+                if (!err?.response) {
+                    setErrMsg('No Server Response');
+                    console.log(err)
+                } else if (err.response?.data?.message) {
+                    window.alert(err.response?.data?.message)
+                } else {
+                    setErrMsg('Registration Failed')
+                    console.log(err)
+                }
+            }
+
           }
           
-        try {console.log(email, username, password)
-            const response = await axios.post("http://localhost:5000/api/auth/register",
-              { username
-                  , password
-                  , email},
-                
-            );
-            
-            console.log(response?.data);
-            setSuccess(true);
-            setUsername('');
-            setPassword('');
-            setMatchPwd('');
-            window.alert('Votre compte a bien été créé')
-            navigate("/login")
-
-        } catch (err) {
-            if (!err?.response) {
-                setErrMsg('No Server Response');
-                console.log(err)
-            } else if (err.response?.data?.message) {
-                window.alert(err.response?.data?.message)
-            } else {
-                setErrMsg('Registration Failed')
-                console.log(err)
-            }
-        }
+        
     }
 
     return (
@@ -102,11 +103,11 @@ const Inscription = () => {
         ) : (
             <section class=" row justify-content-center">
                 <p  className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                <h1>Register</h1>
+                <center><h1> Inscription</h1></center>
                 <form onSubmit={handleSubmit} class="col-6">
                     <label htmlFor="username">
                         Username:
-                        <i class="fa-solid fa-check" style={{color: "#ff000d"}} className={validName ? "valid" : "hide"}></i>
+                        <i class="fa-solid fa-check" style={{color: "white"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
                     <input
@@ -121,10 +122,10 @@ const Inscription = () => {
                     />
                     {username && !validName ? 
                         <p className={"instructions"}>
-                    <i class="fa-solid fa-circle-info" style={{color: "#27511f"}}></i>                       
-                        4 to 24 characters.<br />
-                        Must begin with a letter.<br />
-                        Letters, numbers, underscores, hyphens allowed.
+                    <i class="fa-solid fa-circle-info mx-2" style={{color: "white"}}></i>                       
+                    8 à 24 caractères.<br />
+                        Il doit être commencé par une lettre<br />
+                        Lettres, chiffres, soulignés, traits d'union autorisés.
                     </p>
                      : <div/>}
                     
@@ -146,10 +147,10 @@ const Inscription = () => {
                     />
                     {email && !validEmail ?  
                     <p id="uidnote" className={ "instructions"}>
-                    <i class="fa-solid fa-circle-info" style={{color: "#27511f"}}></i>                       
-                        4 to 24 characters.<br />
-                        Must begin with a letter.<br />
-                        Letters, numbers, underscores, hyphens allowed.
+                    <i class="fa-solid fa-circle-info" style={{color: "white"}}></i>                       
+                        8 à 24 caractères.<br />
+                        Il doit être commencé par une lettre<br />
+                        Lettres, chiffres, soulignés, traits d'union autorisés.
                     </p> 
                     :
                     <div/>}
@@ -173,17 +174,17 @@ const Inscription = () => {
                     {
                         password && !validPwd ? 
                         <p id="pwdnote" className={!validPwd ? "instructions" : "offscreen"}>
-                    <i class="fa-solid fa-circle-info" style={{color: "#27511f"}}></i>                       
-                        8 to 24 characters.<br />
-                        Must include uppercase and lowercase letters, a number and a special character.<br />
-                        Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
+                    <i class="fa-solid fa-circle-info" style={{color: "white"}}></i>                       
+                        8 à 24 caractères.<br />
+                        Il doit inclure minuscule, majuscule et un caractère spécial<br />
+                        caractères utilisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                     </p>
                         : <div/>
 
                     }
                    
                     <label htmlFor="confirm_pwd">
-                        Confirm Password:
+                        Confirmez votre mot de passe:
                         <i class="fa-solid fa-check" style={{color: "#ff000d"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
@@ -198,18 +199,23 @@ const Inscription = () => {
                     />
                     { !validMatch ? 
                     <p id="confirmnote" className={!validMatch ? "instructions" : "offscreen"}>
-                    <i class="fa-solid fa-circle-info" style={{color: "#27511f"}}></i>                       
-                     Must match the first password input field.
+                    <i class="fa-solid fa-circle-info" style={{color: "white"}}></i>                       
+                    Doit correspondre au premier champ de saisie du mot de passe.
                     </p> 
                     : <div/>}
                     
 
-                    <button disabled={!validName || !validPwd || !validMatch || !validEmail ? true : false}>Sign Up</button>
-                </form>
-                <p>
-                    Already registered?<br />
-                        <a href="/login">Se connecter</a>
+                    <button  class="button-auth mt-4" 
+                    disabled={!validName || !validPwd || !validMatch || !validEmail ? true : false}>
+                    Sign Up</button>
+                
+                    <p>
+                    Déjà enregistré ?<br />
+                        <Link to="/login">Se connecter</Link>
                 </p>
+                
+                </form>
+               
             </section>
         )}
     </div>

@@ -79,7 +79,9 @@ const Home = () => {
 
     <div class="row justify-content-between options-carroussel">
     <div class=" col-3" > Les dernières nouveautés </div>
-    <div class="col-3" > Voir les derniers produits </div>
+    <Link to={`/product`} class="col-3" >
+    <div> Voir les derniers produits </div>
+    </Link>
 
     </div>
     
@@ -126,7 +128,9 @@ const Home = () => {
 
     <div class="row justify-content-between mt-5">
     <div class="col-2" > Nos fermiers stars </div>
-    <div class="col-2"> Voir tout les fermiers </div>
+    <Link to={`/fermier`} class="col-2" >
+    <div> Voir tout les fermiers </div>
+    </Link>
 
     </div>
     <div class=" row justify-content-center">

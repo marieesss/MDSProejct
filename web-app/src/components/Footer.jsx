@@ -1,6 +1,7 @@
 import React from 'react'
 import companyLogo from '../assets/logo.png';
 import "../css/app.css"
+import { Link } from 'react-router-dom';
 
 
 
@@ -14,14 +15,21 @@ const Footer = () => {
             <div class ="row justify-content-center container-flex-wrap">
                 <div class="col-lg-3 col-md-12">
                     <h3> Boutique</h3><br/>
-                    <p>Nos producteurs</p><br/>
+                    <Link to={`/fermier`} >
+                    <p>Nos producteurs</p>
+                    </Link>
+                    <br/>
+                    <Link to={`/productf`} >
                     <p>Nos produits</p>
+                    </Link>
                     
                 </div>
                 <div class="col-lg-3 col-md-12">
                 <h3> A propos</h3><br/>
                 <p>Nous contacter</p><br/>
-                <p>Nos Hubs</p><br/>
+                <Link to={`/hub`}>
+                <p class="link">Nos Hubs</p><br/>
+                </Link>
                     
                 </div>
                 <div class="col-lg-3 col-md-12">

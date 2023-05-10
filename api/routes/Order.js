@@ -210,8 +210,6 @@ router.get("/stats", verifyTokenAdmin, async (req, res) => {
     const date = new Date();
     // récupération de la date mais le mois dernier
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-    // récupération de la date deux mois avant
-    const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
     const previouspreviousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 2));
   
     try {

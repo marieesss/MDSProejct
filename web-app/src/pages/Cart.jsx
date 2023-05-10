@@ -73,7 +73,7 @@ const Cart = () => {
     }else{
       setTotal(cart.total)
     }
-  })
+  },[cart.total])
 
 
   useEffect(()=>{

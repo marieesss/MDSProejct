@@ -12,6 +12,7 @@ import Product from './pages/Product';
 import { useSelector } from 'react-redux';
 import Success from './pages/Success';
 import Fermier from './pages/Fermier';
+import Hubs from './pages/Hubs';
 
 
 
@@ -22,17 +23,13 @@ const App = () => {
       <Route path="/" element={<Home/>} />
       <Route path="*" element={<Home/>} />
       <Route path="/inscription" element={<Inscription/>} />
-      
+      <Route path="/hub" element={<Hubs/>} />
       {user ? <Route path="/cart" element={<Cart/>} /> : <Route path="/cart" element={<Login/>}/>}
       <Route path="/login" element={<Login/>} />
       <Route path="/productf" element={<ProductListTest/>} />
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/fermier" element={<Fermier/>} />
       {user ? <Route path="/success" element={<Success/>} /> : <Route path="/success" element={<Login/>}/>}
-      
-
-  
-  
     </Routes>
  
 

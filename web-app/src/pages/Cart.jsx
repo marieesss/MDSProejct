@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Menu from '../components/Menu';
 import { useSelector, useDispatch} from 'react-redux'
 import { delProduct } from '../redux/cartRedux';
+import Footer from '../components/Footer';
 
 
 
@@ -14,10 +15,11 @@ const Cart = () => {
   const [hub, setHub]= useState([])
   const [livraisonFees, setLivraisonFees]= useState(false)
   const [total, setTotal]= useState()
+  const [TVA, setTVA]= useState()
   const [hubChoisi, setHubChoisi]= useState({})
   const [stripe, setStripe]= useState("")
   const cart= useSelector(state=> state.cart)
-  console.log(cart.total)
+  console.log(cart)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
@@ -67,11 +69,12 @@ const Cart = () => {
   useEffect(()=> {
     if(cart.total<50){
       setLivraisonFees(true);
-      setTotal(cart.total + 3.99)
-      console.log(total)
+      setTotal((cart.total + 3.99).toFixed(2))
+      setTVA(((cart.total)*0.2).toFixed(2))
 
     }else{
-      setTotal(cart.total)
+      setTotal((cart.total).toFixed(2))
+      setTVA(((cart.total)*0.2).toFixed(2))
     }
   },[cart.total])
 
@@ -127,34 +130,67 @@ const Cart = () => {
   };
 
   return (
-    <div>
+    <div class="container-fluid p-0 overflow-hidden">
 
       <Menu/>
-      {cart.Product.map(product =>(
-        <div> 
-          <p> Produit {product.title}</p>
-          <img src={product.img}/>
-          <p> Quantité {product.quantity} kg</p>
-          <p> Prix au kilo  {product.price} euros </p>
-          <p> Total {product.price*product.quantity} euros</p>
-          <button onClick={()=> dispatch(delProduct(product._id))}> Supprimer </button>
+      <h1 class="mt-4 mb-4 padding-100">Mon Panier</h1>
+
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-6 col-md-12">
+
+        {cart.Product.map(product =>(
+        <div class="row justify-content-start padding-100 mb-3"> 
+          <div class="product-cart row  justify-content-start p-0 col-6">
+          <img src={product.img} class="product-img-cart col-6 p-0" />
+          <div class="col-6 d-flex flex-column trash proxima">
+          <p style={{fontSize:"14px", fontWeight:"700"}}>{product.title}</p>
+          <p style={{fontSize:"12px"}}>{product.price} euros x {product.quantity} </p>
+          </div>
+          </div>
+          <div class="col-3 trash p-0">
+          <i class="fa-solid fa-trash fa-lg" style={{color: "#485E1B"}} onClick={()=> dispatch(delProduct(product))}></i>
+          </div>
          </div>
       ))}
 
-      <h1> TOTAL </h1>
-      <div>$ {total}</div>
-      {livraisonFees ? <div> Frais de livraison de 3,99 euros compris </div> : <div> Livraison gratuite </div>}
-
-      
-
+      <div class="padding-100 mt-5">
+      <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>livraison</div>
+      <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>A retirer dans nos hubs</div>
 <select name="_id" onClick={handleFilter}>
           <option value="rien">Choisir un point de livraison</option>
-          {hub.map(hub =>(
-        <option value={hub._id}>{hub.name}</option>
-      ))}
-      </select>
+              {hub.map(hub =>(
+            <option value={hub._id}>{hub.name}</option>
+          ))}
+          </select>
+          </div>
 
-      <StripeCheckout
+
+        </div>
+        <div class="col-lg-6 col-md-12 total-cart-end proxima" style={{fontSize:"14px", fontWeight:"700"}}>
+        <div class="total-cart-column" style={{width:"300px"}}>
+          <div class="row justify-content-between">
+            <div class="col-6 p-0">Produits: {cart.quantity}</div>
+            <div class="col-6 p-0">{cart.total} euros</div>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-6 p-0 text-left">TVA 20% </div>
+            <div class="col-6 p-0">{TVA} euros</div>
+          </div>
+          <div class="row justify-content-between">
+            <div class="col-6 p-0">Livraison</div>
+            <div class="col-6 p-0">{livraisonFees ? <div> 3,99 euros</div> : <div> Livraison gratuite </div>}</div>
+          </div>
+
+          <div class="line-green-cart p-0">
+          </div>
+
+          <div class="row justify-content-between">
+            <div class="col-6 p-0">Total</div>
+            <div class="col-6 p-0">{total}</div>
+          </div>
+            
+          
+          <StripeCheckout
       name="Nos producteurs locaux"
       image="https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
@@ -163,9 +199,15 @@ const Cart = () => {
       token={onToken}
       stripeKey={KEY}
       >
-        <button onClick={registerOrderFirst}>Paiement</button>
+        <button class="button-cart" onClick={registerOrderFirst}>Paiement</button>
       </StripeCheckout>
-    </div>
+      </div>
+      </div>
+</div>
+
+      <Footer/>
+        </div>
+    
   )
 }
 

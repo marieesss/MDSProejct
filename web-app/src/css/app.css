@@ -75,6 +75,14 @@ body{
     height:400px;
     margin-bottom: 100px;
   }
+
+  .product-quantity-number{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border: solid #485E1B 1px;
+  }
   
   .column {
     flex: 50%;
@@ -280,6 +288,7 @@ p.offscreen {
   height: 300px;
   width:400px;
   object-fit: cover;
+  object-position: 50% 50%;
 }
 
 h1{
@@ -297,7 +306,7 @@ line-height: 1px;
 color:#485E1B
 }
 
-a{
+.link-footer{
   color:white
 }
 
@@ -326,8 +335,7 @@ a{
   padding:1px;
   font-size:18px;
   background-color: #fff;
-  border-color: #485E1B;
-  border-width: 2px;
+  border: solid #485E1B 1px;
 }
 
 .product-img-fermier{
@@ -347,6 +355,69 @@ a{
   border:none;
   padding:5px
 }
+
+/* panier */
+
+.product-cart{
+  border: solid #485E1B 1px;
+  height:125px;
+  width: 300px
+}
+
+.product-img-cart{
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border-right: solid #485E1B 1px;
+}
+
+.trash{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.line-cart{
+  height: 3px;
+  width:500px;
+  background-color: #485E1B;
+}
+
+.proxima{
+  font-family: "proxima-nova", sans-serif;
+font-style: normal;
+}
+
+.total-cart-end{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding-right: 100px;
+  color: #485E1B;
+  align-items: end;
+}
+
+.total-cart-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.padding-100{
+  padding-left:100px;
+}
+
+.button-cart{
+  width:100%;
+  background-color: #485E1B;
+  color:white
+}
+
+.line-green-cart{
+  height: 1px;
+  background-color: #485E1B;
+}
+
 
   @media only screen and (max-width: 1200px) {
     

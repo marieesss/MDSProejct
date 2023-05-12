@@ -18,7 +18,7 @@ const NewHub = () => {
 
         const newHub = async (e) => {
             try {
-              const res = await axios.post("http://localhost:5000/api/hub/", {
+              const res = await axios.post("http://141.94.244.226:5000/api/hub/", {
                   name : name,
                   adress: adress
                  }, 

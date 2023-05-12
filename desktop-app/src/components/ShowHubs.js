@@ -28,7 +28,7 @@ const ShowHubs = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/hub/`, config)
+        axios.get(`http://141.94.244.226:5000/api/hub/`, config)
           .then(response => {
             console.log(response)
             setHub(response.data)
@@ -41,7 +41,7 @@ const ShowHubs = () => {
   
     const putName = async () => {
       try {
-        const res = await axios.put(`http://localhost:5000/api/hub/${idProduit}`, {
+        const res = await axios.put(`http://141.94.244.226:5000/api/hub/${idProduit}`, {
             name: name,
            }, 
            config);
@@ -53,7 +53,7 @@ const ShowHubs = () => {
 
     const putAdress = async () => {
         try {
-          const res = await axios.put(`http://localhost:5000/api/hub/${idProduit}`, {
+          const res = await axios.put(`http://141.94.244.226:5000/api/hub/${idProduit}`, {
               adress: adress,
              }, 
              config);

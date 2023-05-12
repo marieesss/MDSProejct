@@ -25,46 +25,52 @@ const Menu = () => {
     <div className='bandeaux'>
       Livrais offerte à parti de 50€ d'achat 
     </div>
-      <div class="row justify-content-center mt-4">
-      <div class="col-lg-2 col-md-12">
-      <img class ="companylogo" src={companyLogo} alt="BigCo Inc. logo"/>
-      </div>
 
-      <div class="col-lg-6 col-md-12">
-    <NavLink to="/">
-        <li id ="menu">ACCUEIL</li>
-    </NavLink>
-    <Link to="/#propos">
-    <li id ="menu">A PROPOS </li>
-    </Link>
-    <NavLink to="/productf">
-    <li id ="menu">NOS PRODUITS  </li>
-    </NavLink>
+    <div class="container-fluid text-align-center">
+<nav class="navbar navbar-expand-lg ">
+<div class="container-fluid text-align-center">
+<Link to="/">    <img class ="companylogo" src={companyLogo} alt="BigCo Inc. logo"/> </Link>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+      
+        <li class="nav-item" id="menu">
+        <Link class="nav-link" to="/#propos">A PROPOS</Link>
+        </li>
 
-    <NavLink to="/fermier">
-    <li id ="menu">NOS FERMIERS  </li>
-    </NavLink>
-    </div>
+        <li class="nav-item" id="menu">
+        <Link to="/productf" class="nav-link">NOS PRODUITS</Link>
+        </li>
 
-    <div class="col-lg-4 col-md-12">
-    <div class="row justify-content-end align-items-center">
-    <NavLink to="/cart" class="col-3 ">
-    <li id ="menu"><img class ="panier" src={panier} alt="BigCo Inc. logo"/>{quantity}</li>
-    </NavLink>
-    {!user && 
-    <NavLink to="/login" class="col-7">
-    <li  id ="menu">SE CONNECTER </li>
-    </NavLink> 
+        <li class="nav-item" id="menu">
+        <Link to="/fermier" class="nav-link">NOS PRODUCTEURS</Link>
+        </li>
+      </ul>
+            <ul class="navbar-nav">
+         <li class="nav-item" id ="menu">
+         <Link to="/cart" class="nav-link"><img class ="panier" src={panier} alt="BigCo Inc. logo"/>{quantity}</Link>
+        </li>
+
+        {!user && 
+        <li  id ="menu" class="nav-item">
+    <Link to="/login" class="nav-link">
+    SE CONNECTER 
+    </Link> </li>
     }
     
    {user && 
-            <NavLink to="/" class="col-5">
-            <li onClick={logoutHandler} id="menu">Logout</li>
-            </NavLink>
+            
+            <li onClick={logoutHandler} id="menu" class="nav-item"><Link to="/" class="nav-link">Logout </Link></li>
+           
             }
 
+        </ul>
+      </div>
     </div>
-</div>
+</nav>
 </div>
       </div>
     );

@@ -15,11 +15,11 @@ const Footer = () => {
             <div class ="row justify-content-center container-flex-wrap">
                 <div class="col-lg-3 col-md-12">
                     <h3> Boutique</h3><br/>
-                    <Link to={`/fermier`} >
+                    <Link to={`/fermier`} class="link-footer">
                     <p>Nos producteurs</p>
                     </Link>
                     <br/>
-                    <Link to={`/productf`} >
+                    <Link to={`/productf`} class="link-footer">
                     <p>Nos produits</p>
                     </Link>
                     
@@ -27,7 +27,7 @@ const Footer = () => {
                 <div class="col-lg-3 col-md-12">
                 <h3> A propos</h3><br/>
                 <p>Nous contacter</p><br/>
-                <Link to={`/hub`}>
+                <Link to={`/hub`} class="link-footer">
                 <p class="link">Nos Hubs</p><br/>
                 </Link>
                     

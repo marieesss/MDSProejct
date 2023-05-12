@@ -22,7 +22,7 @@ const PutProduct = (idProduct) => {
 
   const putDesc = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+      const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduct}`, {
           desc: desc,
          }, 
          config);
@@ -34,7 +34,7 @@ const PutProduct = (idProduct) => {
 
   const putImg = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+      const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduct}`, {
           img: img,
          }, 
          config);
@@ -46,7 +46,7 @@ const PutProduct = (idProduct) => {
 
   const putQuantity = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+      const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduct}`, {
           quantity: quantity,
          }, 
          config);
@@ -59,7 +59,7 @@ const PutProduct = (idProduct) => {
   const putPrice= async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+      const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduct}`, {
           price: price,
          }, 
          config);
@@ -72,7 +72,7 @@ const PutProduct = (idProduct) => {
   const putFermier= async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.put(`http://localhost:5000/api/product/${idProduct}`, {
+      const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduct}`, {
           fermierId: IdFermier,
          }, 
          config);

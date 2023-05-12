@@ -42,16 +42,14 @@ const Home = () => {
 
       const handleClick=(id)=>{
         setFermierId(id)
-        nav()
       }
 
-      const nav = () =>{
-        if(fermierId){
-            console.log(fermierId)
-             navigate('/productf', {state : {fermierId :fermierId}})
+      useEffect(() => {
+        if (fermierId) {
+          console.log(fermierId);
+          navigate('/productf', {state : {fermierId: fermierId}});
         }
-        
-      }
+      }, [fermierId]);
 
 
     return (

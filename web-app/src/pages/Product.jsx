@@ -111,10 +111,11 @@ const Product = () => {
       <div class="row row-product-quantity">
       <div class="col-lg-6 col-md-12">
       <div class="row">
+        <button class="col-2 product-quantity" onClick={()=>handleQuantity("dec")}>-</button>
+        <div class="col-2 product-quantity-number">{quantity}</div>
          <button class="col-2 product-quantity" onClick={()=>handleQuantity("inc")}>+</button>
-      <div class="col-2 product-quantity">{quantity}</div>
       
-      <button class="col-2 product-quantity" onClick={()=>handleQuantity("dec")}>-</button>
+      
       </div>
       </div>
       <div class="col-lg-6 col-md-12">

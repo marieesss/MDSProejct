@@ -18,13 +18,14 @@ function ProductListTest() {
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation();
 
+  const URL = process.env.REACT_APP_API_URL;
   
   const url= location.state?.fermierId;
  
 
   useEffect(() => {
     
-    url ? axios.get(`http://localhost:5000/api/product?fermier=${url}`)
+    url ? axios.get(`http://${URL}:5000/api/product?fermier=${url}`)
     .then(response => {
       console.log(response)
       const productsData = response.data;
@@ -36,7 +37,7 @@ function ProductListTest() {
       console.log(error);
     })
     :
-    axios.get(`http://localhost:5000/api/product`)
+    axios.get(`http://${URL}:5000/api/product`)
       .then(response => {
         console.log(response)
         const productsData = response.data;
@@ -50,7 +51,7 @@ function ProductListTest() {
   }, [url]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/fermier`)
+    axios.get(`http://${URL}:5000/api/fermier`)
       .then(response => {
         console.log(response.data)
         setFermier(response.data);

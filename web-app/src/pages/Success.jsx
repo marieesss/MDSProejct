@@ -16,11 +16,12 @@ const Success = () => {
     const [products, setproducts]= useState()
     const location = useLocation();
     let stripe = location.state.stripe;
+    const URL = process.env.REACT_APP_API_URL;
 
     const getOrder = async () => {
   
         try {
-          const res = await axios.get(`http://localhost:5000/api/order/find/last/${user}`, 
+          const res = await axios.get(`http://${URL}:5000/api/order/find/last/${user}`, 
              {
                 headers: { token: `Bearer ${userToken}`,
                 userid: `Bearer ${user}`}
@@ -41,7 +42,7 @@ const Success = () => {
         const products =[]
         for(let i=0; i<productsId.length; i++) {
               try {
-                        const res = await axios.get(`http://localhost:5000/api/product/find/${productsId[i].productId}`, 
+                        const res = await axios.get(`http://${URL}:5000/api/product/find/${productsId[i].productId}`, 
                           {
                               headers: { token: `Bearer ${userToken}` }
                           });
@@ -59,7 +60,7 @@ const Success = () => {
 
       const putOrder = async () => {
         try {
-          const res = await axios.put(`http://localhost:5000/api/order/${idCart}/${informations[0].userId}`,{
+          const res = await axios.put(`http://${URL}:5000/api/order/${idCart}/${informations[0].userId}`,{
             status: "payé",
             stripeStatus : stripe.status, 
             billingAdress : {

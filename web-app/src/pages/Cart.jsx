@@ -27,6 +27,7 @@ const Cart = () => {
   const dispatch = useDispatch()
 
   const KEY = process.env.REACT_APP_REACT_STRIPE;
+  const URL = process.env.REACT_APP_API_URL;
 
   const onToken = (token) => {
     // récupère le token de Stripe contenant les informations
@@ -52,7 +53,7 @@ const Cart = () => {
     
 
     try {
-      const res = await axios.post("http://localhost:5000/api/order", {
+      const res = await axios.post(`http:${URL}//:5000/api/order`, {
           userId: user,
           products: produitarray,
           amount: cart.total,
@@ -84,7 +85,7 @@ const Cart = () => {
     const makeRequest = async ()=>{
       try{
         // envoie une requête POST avec les informations de paiement au backend
-        const res = await axios.post("http://localhost:5000/api/checkout/payment", {
+        const res = await axios.post(`http://${URL}:5000/api/checkout/payment`, {
           tokenId: stripeToken.id, // identifiant du token de paiement
           amount:cart.total*100, // montant total de la commande en centimes (pour Stripe)
         });
@@ -114,7 +115,7 @@ const Cart = () => {
   useEffect (()=>{
     const getHub = async ()=> {
       try{
-        const res =  await axios.get("http://localhost:5000/api/hub")
+        const res =  await axios.get(`http://${URL}:5000/api/hub`)
         setHub(res.data);
         console.log(hub)
       }catch(err){}

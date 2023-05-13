@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleClick = (e) =>{
-    e.preventDefault();
+
     login(dispatch, {email, password});
     if(isLoggedIn === true){
       navigate("/")

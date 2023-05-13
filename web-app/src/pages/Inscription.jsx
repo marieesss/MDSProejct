@@ -29,6 +29,7 @@ const Inscription = () => {
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
+    const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email));
@@ -61,7 +62,7 @@ const Inscription = () => {
           }else{
 
             try {
-                const response = await axios.post("http://localhost:5000/api/auth/register",
+                const response = await axios.post(`http://${URL}:5000/api/auth/register`,
                   { username
                       , password
                       , email},
@@ -80,7 +81,7 @@ const Inscription = () => {
                 } else if (err.response?.data?.message) {
                     window.alert(err.response?.data?.message)
                 } else {
-                    setErrMsg('Registration Failed')
+                    setErrMsg('Veuillez choisir un autre username ou adresse email')
                     console.log(err)
                 }
             }

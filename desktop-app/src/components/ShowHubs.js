@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import "../css/app.css";
 import Table from 'react-bootstrap/Table';
 
+
 const ShowHubs = () => {
     const [Hubs, setHub] = useState([]);
     const [show, setShow] = useState(false);
@@ -17,6 +18,8 @@ const ShowHubs = () => {
     const handleShow = () => setShow(true);
     const [adress, setAdress] = useState("");
     const [name, setName] = useState("");
+    const [ville, setVille] = useState("");
+    const [code, setCode] = useState("");
     const [idProduit, setIdproduit] = useState("");
 
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
@@ -28,7 +31,7 @@ const ShowHubs = () => {
 
 
     useEffect(() => {
-        axios.get(`http://141.94.244.226:5000/api/hub/`, config)
+        axios.get(`http://localhost:5000/api/hub/`, config)
           .then(response => {
             console.log(response)
             setHub(response.data)
@@ -41,7 +44,7 @@ const ShowHubs = () => {
   
     const putName = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/hub/${idProduit}`, {
+        const res = await axios.put(`http://localhost:5000/api/hub/${idProduit}`, {
             name: name,
            }, 
            config);
@@ -51,17 +54,7 @@ const ShowHubs = () => {
       }
     };
 
-    const putAdress = async () => {
-        try {
-          const res = await axios.put(`http://141.94.244.226:5000/api/hub/${idProduit}`, {
-              adress: adress,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
+
   return (
     <div class='row justify-content-center margin-50'>
 
@@ -80,7 +73,9 @@ const ShowHubs = () => {
                  <tr>
                      <td>{hub.name}</td>
                      <td>{hub.adress}</td>
-                     <td><button  onClick={() => { handleShow(); setIdproduit(hub._id);}}value={hub._id} class="button-modal">Modifier</button></td>
+                     <td>
+                      <button  onClick={() => { handleShow(); setIdproduit(hub._id);}}value={hub._id} class="button-modal">Modifier</button>
+                     </td>
                  </tr>
              ))}  
              </tbody>
@@ -99,13 +94,6 @@ const ShowHubs = () => {
          <button onClick={putName} type="submit" class="button-modal mt-3">
          Modifier
        </button><br/>
-         <Form.Label class="mt-3">Adress</Form.Label>
-         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setAdress(e.target.value)}/>
-         
-         <button onClick={putAdress} type="submit" class="button-modal mt-3">
-         Modifier
-       </button>
-    
        </Form.Group>
      </Form>
          </Modal.Body> 

@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Hub = require("../models/Hub");
 const { Client } = require('@googlemaps/google-maps-services-js');
+require("dotenv").config();
+const API_KEY = process.env.API_GOOGLE;
 
 const {
     verifyToken,
@@ -13,10 +15,10 @@ const {
 
 router.post("/", verifyTokenAdmin ,async (req, res) => {
 
+  //récupération des informations pour GoogleMaps API
   const adress = req.body.adress;
   const ville = req.body.ville;
   const code = req.body.code;
-  console.log(adress)
 
  // Validation de l'adresse à l'aide de l'API Google Maps
  const client = new Client({});
@@ -24,7 +26,7 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
    const response = await client.geocode({
      params: {
        address: adress+ville+code,
-       key: 'AIzaSyDTRP1jLzuSp6a14xmfO27IfovPFGyZ4Qs',
+       key: API_KEY,
      },
    });
 
@@ -49,7 +51,6 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
      res.status(201).json({ message: 'Adresse ajoutée avec succès' });
    } else {
      res.status(400).json({ message: 'Adresse invalide' });
-     console.log("merde")
    }
  } catch (error) {
    console.log(error);
@@ -58,47 +59,6 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
 
 })
 
-
-router.post('/add-address', async (req, res) => {
-  // Récupération de l'adresse du corps de la requête
-  const address = req.body.address;
-
-  // Validation de l'adresse à l'aide de l'API Google Maps
-  const client = new Client({});
-  try {
-    const response = await client.geocode({
-      params: {
-        address: address,
-        key: 'VOTRE_CLE_API_GOOGLE_MAPS',
-      },
-    });
-
-    console.log(response)
-
-    // Vérification qu'au moins un résultat a été renvoyé
-    if (response.data.results.length > 0) {
-      // Récupération des données de géolocalisation de l'adresse
-      const location = response.data.results[0].geometry.location;
-
-      // Création d'une nouvelle adresse à partir des données de géolocalisation
-      const newAddress = new Address({
-        address: address,
-        latitude: location.lat,
-        longitude: location.lng,
-      });
-
-      // Sauvegarde de l'adresse dans la base de données
-      await newAddress.save();
-
-      res.status(201).json({ message: 'Adresse ajoutée avec succès' });
-    } else {
-      res.status(400).json({ message: 'Adresse invalide' });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'Erreur serveur' });
-  }
-});
 
 //UPDATE
 

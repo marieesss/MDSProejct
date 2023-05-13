@@ -32,6 +32,7 @@ const Hubs = () => {
             <tr>
                 <td>{hub.name}</td>
                 <td>{hub.adress}</td>
+                <td> <a href={`https://www.google.com/maps/search/?api=1&query=${hub.latitude},${hub.longitude}`} target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" style={{color: "#485E1B"}}/></a></td>
             </tr>
         ))}
       </tbody>

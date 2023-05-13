@@ -3,6 +3,8 @@ import React, {useState, useEffect} from 'react'
 import { View,Text, ScrollView, Image, FlatList, TouchableOpacity} from 'react-native'
 import axios from 'axios';
 import styles from './productDetail.style'
+import {BASE_URL} from '@env'
+
 
 const ProductDetail = ({ navigation, route }) => {
     const [product, setProduct] = useState({});
@@ -13,7 +15,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
-            const res = await axios.get(`http://10.57.132.20:5000/api/product/find/`+route.params._id);
+            const res = await axios.get(`http://${BASE_URL}:5000/api/product/find/`+route.params._id);
             setProduct(res.data)
             setFermierId(res.data.fermierId)
             console.log(fermierId)
@@ -31,7 +33,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
-            const res = await axios.get(`http://10.57.132.20:5000/api/fermier/find/`+fermierId);
+            const res = await axios.get(`http://${BASE_URL}:5000/api/fermier/find/`+fermierId);
             console.log(res.data)
             setFermier(res.data)
 
@@ -49,7 +51,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
       const getProducts = async ()=> {
         try{
-          const res = await axios.get(`http://10.57.132.20:5000/api/product?fermier=`+fermierId);
+          const res = await axios.get(`http://${BASE_URL}:5000/api/product?fermier=`+fermierId);
           console.log(res.data)
           setProducts(res.data)
 

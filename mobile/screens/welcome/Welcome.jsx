@@ -3,6 +3,7 @@ import { View,Text,TouchableOpacity, Image, FlatList, ScrollView} from 'react-na
 import axios from 'axios'
 import Header from '../../components/header/Header'
 import { useNavigation } from '@react-navigation/native';
+import {BASE_URL} from '@env'
 
 import styles from './welcome.style'
 
@@ -13,7 +14,7 @@ const Welcome = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    axios.get(`http://10.57.132.20:5000/api/product`)
+    axios.get(`http://${BASE_URL}:5000/api/product`)
       .then(response => {
         console.log(response.data)
         Setdata(response.data);
@@ -25,7 +26,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://10.57.132.20:5000/api/product?category=fruit`)
+    axios.get(`http://${BASE_URL}:5000/api/product?category=fruit`)
       .then(response => {
         console.log(response.data)
         SetdataFruit(response.data);
@@ -37,7 +38,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://10.57.132.20:5000/api/product?category=legume`)
+    axios.get(`http://${BASE_URL}:5000/api/product?category=legume`)
       .then(response => {
         console.log(response.data)
         SetDataLegume(response.data);

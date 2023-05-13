@@ -2,6 +2,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/userRedux';
 import "../css/app.css";
+import { Link } from 'react-router-dom';
+import companyLogo from '../img/logo.png';
+
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -13,26 +16,52 @@ const Menu = () => {
     }
   return (
 
-    <div class="container-fluid">
-    <div class="row mt-5 justify-content-between">
+    <div class="container-fluid text-align-center">
+    <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid text-align-center">
+    <Link to="/">    <img class ="companylogo" src={companyLogo} alt="BigCo Inc. logo"/> </Link>
+        <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+           <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          
+            <li class="nav-item" id="menu">
+            <Link class="nav-link" to="/">ACCUEIL</Link>
+            </li>
     
-      <a href="/" class="col-6">
-          <img src={require('../img/logo.png')} width={150}/>
-      </a>
+            <li class="nav-item" id="menu">
+            <Link to="/product" class="nav-link">PRODUITS</Link>
+            </li>
+    
+            <li class="nav-item" id="menu">
+            <Link to="/order" class="nav-link">COMMANDES</Link>
+            </li>
 
-      <div class="col-6 row justify-content-end">
-      <a  class="ml-4 col-1" href="/">Home</a>&ensp;
-      <a class="ml-4 col-1" href="/order">Order</a>&ensp;
-      <a class="ml-4 col-1" href="/product">Product</a>&ensp;
-      <a class="ml-4 col-1" href="/user">User</a>&ensp;
-      <a class="ml-4 col-1" href="/hub">Hub</a>&ensp;
-      <a class="ml-4 col-1" href="/fermier">Fermier</a>&ensp;
-      {user && <a onClick={logoutHandler}  class="col-1"> <div  class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/></a>}
-</div>
+            <li class="nav-item" id="menu">
+            <Link to="/user" class="nav-link">USER</Link>
+            </li>
 
+            <li class="nav-item" id="menu">
+            <Link to="/hub" class="nav-link">HUB</Link>
+            </li>
 
-  </div>
-</div>
+            <li class="nav-item" id="menu">
+            <Link to="/fermier" class="nav-link">FERMIER</Link>
+            </li>
+          </ul>
+                <ul class="navbar-nav">
+    
+                <li onClick={logoutHandler}  class="nav-item" id="menu"> 
+                <div  class="fa fa-thin fa-right-from-bracket link" style={{color: "#ffffff;"}}/>
+                 </li>
+    
+            </ul>
+          </div>
+        </div>
+    </nav>
+    </div>
       
   )
 }

@@ -2,40 +2,24 @@
 import React, {useState, useEffect} from 'react'
 import { View,Text, ScrollView, Image, FlatList, TouchableOpacity} from 'react-native'
 import axios from 'axios';
-import styles from './productDetail.style'
+import styles from './fermiersDetails.style'
 import {BASE_URL} from '@env'
 
 
-const ProductDetail = ({ navigation, route }) => {
-    const [product, setProduct] = useState({});
+const FermierDetails = ({ navigation, route }) => {
     const [fermierId, setFermierId] = useState("");
     const [fermier, setFermier] = useState({});
     const [products, setProducts] = useState([]);
 
-    useEffect(()=>{
-        const getProduct = async ()=> {
-          try{
-            const res = await axios.get(`http://${BASE_URL}:5000/api/product/find/`+route.params._id);
-            setProduct(res.data)
-            setFermierId(res.data.fermierId)
-            console.log(fermierId)
-            
-          }catch(err){
-            console.log(err)
-          }
-        };
-        getProduct();
-       
-      
-        
-    }, [route.params])
+    console.log(route.params._id)
 
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
-            const res = await axios.get(`http://${BASE_URL}:5000/api/fermier/find/`+fermierId);
-            console.log(res.data)
+            const res = await axios.get(`http://${BASE_URL}:5000/api/fermier/find/`+ route.params._id);
+            // console.log(res.data)
             setFermier(res.data)
+            setFermierId(res.data._id)
 
             
           }catch(err){
@@ -43,16 +27,14 @@ const ProductDetail = ({ navigation, route }) => {
           }
         };
         getProduct();
-       
-      
         
-    }, [fermierId])
+    }, [route.params._id])
 
     useEffect(()=>{
       const getProducts = async ()=> {
         try{
           const res = await axios.get(`http://${BASE_URL}:5000/api/product?fermier=`+fermierId);
-          console.log(res.data)
+          // console.log(res.data)
           setProducts(res.data)
 
           
@@ -90,16 +72,15 @@ const ProductDetail = ({ navigation, route }) => {
         </TouchableOpacity>
         </View>
         <View style={styles.titleRow}>
-  <Text style={styles.welcomeMessage}> {product.title}</Text>
+  <Text style={styles.welcomeMessage}> {fermier.name}</Text>
   <Image source={require('../../assets/img/logo.png')} style={styles.img}/>
   </View>
             <View style={styles.row}>
-                <Image source={{uri: product.img}}
+                <Image source={{uri: fermier.img}}
             style={{width: 200, height: 200, borderRadius:15}}
             />
-              <View>
-                <Text style={styles.text}> Prix : {product.price} euros</Text>
-                <Text style={styles.text}> {product.desc}</Text>
+            <View>
+                <Text style={styles.text}> {fermier.desc} </Text>
               </View>
             </View>
 
@@ -107,7 +88,7 @@ const ProductDetail = ({ navigation, route }) => {
                       <Text style={styles.welcomeMessage}> Autres produits du fermier </Text>
                 </View>
 
-            <FlatList
+                <FlatList
                   data={products}
                   horizontal={true}
                   renderItem={item => renderItemFruit(item)}
@@ -116,21 +97,7 @@ const ProductDetail = ({ navigation, route }) => {
                   showsHorizontalScrollIndicator={false}
                   style={styles.categorie}
                 />
-
-                <View style={styles.titleRow}>
-                      <Text style={styles.welcomeMessage}>Rencontrez le fermier </Text>
-                </View>
-            
-
-                <View style={styles.row}>
-                    <View>
-                    <Text style={styles.text}> {fermier.name}</Text>
-                    <Text style={styles.text}> {fermier.desc}</Text>
-                    </View>
-                      <Image source={{uri: fermier.img}}
-                    style={{width: 200, height: 200, borderRadius:15}}
-                    />
-                </View>
+                
             
            
         </ScrollView>
@@ -138,4 +105,4 @@ const ProductDetail = ({ navigation, route }) => {
   )
 }
 
-export default ProductDetail
+export default FermierDetails

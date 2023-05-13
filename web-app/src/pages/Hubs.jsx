@@ -5,9 +5,10 @@ import Footer from '../components/Footer';
 
 const Hubs = () => {
     const [hubs, setHubs] = useState([]);
+    const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/hub`)
+        axios.get(`http://${URL}:5000/api/hub`)
           .then(response => {
             console.log(response.data)
             setHubs(response.data);

@@ -12,9 +12,10 @@ const Fermier = () => {
     const [fermier, setFermier] = useState([]);
     const [fermierId, setFermierId] = useState ("") 
     const navigate = useNavigate();
+    const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/fermier`)
+        axios.get(`http://${URL}:5000/api/fermier`)
           .then(response => {
             const productsData = response.data;
             setFermier(productsData);

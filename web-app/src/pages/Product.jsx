@@ -19,6 +19,7 @@ const Product = () => {
   const [categorie, setCategorie]=  useState("");
   const [quantity, setQuantity]=  useState(1);
   const dispatch = useDispatch();
+  const URL = process.env.REACT_APP_API_URL;
 
   useEffect(()=>{
       const getProduct = async ()=> {
@@ -45,7 +46,7 @@ const Product = () => {
   useEffect(()=>{
     const getProductCategorie = async ()=> {
       try{
-        const res = await axios.get(`http://localhost:5000/api/product?category=${categorie}` );
+        const res = await axios.get(`http://${URL}:5000/api/product?category=${categorie}` );
         setProductCategorie(res.data.slice(0,4))
         console.log(ProductCategorie)
       }catch(err){
@@ -64,7 +65,7 @@ const Product = () => {
     console.log(FermierId)
     const getFermier = async ()=> {
       try{
-        const res = await axios.get(`http://localhost:5000/api/fermier/find/${FermierId}` );
+        const res = await axios.get(`http://${URL}:5000/api/fermier/find/${FermierId}` );
   
         setFermier(res.data)
       }catch(err){

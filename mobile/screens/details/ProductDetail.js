@@ -2,7 +2,8 @@
 import React, {useState, useEffect} from 'react'
 import { View,Text, ScrollView, Image, FlatList, TouchableOpacity} from 'react-native'
 import axios from 'axios';
-import styles from './productDetail.style'
+import styles from './productDetail.style';
+import HeaderMenu from "../../components/header/Header"
 
 
 const ProductDetail = ({ navigation, route }) => {
@@ -84,15 +85,8 @@ const ProductDetail = ({ navigation, route }) => {
   return (
     <View style={{flex: 1}}>
         <ScrollView>
-        <View>
-        <TouchableOpacity onPress={() => navigation.goBack()} >
-        <Image source={require('../../assets/img/back.png')} style={styles.back}/>
-        </TouchableOpacity>
-        </View>
-        <View style={styles.titleRow}>
-  <Text style={styles.welcomeMessage}> {product.title}</Text>
-  <Image source={require('../../assets/img/logo.png')} style={styles.img}/>
-  </View>
+        <HeaderMenu title={product.title}/>
+
             <View style={styles.row}>
                 <Image source={{uri: product.img}}
             style={{width: 200, height: 200, borderRadius:15}}

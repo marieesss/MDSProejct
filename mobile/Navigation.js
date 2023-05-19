@@ -1,18 +1,16 @@
 import React, { useContext } from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler';
 import Welcome from './screens/welcome/Welcome';
 import About from './screens/about/About';
 import ProductDetail from './screens/details/ProductDetail';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { createDrawerNavigator} from '@react-navigation/drawer';
 import Fermiers from './screens/Fermiers/Fermiers';
 import FermierDetails from './screens/fermierdetails/FermiersDetails';
 import Hubs from './screens/Hubs/Hubs';
 import Login from './screens/Login/Login';
 import UserProfile from './screens/UserProfile/UserProfile';
 import {UserContext} from './components/useContext';
-import { useNavigation } from '@react-navigation/native';
 import LogoutButton from './components/logout';
 import Commandes from './screens/Commandes/Commandes';
 import CommandeDetails from './screens/Commande_details/commandeDetails';
@@ -22,7 +20,7 @@ const Drawer = createDrawerNavigator();
 
 export default function NavigationApp() {
   const {user} = useContext(UserContext);
-  console.log(user)
+
 
 
   return (

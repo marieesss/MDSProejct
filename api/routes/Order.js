@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { restart } = require("nodemon");
 const Order = require("../models/Order");
 const User = require("../models/user");
+const mongoose = require('mongoose');
+
 const {
     verifyToken,
     verifyTokenAuth,
@@ -20,7 +22,8 @@ router.post("/", verifyTokenAuth, async (req, res) => {
       userId: userId,
       products: req.body.products,
       amount: req.body.amount,
-      Status: req.body.Status
+      Status: req.body.Status,
+      hubId: req.body.hubId
     }
     );
 
@@ -74,6 +77,18 @@ router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => 
           res.status(500).json(err);
         }
       });
+
+        //GET Order by OderId
+
+    router.get("/findOrder/:OrderId/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
+      const objectId = mongoose.Types.ObjectId(req.params.OrderId);
+      try {
+        const orders = await Order.find({ _id: objectId });
+        res.status(200).json(orders);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    });
 
        //GET USER Order TO modifyr
 

@@ -15,7 +15,7 @@ const OrderSchema = new mongoose.Schema(
       },
     ],
     amount: { type: Number, required: true },
-    hub: { type: String},
+    hubId: { type: String, required:true},
     status: { type: String, default: "en attente de paiement" },
     stripeStatus: {type: String},
     billingAdress : {

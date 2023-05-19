@@ -5,12 +5,13 @@ import Header from '../../components/header/Header'
 import { useNavigation } from '@react-navigation/native';
 import { Linking } from 'react-native';
 
-import {BASE_URL} from '@env'
+
 
 
 import styles from './Hubs.style'
 
 const Hubs = () => {
+  const BASE_URL = process.env.BASE_URL
   const [data, Setdata] = useState([]);
   const navigation = useNavigation();
 

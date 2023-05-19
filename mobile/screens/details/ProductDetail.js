@@ -3,10 +3,10 @@ import React, {useState, useEffect} from 'react'
 import { View,Text, ScrollView, Image, FlatList, TouchableOpacity} from 'react-native'
 import axios from 'axios';
 import styles from './productDetail.style'
-import {BASE_URL} from '@env'
 
 
 const ProductDetail = ({ navigation, route }) => {
+  const BASE_URL = process.env.BASE_URL
     const [product, setProduct] = useState({});
     const [fermierId, setFermierId] = useState("");
     const [fermier, setFermier] = useState({});

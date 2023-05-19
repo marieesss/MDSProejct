@@ -3,12 +3,12 @@ import { View,Text,TouchableOpacity, Image, FlatList, ScrollView} from 'react-na
 import axios from 'axios'
 import Header from '../../components/header/Header'
 import { useNavigation } from '@react-navigation/native';
-import {BASE_URL} from '@env'
 
 
 import styles from './fermiers.style'
 
 const Fermiers = () => {
+  const BASE_URL = process.env.BASE_URL
   const [data, Setdata] = useState([]);
   const navigation = useNavigation();
 

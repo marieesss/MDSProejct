@@ -1,13 +1,24 @@
 import React from 'react'
 import styles from './header.style'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
-const Header = () => {
+
+const HeaderMenu = (props) => {
+
+  const navigation = useNavigation();
+
+
   return (
-    <View style={styles.container}>
-     <Image source={require('../../assets/img/logo.png')} style={styles.img}/>
-    </View>
+    <><View>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Image source={require('../../assets/img/back.png')} style={styles.back} />
+      </TouchableOpacity>
+    </View><View style={styles.titleRow}>
+        <Text style={styles.welcomeMessage}> {props.title}</Text>
+        <Image source={require('../../assets/img/logo.png')} style={styles.img} />
+      </View></>
   )
 }
 
-export default Header
+export default HeaderMenu

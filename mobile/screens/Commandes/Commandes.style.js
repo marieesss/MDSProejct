@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   welcomeMessage: {
     fontSize: 30,
     color: '#4A5D26',
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 40,
+    marginBottom: 40,
     textAlign: "center",
     fontFamily: 'Josefin',
     marginRight: 20    
@@ -38,6 +38,17 @@ const styles = StyleSheet.create({
     alignItems:'center',
     marginBottom: 20,
   },
+  commandes: {
+    height : 100,
+    padding: 5,
+    width:300,
+    borderColor: '#4A5D26',
+    borderRadius:15,
+    borderWidth:2,
+    flexDirection: 'column',
+    alignItems:'center',
+    marginBottom: 20,
+  },
   categorie:{
     padding :10
   },
@@ -56,20 +67,6 @@ const styles = StyleSheet.create({
   img:{
     width: 50,
     height : 50
-  },
-  row:{
-    flexDirection:"row",
-    alignItems:'flex-end',
-    padding: 15
-  },
-  back:{
-    width: 20,
-    height:20,
-    marginTop:10,
-    marginLeft: 10
-  },
-  text:{
-    fontFamily:"Avenir"
   }
 
 });

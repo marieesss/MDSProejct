@@ -3,12 +3,14 @@ import { View,Text,TouchableOpacity, Image, FlatList, ScrollView} from 'react-na
 import axios from 'axios'
 import Header from '../../components/header/Header'
 import { useNavigation } from '@react-navigation/native';
-import {BASE_URL} from '@env'
+import HeaderMenu from "../../components/header/Header"
+
 
 
 import styles from './fermiers.style'
 
 const Fermiers = () => {
+  const BASE_URL = process.env.BASE_URL
   const [data, Setdata] = useState([]);
   const navigation = useNavigation();
 
@@ -29,10 +31,10 @@ const Fermiers = () => {
     <View>
     <ScrollView showsVerticalScrollIndicator={false} >
   <View style={styles.container}>
-  <View style={styles.titleRow}>
-  <Text style={styles.welcomeMessage}> Catalogue</Text>
-  <Image source={require('../../assets/img/logo.png')} style={styles.img}/>
-  </View>
+
+  
+  <HeaderMenu title="Fermiers"/>
+
  
 <View style={styles.banner}>
   <Text style={styles.textBanner}>Tout les fermiers</Text>

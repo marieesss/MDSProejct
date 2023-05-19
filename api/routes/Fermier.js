@@ -1,9 +1,6 @@
 const router = require("express").Router();
-const { restart } = require("nodemon");
 const Fermier = require("../models/Fermier");
 const {
-    verifyToken,
-    verifyTokenAuth,
     verifyTokenAdmin,
   } = require("./verifyToken");
 

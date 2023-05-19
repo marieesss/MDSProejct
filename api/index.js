@@ -14,10 +14,12 @@ const cors = require('cors');
 
 dotenv.config();
 
-
+  // connexion à la base de données 
     mongoose
   .connect(process.env.MONGO_URL)
+  // affiche le message si la connexion est établie
   .then(() => console.log("DB Connection Successfull!"))
+  // affiche un message d'erreur si la connection échoue
   .catch((err) => {
     console.log(err);
   });
@@ -35,6 +37,6 @@ app.use("/api/checkout", stripeRoute);
 
   
 
-app.listen(process.env.PORT || 5000, ()=>{
+app.listen(5000, ()=>{
     console.log("Backend server is listening on port 5000")
 });

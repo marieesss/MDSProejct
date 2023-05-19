@@ -1,0 +1,7 @@
+FROM node:latest
+EXPOSE 5000 443 80
+WORKDIR /api
+COPY . .
+RUN npm install
+CMD npm start
+

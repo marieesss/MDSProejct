@@ -30,7 +30,7 @@ const ShowFermier = () => {
  
  
      useEffect(() => {
-         axios.get(`http://141.94.244.226:5000/api/fermier/`, config)
+         axios.get(`http://141.94.244.226:80/api/fermier/`, config)
            .then(response => {
              console.log(response)
              setFermier(response.data)
@@ -43,7 +43,7 @@ const ShowFermier = () => {
    
      const putName = async () => {
        try {
-         const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+         const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
              name: name,
             }, 
             config);
@@ -55,7 +55,7 @@ const ShowFermier = () => {
  
      const putDesc = async () => {
          try {
-           const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+           const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
                desc: desc,
               }, 
               config);
@@ -67,7 +67,7 @@ const ShowFermier = () => {
  
        const putImg = async () => {
          try {
-           const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+           const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
                img: img,
               }, 
               config);

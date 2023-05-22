@@ -62,7 +62,7 @@ const Inscription = () => {
           }else{
 
             try {
-                const response = await axios.post(`http://${URL}:5000/api/auth/register`,
+                const response = await axios.post(`http://${URL}:80/api/auth/register`,
                   { username
                       , password
                       , email},
@@ -91,6 +91,30 @@ const Inscription = () => {
         
     }
 
+    const handlePasswordClick = () =>{
+        const pwd = document.getElementById('password');
+        const icon = document.getElementById('icon');
+        if(pwd.getAttribute("type")=="password"){
+            pwd.setAttribute("type","text");
+            icon.setAttribute("class","fa-sharp fa-solid fa-eye-slash")
+        } else {
+            pwd.setAttribute("type","password");
+            icon.setAttribute("class","fa-sharp fa-solid fa-eye")
+        }
+
+    }
+
+    const handleConfirmPasswordClick = ()=>{
+        const pwd = document.getElementById('confirm_pwd');
+        const icon = document.getElementById('icon-confirm');
+        if(pwd.getAttribute("type")=="password"){
+            pwd.setAttribute("type","text");
+            icon.setAttribute("class","fa-sharp fa-solid fa-eye-slash")
+        } else {
+            pwd.setAttribute("type","password");
+            icon.setAttribute("class","fa-sharp fa-solid fa-eye")
+        }
+    }
     return (
         <div class="container-fluid p-0 overflow-hidden">
         <Menu/>
@@ -157,12 +181,13 @@ const Inscription = () => {
                     <div/>}
                     
 
-
-                    <label htmlFor="password">
-                        Password:
+                    <label htmlFor="password ">
+                        Password:                        
                         <i class="fa-solid fa-check" style={{color: "#ff000d"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
+                    
+                    <div class="pt-site-footer__submit">
                     <input
                         type="password"
                         id="password"
@@ -171,7 +196,11 @@ const Inscription = () => {
                         required
                         aria-invalid={validPwd ? "false" : "true"}
                         aria-describedby="pwdnote"
-                    />
+                        class='input-mdp'
+                        />
+                         <i id="icon" onClick={handlePasswordClick} class="fa-sharp fa-solid fa-eye button-mdp"></i>
+                         </div>
+                    
                     {
                         password && !validPwd ? 
                         <p id="pwdnote" className={!validPwd ? "instructions" : "offscreen"}>
@@ -189,6 +218,7 @@ const Inscription = () => {
                         <i class="fa-solid fa-check" style={{color: "#ff000d"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
+                    <div class="pt-site-footer__submit">
                     <input
                         type="password"
                         id="confirm_pwd"
@@ -198,6 +228,8 @@ const Inscription = () => {
                         aria-invalid={validMatch ? "false" : "true"}
                         aria-describedby="confirmnote"
                     />
+                      <i id="icon-confirm" onClick={handleConfirmPasswordClick} class="fa-sharp fa-solid fa-eye button-mdp"></i>
+                      </div>
                     { !validMatch ? 
                     <p id="confirmnote" className={!validMatch ? "instructions" : "offscreen"}>
                     <i class="fa-solid fa-circle-info" style={{color: "white"}}></i>                       

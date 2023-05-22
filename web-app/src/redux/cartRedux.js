@@ -12,19 +12,20 @@ const cartSlice = createSlice({
   // fonctions pour modifier l'état du slice 
   reducers: {
     addProduct: (state, action) => {
-      const productIndex = state.Product.findIndex(product => product.id === action.payload.id);
+      const productIndex = state.Product.findIndex(product => product._id === action.payload._id);
       // vérifie si le produit existe déjà dans le tableau
       if (productIndex !== -1) {
         // si le produit existe, ajoute simplement la quantité et met à jour le prix total
-        state.Product[productIndex].quantity += 1;
-        state.total += action.payload.price;
+        state.Product[productIndex].quantity += action.payload.quantity;
+        state.quantity += action.payload.quantity;
+        state.total += action.payload.price**action.payload.quantity;
       } else {
         // si le produit n'existe pas encore, ajoute-le avec une quantité de 1 et met à jour le prix total
-        state.Product.push({ ...action.payload, quantity: 1 });
-        state.total += action.payload.price;
-      }
-      state.quantity += 1; // ajoute 1 à la quantité totale de produits
-    
+        state.Product.push({ ...action.payload, quantity: action.payload.quantity });
+        state.total += action.payload.price*action.payload.quantity;
+        state.quantity += action.payload.quantity;
+
+      }    
     },
     delProduct: (state, action) => {
       console.log(action.payload)

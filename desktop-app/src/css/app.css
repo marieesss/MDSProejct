@@ -142,12 +142,12 @@ a:link, a:visited, a:hover{
 .form-login{
     background-color: rgba(255, 255, 255, 0.762);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.212);
-    padding: 20px;
-    height: 60vh;
-    width: 20%;
     border-radius: 20px;
-    margin-top: 150px;
-    border:none
+    border:none;
+    vertical-align:middle;
+    align-items: center;
+    margin-top: 200px;
+    padding:20px
 }
 
 .connexion-title{
@@ -161,6 +161,7 @@ a:link, a:visited, a:hover{
     background : url(https://images.unsplash.com/photo-1566385101042-1a0aa0c1268c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80);
     object-fit: cover;
     background-size: cover;
+    width:100%
 
 }
 .login-form-container{
@@ -183,6 +184,25 @@ center{
     justify-content: center;
 }
 
+.input-user{
+    width:400px;
+}
+
+.btnAdminFalse{
+    background-color: #bac100;
+    border-radius:20px;
+    padding:10px;
+    border:none
+}
+
+.btnAdminTrue{
+    background-color: #475E1B;
+    border-radius:20px;
+    padding:10px;
+    border:none;
+    color:white;
+}
+
 .title-home-container{
     display:flex;
     flex-direction: row;
@@ -191,7 +211,7 @@ center{
 }
 
 .title-home-content{
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
     color:#475E1B;
     margin-right: 15px
 }

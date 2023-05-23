@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(() => {
     const getOrderStats = async () => {
       try {
-        const res = await axios.get("http://141.94.244.226:5000/api/user/stats", config);
+        const res = await axios.get("http://141.94.244.226:80/api/user/stats", config);
         console.log(res.data)
         setDataUser(res.data)
         console.log(dataUser)
@@ -74,7 +74,7 @@ const Home = () => {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("http://141.94.244.226:5000/api/order/stats", config);
+        const res = await axios.get("http://141.94.244.226:80/api/order/stats", config);
         console.log(res.data)
         setDataOrder(res.data)
       } catch(err){
@@ -87,7 +87,7 @@ const Home = () => {
 
   useEffect(() => {
 
-    axios.get("http://141.94.244.226:5000/api/order/adminhomepage", config)
+    axios.get("http://141.94.244.226:80/api/order/adminhomepage", config)
       .then(response => {
         console.log(response.data)
         setLastOrders(response.data)
@@ -116,16 +116,16 @@ const Home = () => {
         <h3>Administrateur</h3>
       </div>
       
-      <div className="container-c justify-content-around margin-50"> 
+      <div className="row justify-content-around margin-50"> 
         
-        <div className="container-y container-stats">
+        <div class="container-y container-stats col-lg-6 col-md-12">
         <ChartUI
         data={userStats}
         dataKey={"value"}
         title={"Utilisateurs créés ces trois derniers mois"}
       />
       </div>
-      <div class="container-y container-stats">
+      <div class="container-y container-stats col-lg-6 col-md-12">
       <ChartUI
               data={orderStats}
               dataKey={"value"}

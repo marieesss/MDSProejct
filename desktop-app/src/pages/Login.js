@@ -15,16 +15,16 @@ const Login = () => {
     login(dispatch, {email, password});
   }
   return (
-    <div class="page">
-    <div class="container-c login-form-container" >
+    <div class="page overflow-hidden">
+    <div class="row justify-content-center" >
       
-      <form class="form-login container-y">
+      <form class="col-6 form-login row justify-content-center">
         <h3>Connexion</h3>
-        <div>
+        <div class="row justify-content-center">
         <div><i class="fa-regular fa-user fa-sm padding-right" style={{color:" #ffffff;"}}></i> Adresse mail</div>
           <input class="input-form" name="username" type="text" placeholder="email" onChange={(e)=> setEmail(e.target.value)}/>
         </div>
-        <div>
+        <div class="row justify-content-center">
         <div><i class="fa-solid fa-lock padding-right" style={{color:" #ffffff;"}}></i> Password</div>
         <input class="input-form" name="password" type="password" placeholder="Password"onChange={(e)=> setPassword(e.target.value)}/>
         </div>

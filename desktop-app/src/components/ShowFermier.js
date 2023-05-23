@@ -30,7 +30,7 @@ const ShowFermier = () => {
  
  
      useEffect(() => {
-         axios.get(`http://141.94.244.226:5000/api/fermier/`, config)
+         axios.get(`http://141.94.244.226:80/api/fermier/`, config)
            .then(response => {
              console.log(response)
              setFermier(response.data)
@@ -43,7 +43,7 @@ const ShowFermier = () => {
    
      const putName = async () => {
        try {
-         const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+         const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
              name: name,
             }, 
             config);
@@ -55,7 +55,7 @@ const ShowFermier = () => {
  
      const putDesc = async () => {
          try {
-           const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+           const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
                desc: desc,
               }, 
               config);
@@ -67,7 +67,7 @@ const ShowFermier = () => {
  
        const putImg = async () => {
          try {
-           const res = await axios.put(`http://141.94.244.226:5000/api/fermier/${idFermier}`, {
+           const res = await axios.put(`http://141.94.244.226:80/api/fermier/${idFermier}`, {
                img: img,
               }, 
               config);
@@ -76,6 +76,26 @@ const ShowFermier = () => {
            console.log(error)
          }
        };
+
+       function handleDelete (e){
+        console.log(e.target.value)
+        const id= e.target.value
+    
+        const config = {
+            headers: { token: `Bearer ${userToken}` }
+        };
+    
+        axios.delete(`http://141.94.244.226:80/api/fermier/${id}`,config)
+          .then(response => {
+            console.log(response)
+            window.location.reload()
+    
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    
+      }
  
   return (
     <div>
@@ -93,14 +113,18 @@ const ShowFermier = () => {
                 </thead>
             <tbody>
                 
-                { Fermier.map(fermier=> (
-                <tr>
-                <td><img src={fermier.img} style={{width: "100px"}}/></td>
-                    <td>{fermier.name}</td>
-                    <td>{fermier.desc}</td>
-                    <td><button  onClick={() => { handleShow(); setIdFermier(fermier._id);}}value={fermier._id} class="button-modal">Modifier</button></td>
-                </tr>
-            ))}  
+            {Fermier.length > 0 ? Fermier.map(fermier => (
+    <tr>
+        <td><img src={fermier.img} style={{width: "100px"}}/></td>
+        <td>{fermier.name}</td>
+        <td>{fermier.desc}</td>
+        <td>
+        <button onClick={() => { handleShow(); setIdFermier(fermier._id);}} value={fermier._id} className="button-modal mx-5">Modifier</button>
+        <button  onClick={handleDelete} value={fermier._id} class="button-modal">Supprimer</button>
+        </td>
+    </tr>
+)) : null}
+
             </tbody>
         </Table>
         <Modal show={show} onHide={handleClose}>

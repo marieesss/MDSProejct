@@ -8,7 +8,7 @@ const Hubs = () => {
     const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`http://${URL}:5000/api/hub`)
+        axios.get(`http://${URL}:80/api/hub`)
           .then(response => {
             console.log(response.data)
             setHubs(response.data);

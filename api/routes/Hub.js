@@ -89,16 +89,16 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
     }
   });
 
-    //GET HUB
+  router.get("/find/:id", async (req, res) => {
+    var id = mongoose.Types.ObjectId(req.params.id);
 
-    router.get("/find/:OrderId", verifyTokenAuth, async (req, res) => {
-        try {
-          const hub = await Hub.find({ OrderId: req.params.OrderId });
-          res.status(200).json(hub);
-        } catch (err) {
-          res.status(500).json(err);
-        }
-      });
+    try {
+      const hub = await Hub.find(_id = id);
+      res.status(200).json(hub);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
          //GET All Hubs
 

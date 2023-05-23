@@ -55,16 +55,17 @@ router.delete("/:id", verifyTokenAdmin, async (req, res) => {
 
          //GET All users
 
-    router.get("/", verifyTokenAdmin, async (req, res)=>{
-        const query = req.query.new;
-        try{
-            const users = query?await User.find().sort({_id: -1}).limit(5):await User.find();
-        res.status(200).json(users);
-        }catch(err){
-            res.status(500).json.apply(err)
-        }
-      })
-
+         router.get("/", verifyTokenAdmin, async (req, res)=>{
+          const query = req.query.new;
+          try{
+            let usersQuery = query ? User.find().sort({_id: -1}).limit(5) : User.find().sort({_id: -1});
+            usersQuery = usersQuery.select("-password"); // Exclure le champ "password"
+            const users = await usersQuery.exec()
+          res.status(200).json(users);
+          }catch(err){
+              res.status(500).json.apply(err)
+          }
+        })
 //GET USER Stats
 
 router.get("/stats", verifyTokenAdmin, async (req, res) => {

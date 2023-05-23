@@ -19,7 +19,7 @@ const NewFermier = () => {
 
         const newFermier = async () => {
             try {
-              const res = await axios.post("http://141.94.244.226:5000/api/fermier/", {
+              const res = await axios.post("http://141.94.244.226:80/api/fermier/", {
                   name : name,
                   desc: desc,
                   img: img

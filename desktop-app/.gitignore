@@ -10,6 +10,8 @@
 
 # production
 /build
+/app-win32-x64
+/dist
 
 # misc
 .DS_Store

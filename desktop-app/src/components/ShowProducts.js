@@ -35,7 +35,7 @@ const ShowProducts = () => {
   
     const putDesc = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`http://141.94.244.226:80/api/product/${idProduit}`, {
             desc: desc,
            }, 
            config);
@@ -47,7 +47,7 @@ const ShowProducts = () => {
   
     const putImg = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`http://141.94.244.226:80/api/product/${idProduit}`, {
             img: img,
            }, 
            config);
@@ -59,7 +59,7 @@ const ShowProducts = () => {
   
     const putPrice= async (e) => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`http://141.94.244.226:80/api/product/${idProduit}`, {
             price: price,
            }, 
            config);
@@ -73,7 +73,7 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://141.94.244.226:5000/api/fermier`, config)
+        axios.get(`http://141.94.244.226:80/api/fermier`, config)
           .then(response => {
             console.log(response.data)
             setFermier(response.data)
@@ -92,7 +92,7 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://141.94.244.226:5000/api/product/all`, config)
+        axios.get(`http://141.94.244.226:80/api/product/all`, config)
           .then(response => {
             console.log(response.data)
             setProducts(response.data)
@@ -103,14 +103,13 @@ const ShowProducts = () => {
       }, []);
 
       function deleteProduct (e){
-        console.log(e.target.value)
         const id= e.target.value
     
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.delete(`http://141.94.244.226:5000/api/product/${id}`,config)
+        axios.delete(`http://141.94.244.226:80/api/product/${id}`,config)
           .then(response => {
             window.location.reload();
     
@@ -123,7 +122,7 @@ const ShowProducts = () => {
 
       const putFermier= async (e) => {
         try {
-          const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+          const res = await axios.put(`http://141.94.244.226:80/api/product/${idProduit}`, {
               fermierId: IdFermier,
              }, 
              config);
@@ -136,7 +135,7 @@ const ShowProducts = () => {
   return (
     <div class="row align-content-center">
         {products.map(product =>(
-        <div class="col-4 margin-50 row justify-content-center" > 
+        <div class="col-lg-4 col-md-12 margin-50 row justify-content-center" > 
             <div class="card" style={{ width: '18rem' }}>
             <div class ="card-header">
             <Card.Img variant="top" src={product.img} class="img-products"/>
@@ -155,11 +154,9 @@ const ShowProducts = () => {
               
               <Card.Text>
               <div>
-                {product.fermier.map(fermier=>(
                   <div> 
-                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{fermier.name}
+                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{product.fermier[0].name}
                   </div>
-                ))}
               </div>
               
               

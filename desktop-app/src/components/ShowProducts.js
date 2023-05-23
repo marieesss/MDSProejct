@@ -155,7 +155,7 @@ const ShowProducts = () => {
               <Card.Text>
               <div>
                   <div> 
-                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{product.fermier[0].name}
+                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{ product.fermier[0] ? product.fermier[0].name : null}
                   </div>
               </div>
               
@@ -196,11 +196,11 @@ const ShowProducts = () => {
       <Form.Label class="mt-3">Id du fermier</Form.Label>
         <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
         <option>Choisir un fermier</option>
-            {Fermier.map(item=>(
+            { Fermier ? Fermier.map(item=>(
               <option value={item._id}>{item.name}</option>
             ))
 
-            }
+            : null }
         </Form.Select>
 
         <button onClick={putFermier} type="submit" class="button-modal mt-3">

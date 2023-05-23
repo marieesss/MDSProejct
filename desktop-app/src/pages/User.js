@@ -14,6 +14,11 @@ const User = () => {
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
     const [userListe, setUserListe] = useState([]);
     const [message, setMessage] = useState("");
+    const [searchInput, setSearchInput] = useState('');
+    const [userFiltres, setuserFiltres] = useState([]);
+    const [searchAdmin, setSearchAdmin] = useState(false);
+
+
 
     const [show, setShow] = useState(false);
 
@@ -101,6 +106,35 @@ const User = () => {
           });
     
       }
+
+      const searchItems = (searchValue) => {
+        setSearchInput(searchValue)
+        if (searchInput !== '') {
+            const filteredData = userListe.filter((item) => {
+                return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+            })
+            setuserFiltres(filteredData)
+        }
+        else{
+          setuserFiltres(userListe)
+        }
+      }
+
+      const handleClickAdmin = () => {
+        if (searchAdmin === false) {
+            const filteredData = userListe.filter((item) => {
+                return item.isAdmin === true
+            })
+            document.getElementById('btn-Admin').className = "btnAdminTrue col-3";
+            setuserFiltres(filteredData)
+            setSearchAdmin(true)
+        }
+        else{
+          document.getElementById('btn-Admin').className = "btnAdminFalse col-3";
+          setuserFiltres(userListe)
+          setSearchAdmin(false)
+        }
+      }
     
   return (
     <div>
@@ -108,12 +142,19 @@ const User = () => {
         <div class="row justify-content-center">
 
         
-    <div className={'col-8'}>
+    <div class="col-8 p-0">
 
     <div class="title-home-container mb-5">
         <h1 class="title-home-content">Nos Utilisateurs</h1>
         <img src={require('../img/logo2.png')} width={100} />
-      </div>  
+      </div> 
+
+      <div class="row justify-content-center">
+        <input type='search' placeholder='Entrez un nom'  class="input-user p-0 mb-3" onChange={(e) => searchItems(e.target.value)}></input>
+      </div> 
+      <div class="row justify-content-center">
+        <button id="btn-Admin" onClick={handleClickAdmin} class="btnAdminFalse col-3 mb-3"> Administrateurs </button>
+      </div> 
 
          
         <Table striped bordered hover>
@@ -128,7 +169,32 @@ const User = () => {
       <tbody>
          
        
-        {userListe.map((user) =>(
+        {  userFiltres.length > 0  // if produitsFiltres = resultat affiche moi valeurs !
+          ? 
+
+          userFiltres.map((user) =>(
+        <tr>
+          <td>{user.username}</td>
+          <td>{user.email}</td>
+          <td>{user.isAdmin ? 
+            <div> Admin </div> : 
+            <div> Pas Admin</div> 
+            }</td>
+            <td>
+                <button value={user._id} onClick={handleDelete} class="button-delete m-3" >Supprimer</button>
+            {user.isAdmin ? 
+            <button value={user._id} onClick={DeleteAdmin} class="button-not-admin">Enlever admin</button>
+            :
+            <button value={user._id} onClick={handleAdmin} class="button-admin">Attribuer admin</button>
+            }
+            </td>
+            </tr>
+           
+            
+        ))
+          
+          :
+        userListe.map((user) =>(
         <tr>
           <td>{user.username}</td>
           <td>{user.email}</td>

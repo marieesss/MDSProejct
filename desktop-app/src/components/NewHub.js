@@ -20,6 +20,7 @@ const NewHub = () => {
         };
 
         const newHub = async (e) => {
+          e.preventDefault()
             try {
               const res = await axios.post("http://141.94.244.226:80/api/hub/", {
                   name : name,

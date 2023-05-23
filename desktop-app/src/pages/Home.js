@@ -116,16 +116,16 @@ const Home = () => {
         <h3>Administrateur</h3>
       </div>
       
-      <div className="container-c justify-content-around margin-50"> 
+      <div className="row justify-content-around margin-50"> 
         
-        <div className="container-y container-stats">
+        <div class="container-y container-stats col-lg-6 col-md-12">
         <ChartUI
         data={userStats}
         dataKey={"value"}
         title={"Utilisateurs créés ces trois derniers mois"}
       />
       </div>
-      <div class="container-y container-stats">
+      <div class="container-y container-stats col-lg-6 col-md-12">
       <ChartUI
               data={orderStats}
               dataKey={"value"}

@@ -103,7 +103,6 @@ const ShowProducts = () => {
       }, []);
 
       function deleteProduct (e){
-        console.log(e.target.value)
         const id= e.target.value
     
         const config = {
@@ -136,7 +135,7 @@ const ShowProducts = () => {
   return (
     <div class="row align-content-center">
         {products.map(product =>(
-        <div class="col-4 margin-50 row justify-content-center" > 
+        <div class="col-lg-4 col-md-12 margin-50 row justify-content-center" > 
             <div class="card" style={{ width: '18rem' }}>
             <div class ="card-header">
             <Card.Img variant="top" src={product.img} class="img-products"/>
@@ -155,11 +154,9 @@ const ShowProducts = () => {
               
               <Card.Text>
               <div>
-                {product.fermier.map(fermier=>(
                   <div> 
-                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{fermier.name}
+                  <i class="fa-solid fa-wheat-awn padding-right" style={{color: "#bac100"}}></i>{product.fermier[0].name}
                   </div>
-                ))}
               </div>
               
               

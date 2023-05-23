@@ -54,6 +54,26 @@ const ShowHubs = () => {
       }
     };
 
+    function handleDelete (e){
+      console.log(e.target.value)
+      const id= e.target.value
+  
+      const config = {
+          headers: { token: `Bearer ${userToken}` }
+      };
+  
+      axios.delete(`http://141.94.244.226:80/api/hub/${id}`,config)
+        .then(response => {
+          console.log(response)
+          window.location.reload()
+  
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  
+    }
+
 
   return (
     <div class='row justify-content-center margin-50'>
@@ -74,7 +94,8 @@ const ShowHubs = () => {
                      <td>{hub.name}</td>
                      <td>{hub.adress}</td>
                      <td>
-                      <button  onClick={() => { handleShow(); setIdproduit(hub._id);}}value={hub._id} class="button-modal">Modifier</button>
+                      <button  onClick={() => { handleShow(); setIdproduit(hub._id);}} value={hub._id} class="button-modal mx-5">Modifier</button>
+                      <button  onClick={handleDelete} value={hub._id} class="button-modal">Supprimer</button>
                      </td>
                  </tr>
              ))}  

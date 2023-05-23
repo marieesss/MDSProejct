@@ -16,12 +16,12 @@ function App() {
   return (
     <Routes>
       {user ? <Route path="/" element={<Home/>} /> : <Route path="/" element={<Login/>}/>}
-      <Route path="*" element={<Home/>} />
+      {user ? <Route path="*" element={<Home/>} /> : <Route path="/" element={<Login/>}/>}
       {user ? <Route path="/login" element={<Login/>} />: <Route path="/login" element={<Login/>}/>}
       {user ? <Route path="/order" element={<Order/>} />: <Route path="/order" element={<Login/>}/>}
       {user ? <Route path="/product" element={<Product/>} />: <Route path="/product" element={<Login/>}/>}
       {user ? <Route path="/user" element={<User/>} />: <Route path="/user" element={<Login/>}/>}
-      {user ? <Route path="/hub" element={<Hub/>} />: <Route path="/user" element={<Login/>}/>}
+      {user ? <Route path="/hub" element={<Hub/>} />: <Route path="/hub" element={<Login/>}/>}
       {user ? <Route path="/fermier" element={<Fermier/>} />: <Route path="/fermier" element={<Login/>}/>}
     </Routes>
   );

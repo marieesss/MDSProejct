@@ -181,7 +181,7 @@ const User = () => {
             <div> Pas Admin</div> 
             }</td>
             <td>
-                <button value={user._id} onClick={handleDelete} class="button-delete m-3" >Supprimer</button>
+                <button id="delete" value={user._id} onClick={handleDelete} class="button-delete m-3" >Supprimer</button>
             {user.isAdmin ? 
             <button value={user._id} onClick={DeleteAdmin} class="button-not-admin">Enlever admin</button>
             :

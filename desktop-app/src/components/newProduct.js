@@ -72,24 +72,23 @@ const NewProduct = () => {
       <Form>
       <Form.Group className="mb-3">
         <Form.Label class="modal-title">Titre</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setTitle(e.target.value)}/>
+        <Form.Control name="titre" type="text" placeholder="Enter text" onChange={(e)=>setTitle(e.target.value)}/>
         <Form.Label class="modal-title">Description</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setdesc(e.target.value)}/>
+        <Form.Control name="description" type="text" placeholder="Enter text" onChange={(e)=>setdesc(e.target.value)}/>
         <Form.Label class="modal-title">Image</Form.Label>
-        <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
+        <Form.Control  name="img" type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
         <Form.Label class="modal-title">Categorie</Form.Label>
-        <Form.Select onClick={(e)=>setCategorie(e.target.value)}>
+        <Form.Select name="cat" onClick={(e)=>setCategorie(e.target.value)}>
           <option value="fruit" >Fruit</option>
           <option value="legume">Légume</option>
         </Form.Select>
         <Form.Label class="modal-title">Prix</Form.Label>
-        <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
+        <Form.Control name="price" type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
         <Form.Label class="modal-title">Taille</Form.Label>
-        <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setSize(e.target.value)}/>
+        <Form.Control name="taille" type="number" placeholder="Enter text" onChange={(e)=>setSize(e.target.value)}/>
         
       <label class="modal-title">fermier</label>
-        <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
-        <option>Choisir un fermier</option>
+        <Form.Select name="fermier" type="text" placeholder="Enter text" onChange={(e)=>setIdFermier(e.target.value)}>
             {fermier.map(item=>(
               <option value={item._id}>{item.name}</option>
             ))

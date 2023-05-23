@@ -39,6 +39,7 @@ describe('Hub', () => {
           .set('token', `Bearer ${token}`);
           expect(response.statusCode).toBe(201); // Définit le code de retour attendu
           hubId = response.body._id;
+          expect(response.body.code).toBe("06000");
 
       });
 
@@ -52,6 +53,7 @@ describe('Hub', () => {
           .send(hub)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 
+        expect(response.body.name).toBe("Jean");
       });
 
       test("deleteHub", async () => { 

@@ -65,6 +65,7 @@ describe('Authentification', () => {
           .send(User)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 
+        expect(response.body.username).toBe("Fabrice");
       });
 
       test("get One User", async () => { 

@@ -51,6 +51,7 @@ describe('Order', () => {
           .set('token', `Bearer ${token}`)
           .set('userId', `Bearer ${UserId}`);
           expect(response.statusCode).toBe(200); // Définit le code de retour attendu
+          expect(response.body.userId).toBe(UserId);
           OrderId = response.body._id;
 
       });
@@ -83,6 +84,7 @@ describe('Order', () => {
           .set('token', `Bearer ${token}`)
           .set('userId', `Bearer ${UserId}`);
         expect(response.statusCode).toBe(200); 
+        expect(response.body.status).toBe("payé");
         OrderId = response.body._id;
       });
 

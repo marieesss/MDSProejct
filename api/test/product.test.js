@@ -54,6 +54,8 @@ describe('Product', () => {
           .send(product)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 
+        expect(response.body.title).toBe("cerises");
+
         productId = response.body._id;
       });
 

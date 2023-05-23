@@ -87,7 +87,7 @@ const Order = () => {
             <div class="card m-5" style={{width: '25rem'}}>
                 <div class="card-header">
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item"><div class="fa-solid fa-user padding-right"/>{order.user[0].email} </li>
+                {order.user[0] ? <li class="list-group-item"><div class="fa-solid fa-user padding-right"/>{order.user[0].email} </li> : null}
                 <li class="list-group-item">{order.hub} </li>
                 <li class="list-group-item">
                   <div class="row justify-content-center product-title">

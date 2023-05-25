@@ -7,6 +7,8 @@ import Menu from '../components/Menu';
 import { useSelector, useDispatch} from 'react-redux'
 import { delProduct } from '../redux/cartRedux';
 import Footer from '../components/Footer';
+import { resetCart } from '../redux/cartRedux';
+
 
 
 
@@ -16,8 +18,9 @@ const Cart = () => {
   const [livraisonFees, setLivraisonFees]= useState(false)
   const [total, setTotal]= useState()
   const [TVA, setTVA]= useState()
-  const [hubChoisi, setHubChoisi]= useState({})
+  const [hubChoisi, setHubChoisi]= useState("")
   const [stripe, setStripe]= useState("")
+  const [OrderId, setOrderId]= useState("")
   const cart= useSelector(state=> state.cart)
   console.log(cart)
   const user = useSelector((state) => state.user.currentUser._id);
@@ -35,13 +38,14 @@ const Cart = () => {
   };
 
   const registerOrderFirst = async () => {
+    if(hubChoisi !== ""){
+      console.log(hubChoisi)
     const config = {
       headers: { token: `Bearer ${userToken}`,
       userid: `Bearer ${user}` }
   };
 
     const produitarray= []
-    console.log(produitarray)
       for(let i = 0; i < cart.Product.length; i++){
         const array= {
           productId : cart.Product[i]._id,
@@ -49,15 +53,15 @@ const Cart = () => {
         }
         produitarray.push(array)
       }
-      console.log(produitarray)
     
 
     try {
-      const res = await axios.post(`http:${URL}//:5000/api/order`, {
+      const res = await axios.post(`http://${URL}:80/api/order`, {
           userId: user,
           products: produitarray,
-          amount: cart.total,
-          Status: "En attente de paiement"
+          amount: total,
+          hubId: hubChoisi,
+          Status: "En attente de paiement",
          }, 
          config);
          console.log(res.data)
@@ -65,7 +69,9 @@ const Cart = () => {
     } catch (error) {
       console.log(error)
     }
-  };
+  }else{
+    window.alert('pas de hub choisi, veuillez recommencer, vous aurez pas une adresse de livraison')
+  }};
 
   useEffect(()=> {
     if(cart.total<50){
@@ -85,12 +91,13 @@ const Cart = () => {
     const makeRequest = async ()=>{
       try{
         // envoie une requête POST avec les informations de paiement au backend
-        const res = await axios.post(`http://${URL}:5000/api/checkout/payment`, {
+        const res = await axios.post(`http://${URL}:80/api/checkout/payment`, {
           tokenId: stripeToken.id, // identifiant du token de paiement
-          amount:cart.total*100, // montant total de la commande en centimes (pour Stripe)
+          amount:total*100, // montant total de la commande en centimes (pour Stripe)
         });
         // met à jour l'état avec les informations de paiement renvoyées par le backend
         setStripe(res.data)
+        setOrderId(res.data._id)
       }catch(err){
         // si une erreur se produit lors de la demande de paiement, affiche l'erreur dans la console
         console.log(err.response.data)
@@ -104,10 +111,12 @@ const Cart = () => {
   useEffect(() => {
     // si stripe n'est pas vide et que le statut est égale à succeded
     if (stripe && stripe.status === "succeeded") {
+        dispatch(resetCart())
       navigate("/success", {
         state: {
           // passe en paramètres le state stripe
           stripe: stripe,
+          orderId: OrderId
         }
       });
     }
@@ -115,7 +124,7 @@ const Cart = () => {
   useEffect (()=>{
     const getHub = async ()=> {
       try{
-        const res =  await axios.get(`http://${URL}:5000/api/hub`)
+        const res =  await axios.get(`http://${URL}:80/api/hub`)
         setHub(res.data);
         console.log(hub)
       }catch(err){}
@@ -125,9 +134,8 @@ const Cart = () => {
 
   const handleFilter = (e) => {
     const value = e.target.value;
-        let hubseul = hub.filter(hub=> hub._id.includes(value))
-        setHubChoisi(hubseul)
-    console.log(hubChoisi)
+        setHubChoisi(value)
+        console.log(value)
   };
 
   return (
@@ -139,7 +147,8 @@ const Cart = () => {
       <div class="row justify-content-center mb-5">
         <div class="col-lg-6 col-md-12">
 
-        {cart.Product.map(product =>(
+  
+       { cart.Product.map(product =>(
         <div class="row justify-content-start padding-100 mb-3"> 
           <div class="product-cart row  justify-content-start p-0 col-6">
           <img src={product.img} class="product-img-cart col-6 p-0" />
@@ -153,21 +162,26 @@ const Cart = () => {
           </div>
          </div>
       ))}
-
+      { cart.quantity < 1 ? 
+          <div class="col-lg-12 col-md-12 row justify-content-center proxima" style={{fontSize:"14px", fontWeight:"700"}}>
+          Pas de produits
+        </div>:
       <div class="padding-100 mt-5">
       <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>livraison</div>
       <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>A retirer dans nos hubs</div>
 <select name="_id" onClick={handleFilter}>
-          <option value="rien">Choisir un point de livraison</option>
+          <option value="">Choisir un point de livraison</option>
               {hub.map(hub =>(
             <option value={hub._id}>{hub.name}</option>
           ))}
           </select>
-          </div>
+          </div>}
 
 
         </div>
-        <div class="col-lg-6 col-md-12 total-cart-end proxima" style={{fontSize:"14px", fontWeight:"700"}}>
+        { cart.quantity < 1 ? 
+          null :
+          <div class="col-lg-6 col-md-12 total-cart-end proxima" style={{fontSize:"14px", fontWeight:"700"}}>
         <div class="total-cart-column" style={{width:"300px"}}>
           <div class="row justify-content-between">
             <div class="col-6 p-0">Produits: {cart.quantity}</div>
@@ -196,14 +210,25 @@ const Cart = () => {
       image="https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
       billingAddress
-      amount={total*100}
+      amount={(total*100).toFixed(0)}
       token={onToken}
       stripeKey={KEY}
       >
-        <button class="button-cart" onClick={registerOrderFirst}>Paiement</button>
+      {
+        hubChoisi !== "" ? 
+        <button class="button-cart" onClick={registerOrderFirst}>Paiement</button>:
+        <button disabled class="button-cart" onClick={registerOrderFirst}>Paiement</button>
+      }
+        
       </StripeCheckout>
+
+        
+        
+        
+
+        
       </div>
-      </div>
+      </div>}
 </div>
 
       <Footer/>

@@ -12,6 +12,7 @@
 /build
 /app-win32-x64
 /dist
+/release-builds
 
 # misc
 .DS_Store

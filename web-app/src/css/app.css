@@ -9,6 +9,14 @@ body{
     box-sizing: border-box;
   }
 
+  a:link{
+    text-decoration: none;
+  }
+
+  .font-vert:link :active{
+    color:#485E1B;
+  }
+
   /*menu */
   .navigation {
     text-align: center;
@@ -133,6 +141,26 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .pt-site-footer__submit{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    vertical-align: center;
+    align-items: center;
+  }
+
+  #password{
+    width: 95%;
+    margin-right: 5%;
+
+  }
+
+  #confirm_pwd{
+    width: 95%;
+    margin-right: 5%;
+
   }
 
   .text-box-homepage{
@@ -418,6 +446,17 @@ font-style: normal;
   background-color: #485E1B;
 }
 
+.commande-title{
+  font-family: "grenadine-mvb", sans-serif;
+  font-size: 33px;
+  color:#485E1B
+}
+
+.successImg{
+  height: 340px;
+  width:auto
+}
+
 
   @media only screen and (max-width: 1200px) {
     
@@ -435,6 +474,11 @@ font-style: normal;
       width: 100px;
       float: left;
       margin-left: 5% ;
+    }
+
+    .successImg{
+      height: 180px;
+      width:auto
     }
 
 

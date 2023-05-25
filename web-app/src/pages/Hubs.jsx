@@ -20,7 +20,7 @@ const Hubs = () => {
       }, []);
 
   return (
-    <div>
+    <div class="overflow-hidden">
     <Menu/>
     <center><h1>Nos Hubs</h1></center>
     <table class="table" striped bordered hover>

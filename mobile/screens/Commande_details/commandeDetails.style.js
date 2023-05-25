@@ -19,24 +19,29 @@ const styles = StyleSheet.create({
     marginRight: 20    
   },
   product: {
-    flexDirection: "row",
-    justifyContent: 'center',
-    margin: 15,
-    shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    height: 100,
+    width:200,
+    borderWidth: 1,
+    borderRadius:15,
+    borderColor: "#4A5D26",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    padding:15,
+    marginBottom: 15
   }, 
   split:{
     width: 150
   }, 
-  banner: {
-    height : 60,
-    padding: 5,
-    backgroundColor:'#4A5D26',
-    flexDirection:'row',
-    alignItems:'center',
-    marginBottom: 20,
+  button: {
+   height: 90,
+   width:200,
+   backgroundColor:"#4A5D26",
+   borderRadius:20,
+   shadowColor: 'black',
+   flexDirection: "row",
+    justifyContent:"center",
+    alignItems:"center",
   },
   categorie:{
     padding :10

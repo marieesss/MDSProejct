@@ -3,9 +3,11 @@ import { View, Text, TouchableOpacity, Image, ScrollView, Linking } from 'react-
 import axios from 'axios';
 import { UserContext } from '../../components/useContext';
 import { useNavigation } from '@react-navigation/native';
+import { Entypo } from '@expo/vector-icons';
 
 
 import styles from './Commandes.style';
+import HeaderMenu from '../../components/header/Header';
 
 const Commandes = () => {
   const [informations, setInformations] = useState([]);
@@ -14,17 +16,15 @@ const Commandes = () => {
 
 
   const { user } = useContext(UserContext);
-  console.log(user.id);
-  console.log(user.token);
 
   const BASE_URL = process.env.BASE_URL;
 
   const getOrder = async () => {
     try {
-      const res = await axios.get(`http://${BASE_URL}:5000/api/order/find/${user.id}`, {
+      const res = await axios.get(`http://${BASE_URL}:80/api/order/find/${user.id}`, {
         headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
       });
-      console.log(res.data);
+      console.log(res.data)
       setInformations(res.data);
       setHasDataLoaded(true);
     } catch (error) {
@@ -55,24 +55,25 @@ const Commandes = () => {
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <View style={styles.titleRow}>
-            <Text style={styles.welcomeMessage}> Catalogue</Text>
-            <Image source={require('../../assets/img/logo.png')} style={styles.img} />
-          </View>
+          <HeaderMenu title="Vos commandes"/>
 
           <View style={styles.banner}>
             <Text style={styles.textBanner}>Les commandes de {user.username}</Text>
           </View>
 
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
             <ScrollView>
               {informations.length > 0 ? (
                 informations.map((commande) => (
-                  <TouchableOpacity onPress={() => {navigation.navigate("CommandeDetails", {_id : commande._id})}}>
-                  <View style={styles.commandes} key={commande._id}>
-                    <Text>{commande._id}</Text>
+                  <TouchableOpacity key={commande._id} onPress={() => {navigation.navigate("CommandeDetails", {_id : commande._id})}}>
+                  <View style={styles.commandes} >
+                  <View>
+                  <Entypo name="shopping-cart" size={24} color="black" />
+                  <Text> {commande._id}</Text>
+                  </View>
+                  <View>
                     {isOrderExpired(commande.updatedAt)  ? 
-                        <Text>Order has expired!</Text> :
+                        <Text>Reçu plus disponible</Text> :
                           commande.status === "en attente de paiement" ? 
                         <Text>En attente de paiement</Text> :
                         <TouchableOpacity onPress={() => Linking.openURL(commande.receipt_url)} style={{ backgroundColor: 'blue' }}>
@@ -86,6 +87,7 @@ const Commandes = () => {
                     </View>
                     <View>
                       <Text>{commande.amount} euros</Text>
+                    </View>
                     </View>
                   </View>
                   </TouchableOpacity>

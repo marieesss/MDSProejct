@@ -30,18 +30,21 @@ const Fermier = () => {
 <div class="container-fluid p-0 overflow-hidden">
 <Menu/>
 
-<div class=" row justify-content-center">
+<div class="row justify-content-center mb-4">
         {fermier.map(fermier =>
-            <div class="card card-product col-lg-4 col-md-12">
+        <div class="col-lg-2 col-md-12">
+            <div class="card card-product">
                 <img class="card-img-top card-img-product" src={fermier.img}/>
                 <div class="card-body">
                     <h5 class="card-title">{fermier.name}</h5>
                     <p class="card-text">{fermier.desc}</p>
-                    <Link to="/productf" state={{fermierId : fermier._id}}>
-                    <button> Ajouter au panier </button>
-                    </Link>
+                   
                     
                 </div>
+                </div>
+                <Link  to="/productf" state={{fermierId : fermier._id}}>
+                    <button class="button-item mt-2 mb-2"> Voir ses produits </button>
+                    </Link>
                 </div>
 
         )}

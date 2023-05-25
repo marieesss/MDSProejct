@@ -133,19 +133,23 @@ const searchItems = (searchValue) => {
                 ?
                 produitsFiltres.map(product => (
                   <div key={product.id} class="col-lg-4 col-md-12">
-                  <div class="card" style={{width: "18rem"}}>
-                  <img src={product.img} alt={product.title} class="img_product" />
-                    <div class="card-body">
-                    <h2 class="card-title">{product.title}</h2>
-                    <p>{product.price}</p>
-                      <p>{product.fermierId}</p>
-                      <Link to={`/product/${product._id}`}>
-                        <button> Acheter </button>
-                    </Link>
-                    </div>
-                  </div>
 
+                  <div class="card card-product">
+                  <img src={product.img} alt={product.title} class="img_product"/>
+                    <div class="card-body">
+                    <p class="product-card-title">{product.title}</p>
+                    <p>{product.price} euros/kg</p>
                     </div>
+                     
+                  </div>
+                  <Link to={`/product/${product._id}`}>
+                            <button class="button-item mt-2 mb-2">
+                            <i class="fa-solid fa-cart-shopping mx-2" style={{color: "#485E1B"}}></i>
+                             Ajouter au panier </button>
+                    </Link>
+
+                    
+                  </div>
                   ))
                 :   // else championsSort = nul affiche moi tout !
                 products.map(product => (

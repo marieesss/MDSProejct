@@ -14,6 +14,8 @@ import {UserContext} from './components/useContext';
 import LogoutButton from './components/logout';
 import Commandes from './screens/Commandes/Commandes';
 import CommandeDetails from './screens/Commande_details/commandeDetails';
+import UpdateUser from './screens/UpdateUser/UpdateUser';
+import Register from './screens/Register/Register';
 
 
 const Drawer = createDrawerNavigator();
@@ -45,9 +47,11 @@ export default function NavigationApp() {
 
           {user ? <Drawer.Screen name="Logout" component={LogoutButton} options={{title: 'Se déconnecter'}}/>
             : null}
-            {user ? <Drawer.Screen name="Mes commandes" component={Commandes} options={{title: 'Nos producteurs locaux'}}/>
+            {user ? <Drawer.Screen name="Mes commandes" component={Commandes} options={{headertitle: 'Nos producteurs locaux', title:'Mes commandes'}}/>
             : null}
-            {!user ? <Drawer.Screen name="Se connecter" component={Login} options={{ headerTitle:'Nos producteurs locaux' }}/> : null} 
+            {!user ? <Drawer.Screen name="Connexion" component={Login} options={{ headerTitle:'Nos producteurs locaux' }}/> : null} 
+            {!user ? <Drawer.Screen name="S'inscrire" component={Register} options={{ headerTitle:'Nos producteurs locaux' }}/> : null} 
+          
           <Drawer.Screen name="ProductDetail" component={ProductDetail} options={{
             drawerItemStyle: { height: 0 },
             headerTitle:'Nos producteurs locaux'
@@ -57,6 +61,10 @@ export default function NavigationApp() {
             headerTitle:'Nos producteurs locaux'
           }}/>
           <Drawer.Screen name="CommandeDetails" component={CommandeDetails} options={{
+            drawerItemStyle: { height: 0 },
+            headerTitle:'Nos producteurs locaux'
+          }}/>
+          <Drawer.Screen name="UpdateUser" component={UpdateUser} options={{
             drawerItemStyle: { height: 0 },
             headerTitle:'Nos producteurs locaux'
           }}/>

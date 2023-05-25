@@ -11,13 +11,15 @@ const Login = () => {
   const {isFetching, error, isLoggedIn}= useSelector((state)=> state.user)
   const navigate = useNavigate();
 
-  const handleClick = (e) =>{
 
-    login(dispatch, {email, password});
-    if(isLoggedIn === true){
-      navigate("/")
+
+  const handleClick = async (e) => {
+    try {
+      await login(dispatch, { email, password });
+      navigate("/");
+    } catch (error) {
     }
-  }
+  };
   return (
     
     <div>
@@ -32,7 +34,7 @@ const Login = () => {
         <label htmlFor="email">
         Mot de passe
         </label>
-        <input name="password" type="password" placeholder="Password"onChange={(e)=> setPassword(e.target.value)}/>
+        <input name="password" type="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)}/>
         <button class ="button-auth mt-3"onClick={handleClick} disabled= {isFetching}>Se connecter</button>
         { error && <p> Something went wrong</p>}
 

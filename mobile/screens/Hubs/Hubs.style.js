@@ -9,54 +9,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "column"
   },
-  welcomeMessage: {
-    fontSize: 30,
-    color: '#4A5D26',
-    marginTop: 40,
-    marginBottom: 40,
-    textAlign: "center",
+  hub: {
+    flexDirection: "row",
+    height: 100,
+    width: 300,
+    borderWidth: 1, 
+    borderColor: '#4A5D26', 
+    justifyContent:"space-between",
+    padding:15, 
+    marginBottom: 10
+  },
+  name:{
+    fontSize: 18,
     fontFamily: 'Josefin',
-    marginRight: 20    
-  },
-  product: {
-    flexDirection: "row",
-    justifyContent: 'center',
-    margin: 15,
-    shadowColor: '#171717',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
+    color:"#4A5D26"
   }, 
-  split:{
-    width: 150
-  }, 
-  banner: {
-    height : 60,
-    padding: 5,
-    backgroundColor:'#4A5D26',
-    flexDirection:'row',
-    alignItems:'center',
-    marginBottom: 20,
-  },
-  categorie:{
-    padding :10
-  },
-  textBanner:{
-    paddingLeft:10,
-    color:"white",
-    fontSize:20,
-    fontFamily: 'Josefin'
-  },
-  titleRow:{
-    justifyContent:"center",
-    flexDirection: "row",
-    alignItems:"center",
-    padding:30
-  },
-  img:{
-    width: 50,
-    height : 50
+  explications:{
+    padding: 10,
+    marginBottom:15,
+    fontSize:18
   }
+
 
 });
 

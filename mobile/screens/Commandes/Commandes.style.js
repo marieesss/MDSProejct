@@ -45,9 +45,8 @@ const styles = StyleSheet.create({
     borderColor: '#4A5D26',
     borderRadius:15,
     borderWidth:2,
-    flexDirection: 'column',
-    alignItems:'center',
-    marginBottom: 20,
+    flexDirection:"row",
+    justifyContent:"space-between"
   },
   categorie:{
     padding :10

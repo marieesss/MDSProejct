@@ -48,7 +48,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:package:win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:win:pack": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --out=release-builds  --version-string.ProductName=\"NosProducteursLocaux\"",
     "electron": "wait-on tcp:3000 | electron ."
   },
   "eslintConfig": {

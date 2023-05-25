@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { restart } = require("nodemon");
-const User = require("../models/user");
+const User = require("../models/User");
 const Order = require("../models/Order");
 const CryptoJS = require("crypto-js");
 
@@ -75,16 +75,16 @@ router.put("/updatebyuser/:userId", verifyToken,verifyTokenAuth, async (req, res
 });
 
  //DELETE
-router.delete("/:id", verifyTokenAdmin, async (req, res) => {
+ router.delete("/:id", verifyTokenAdmin, async (req, res) => {
   try {
+    const userIdToDelete=req.params.id
     await User.findByIdAndDelete(req.params.id);
     await Order.deleteMany({ userId: userIdToDelete })
-    res.status(200).json("User has been deleted...");
+    res.status(200).json("User has been deleted and his orders");
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
     //GET 
 
@@ -107,8 +107,8 @@ router.delete("/:id", verifyTokenAdmin, async (req, res) => {
           const query = req.query.new;
           try{
             let usersQuery = query ? User.find().sort({_id: -1}).limit(5) : User.find().sort({_id: -1});
-            usersQuery = usersQuery.select("-password"); // Exclure le champ "password"
-            const users = await usersQuery.exec()
+          usersQuery = usersQuery.select("-password"); // Exclure le champ "password"
+          const users = await usersQuery.exec()
           res.status(200).json(users);
           }catch(err){
               res.status(500).json.apply(err)
@@ -145,4 +145,49 @@ router.get("/stats", verifyTokenAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//User can modify his profile
+
+router.put("/updatebyuser/:userId", verifyToken,verifyTokenAuth, async (req, res) => {
+  console.log("salut")
+  try {
+
+     // Rechercher l'utilisateur dans la base de données par nom d'utilisateur
+     const user = await User.findOne({ email: req.body.email });
+
+     // Vérifier si l'utilisateur existe
+     if (!user) {
+         // Si l'utilisateur n'existe pas, renvoyer une réponse avec un code de statut 401 (non autorisé)
+         return res.status(404).json({message : "Votre email originel est mauvais"});
+     }
+
+     // Décrypter le mot de passe stocké dans la base de données
+     const hashedPassword = CryptoJS.AES.decrypt(
+         user.password,
+         process.env.PASS_SEC
+     );
+     const Oripassword = hashedPassword.toString(CryptoJS.enc.Utf8);
+
+     // Vérifier si le mot de passe soumis par l'utilisateur est correct
+     if (Oripassword !== req.body.password) {
+         // Si le mot de passe est incorrect, renvoyer une réponse avec un code de statut 401 (non autorisé)
+         return res.status(401).json({message : "Mauvais mot de passe"});
+     }
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.userId,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.newemail,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err)
+  }
+});
+
 module.exports = router

@@ -3,6 +3,7 @@ const Hub = require("../models/Hub");
 const { Client } = require('@googlemaps/google-maps-services-js');
 require("dotenv").config();
 const API_KEY = process.env.API_GOOGLE;
+var mongoose = require('mongoose');
 
 const {
     verifyToken,

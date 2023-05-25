@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { restart } = require("nodemon");
 const Order = require("../models/Order");
-const User = require("../models/user");
+const User = require("../models/User");
 const mongoose = require('mongoose');
 
 const {
@@ -96,8 +96,18 @@ router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => 
         console.log(req.params.userId)
         try {
           const orders = await Order.find({ userId: req.params.userId })
-            .sort({ createdAt: -1 })
+            .sort({ updatedAt: -1 })
             .limit(1);
+          res.status(200).json(orders);
+        } catch (err) {
+          res.status(500).json(err);
+        }
+      });
+
+      router.get("/findOrder/:OrderId/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
+        const objectId = mongoose.Types.ObjectId(req.params.OrderId);
+        try {
+          const orders = await Order.find({ _id: objectId });
           res.status(200).json(orders);
         } catch (err) {
           res.status(500).json(err);

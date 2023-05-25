@@ -2,6 +2,8 @@ const router = require("express").Router();
 const Hub = require("../models/Hub");
 const { Client } = require('@googlemaps/google-maps-services-js');
 require("dotenv").config();
+var mongoose = require('mongoose');
+
 const API_KEY = process.env.API_GOOGLE;
 
 const {
@@ -48,7 +50,7 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
      // Sauvegarde de l'adresse dans la base de données
      await hub.save();
 
-     res.status(201).json({ message: 'Adresse ajoutée avec succès' });
+     res.status(201).json(hub);
    } else {
      res.status(400).json({ message: 'Adresse invalide' });
    }
@@ -89,11 +91,11 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
     }
   });
 
-    //GET HUB
+      router.get("/find/:id", async (req, res) => {
+        var id = mongoose.Types.ObjectId(req.params.id);
 
-    router.get("/find/:OrderId", verifyTokenAuth, async (req, res) => {
         try {
-          const hub = await Hub.find({ OrderId: req.params.OrderId });
+          const hub = await Hub.find(_id = id);
           res.status(200).json(hub);
         } catch (err) {
           res.status(500).json(err);

@@ -35,6 +35,6 @@ app.use("/api/checkout", stripeRoute);
 
   
 
-app.listen(process.env.PORT || 5000, ()=>{
-    console.log("Backend server is listening on port 5000")
+app.listen(80, ()=>{
+    console.log("Backend server is listening on port 80")
 });

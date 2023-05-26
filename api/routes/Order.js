@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { restart } = require("nodemon");
 const Order = require("../models/Order");
 const User = require("../models/User");
+const Product = require("../models/Product");
 const mongoose = require('mongoose');
 
 const {
@@ -15,6 +16,8 @@ const {
 // CREATE 
 
 router.post("/", verifyTokenAuth, async (req, res) => {
+  const products = req.body.products;
+
   const authHeader = req.headers.userid;
   const userId = authHeader.split(" ")[1];
 
@@ -27,8 +30,18 @@ router.post("/", verifyTokenAuth, async (req, res) => {
     }
     );
 
-    console.log(newOrder)
+    for (const product of products) {
+      const { productId, quantity } = product;
     
+      try {
+        // Recherche du produit correspondant par son ID et mise à jour du champ "size"
+        await Product.findByIdAndUpdate(productId, { $inc: { size: -quantity } });
+      } catch (err) {
+        // Gérez l'erreur si la mise à jour échoue
+        console.error("Failed to update product size:", err);
+        // Vous pouvez choisir de revenir en arrière en annulant la commande ou prendre d'autres mesures appropriées
+      }
+    }
   try {
     const savedOrder = await newOrder.save();
     res.status(200).json(savedOrder);

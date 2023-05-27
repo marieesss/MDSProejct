@@ -36,7 +36,13 @@ const Login = () => {
         </label>
         <input name="password" type="password" placeholder="Password" onChange={(e)=> setPassword(e.target.value)}/>
         <button class ="button-auth mt-3"onClick={handleClick} disabled= {isFetching}>Se connecter</button>
-        { error && <p> Something went wrong</p>}
+        { error && 
+        <div class="error-message">
+        <div>
+        <i class="fa-regular fa-face-frown fa-xl mx-2" style={{color: "white"}}/>
+          Mot de passe ou email incorrect, veuillez réessayer
+          </div>
+        </div>}
 
         <p> Pas inscrit ? <Link to="/inscription">Cliquez ici</Link></p>
       </form>

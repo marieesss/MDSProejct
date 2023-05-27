@@ -63,14 +63,14 @@ const Home = () => {
         <div class="row m-4">
             <div class="column col-lg-6 col-md-12">
                 <h1 id='home'>LIVRAISON <br/>OFFERTE</h1>
-                <p id='home'> Recevez notre panier frais, direcetement chez vous <br/>ou dans l'un de nos hubs, gratuitement <br/>dès 50 euros d'achat</p>
+                <p id='home'> Recevez notre panier frais, directement chez vous <br/>ou dans l'un de nos hubs, gratuitement <br/>dès 50 euros d'achat</p>
             </div>
             <div class="column col-lg-6 col-md-12" >
                 <img class ="panierhome" src={panierhome} alt="BigCo Inc. logo"/>
             </div>
         </div>
     </div>
-    <div class="box-homepage-text" style={{marginTop:"150px"}}>
+    <div class="box-homepage-text">
         <span class="text-box-homepage">Avec nous, l'avenir sera meilleure</span> <br/>
             Découvrez nos produits de circuits courts
     </div>
@@ -144,7 +144,7 @@ const Home = () => {
                     
                 </div>
                 </div>
-                 <button class="button-item" onClick={() => handleClick(fermier._id)}>Produits</button>
+                 <button class="button-item" onClick={() => handleClick(fermier._id)}>Voir ses produits</button>
                 </div>
 
         )}

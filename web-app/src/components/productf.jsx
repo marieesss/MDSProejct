@@ -165,8 +165,8 @@ const searchItems = (searchValue) => {
                   </div>
                   {product.size < 1  ? 
 
-                    <button class="button-item mt-2 mb-2">
-                            <i class="fa-solid fa-cart-shopping mx-2" style={{color: "#485E1B"}}></i>
+                    <button class="button-item-nostock mt-2 mb-2">
+                    <i class="fa-regular fa-face-frown fa-xl mx-2" style={{color: "#ff0000"}}/>
                             produit épuisé </button>
 
                    :

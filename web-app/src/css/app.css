@@ -1,8 +1,4 @@
-@font-face {
-  font-family: "Josefin";   /*Can be any text*/
-  src: local("JosefinSans-Regular"),
-    url("../fonts/JosefinSans-Regular.ttf") format("truetype");
-}
+
 
 body{
     margin: 0px;
@@ -80,7 +76,6 @@ body{
   
   .container-home {
     padding-top: 5%;
-    height:400px;
     margin-bottom: 100px;
   }
 
@@ -134,6 +129,34 @@ body{
     padding: 10px;
     font-size: 10px;
   }
+
+  .button-item-nostock{
+    width:250px;
+    height: 50;
+    font-weight: 600;
+    color:#ff0000;
+    border-color: #ff0000;
+    border-width: 1px;
+    background-color: white;
+    padding: 10px;
+    font-size: 10px;
+  }
+
+  .error-message{
+    background-color: #bac100;
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 15px;
+    color: white;
+  }
+  
+  
+  
+  
+
   .box-homepage-text{
     height: 150px;
     border: solid 3px  #485E1B ;
@@ -165,7 +188,7 @@ body{
 
   .text-box-homepage{
     font-size: 30px;
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
   }
 
   .card-product{
@@ -201,9 +224,7 @@ body{
     object-fit: cover;
   }
 
-  .Josefin {
-    font-family: Josefin
-  }
+ 
   .box-homepage-text2{
     height: 500px;
     padding: 100px 10px 30px 40px;

@@ -32,7 +32,7 @@ const Fermier = () => {
 
 <div class="row justify-content-center mb-4">
         {fermier.map(fermier =>
-        <div class="col-lg-2 col-md-12">
+        <div class="col-lg-2 col-md-12 mx-4">
             <div class="card card-product">
                 <img class="card-img-top card-img-product" src={fermier.img}/>
                 <div class="card-body">

@@ -56,7 +56,7 @@ const Cart = () => {
     
 
     try {
-      const res = await axios.post(`https://${URL}:5000/api/order`, {
+      const res = await axios.post(`https://${URL}/api/order`, {
           userId: user,
           products: produitarray,
           amount: total,
@@ -91,7 +91,7 @@ const Cart = () => {
     const makeRequest = async ()=>{
       try{
         // envoie une requête POST avec les informations de paiement au backend
-        const res = await axios.post(`https://${URL}:5000/api/checkout/payment`, {
+        const res = await axios.post(`https://${URL}/api/checkout/payment`, {
           tokenId: stripeToken.id, // identifiant du token de paiement
           amount:total*100, // montant total de la commande en centimes (pour Stripe)
         });
@@ -124,7 +124,7 @@ const Cart = () => {
   useEffect (()=>{
     const getHub = async ()=> {
       try{
-        const res =  await axios.get(`https://${URL}:5000/api/hub`)
+        const res =  await axios.get(`https://${URL}/api/hub`)
         setHub(res.data);
         console.log(hub)
       }catch(err){}

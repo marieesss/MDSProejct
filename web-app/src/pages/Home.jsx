@@ -20,7 +20,7 @@ const Home = () => {
     const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`https://${URL}:5000/api/product`)
+        axios.get(`https://${URL}/api/product`)
           .then(response => {
             const productsData = response.data.slice(0,4);
             setProducts(productsData);
@@ -31,7 +31,7 @@ const Home = () => {
       }, []);
 
       useEffect(() => {
-        axios.get(`https://${URL}:5000/api/fermier`)
+        axios.get(`https://${URL}/api/fermier`)
           .then(response => {
             const productsData = response.data.slice(0,4);
             setFermier(productsData);

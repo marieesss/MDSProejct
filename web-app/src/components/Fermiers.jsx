@@ -11,7 +11,7 @@ const Fermiers = () => {
    useEffect (()=>{
     const getFermiers = async ()=> {
       try{
-        const res =  await axios.get(`https://${URL}:5000/api/fermier`)
+        const res =  await axios.get(`https://${URL}/api/fermier`)
         setFarmer(res.data[0]);
         console.log(Fermiers)
         setFermierId(res.data[0]._id);
@@ -26,7 +26,7 @@ const Fermiers = () => {
     const getProducts = async ()=> {
       try{
         console.log(fermierId)
-        const res = await axios.get(`https://${URL}:5000/api/product?fermier=${fermierId}` );
+        const res = await axios.get(`https://${URL}/api/product?fermier=${fermierId}` );
         setProducts(res.data)
         console.log(products)
       }catch(err){

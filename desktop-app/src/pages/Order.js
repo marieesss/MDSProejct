@@ -20,7 +20,7 @@ const Order = () => {
 
 
   useEffect(() => {
-    axios.get(`http://141.94.244.226:80/api/order/adminall`, config)
+    axios.get(`http://141.94.244.226:5000/api/order/adminall`, config)
       .then(response => {
         console.log(response)
         setOrderListe(response.data)
@@ -42,7 +42,7 @@ const Order = () => {
         userid: `Bearer ${user}` }
     };
 
-    axios.put(`http://141.94.244.226:80/api/order/${id}/${user}`, {
+    axios.put(`http://141.94.244.226:5000/api/order/${id}/${user}`, {
         status : "envoyé"
     },config)
       .then(response => {
@@ -63,7 +63,7 @@ const Order = () => {
         headers: { token: `Bearer ${userToken}` }
     };
 
-    axios.delete(`http://141.94.244.226:80/api/order/${id}`,config)
+    axios.delete(`http://141.94.244.226:5000/api/order/${id}`,config)
       .then(response => {
         window.location.reload();
 
@@ -115,7 +115,7 @@ const Order = () => {
                     <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
                       <div>
                       <div>Commande envoyée</div>
-                      <button class="button-green"value={order._id} onClick={handleDelete}>Supprimer</button>
+                      <button class="button-green" value={order._id} onClick={handleDelete}>Supprimer</button>
                       </div>}
 
                       

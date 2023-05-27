@@ -19,6 +19,10 @@ describe("searchUser", () => {
     cy.wait(3000)
     cy.get('button[type=submit]').click()
     cy.contains("div", "courgette").should("be.visible");
+    cy.get('.card').last().find('.button-green').click();
+    cy.contains("div", "courgette").should('not.contain', 'Text')
+
+
 
   });
 });

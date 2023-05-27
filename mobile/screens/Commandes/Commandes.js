@@ -21,7 +21,7 @@ const Commandes = () => {
 
   const getOrder = async () => {
     try {
-      const res = await axios.get(`http://${BASE_URL}:80/api/order/find/${user.id}`, {
+      const res = await axios.get(`http://${BASE_URL}:5000/api/order/find/${user.id}`, {
         headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
       });
       console.log(res.data)
@@ -55,30 +55,30 @@ const Commandes = () => {
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
-          <HeaderMenu title="Vos commandes"/>
+        <HeaderMenu title={" Les commandes de " + user.username }/>
 
-          <View style={styles.banner}>
-            <Text style={styles.textBanner}>Les commandes de {user.username}</Text>
-          </View>
 
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center'}}>
+        <View style={{
+    flexDirection: 'column',
+    alignItems:'center',
+    flex:1
+    }}>
             <ScrollView>
               {informations.length > 0 ? (
                 informations.map((commande) => (
                   <TouchableOpacity key={commande._id} onPress={() => {navigation.navigate("CommandeDetails", {_id : commande._id})}}>
                   <View style={styles.commandes} >
-                  <View>
-                  <Entypo name="shopping-cart" size={24} color="black" />
-                  <Text> {commande._id}</Text>
+                  <View style={styles.cart}>
+                  <Entypo name="shopping-cart" size={30} color="#4A5D26" />
                   </View>
-                  <View>
+                  <View style={styles.informations}>
                     {isOrderExpired(commande.updatedAt)  ? 
                         <Text>Reçu plus disponible</Text> :
                           commande.status === "en attente de paiement" ? 
                         <Text>En attente de paiement</Text> :
-                        <TouchableOpacity onPress={() => Linking.openURL(commande.receipt_url)} style={{ backgroundColor: 'blue' }}>
-                          <View>
-                            <Text>Voir mon reçu</Text>
+                        <TouchableOpacity onPress={() => Linking.openURL(commande.receipt_url)}>
+                          <View style={styles.button}>
+                            <Text style={styles.text}>Voir mon reçu</Text>
                           </View>
                         </TouchableOpacity>
                     }

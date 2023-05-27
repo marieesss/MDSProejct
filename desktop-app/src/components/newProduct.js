@@ -25,7 +25,7 @@ const NewProduct = () => {
         headers: { token: `Bearer ${userToken}` }
     };
 
-    axios.get(`http://141.94.244.226:80/api/fermier`, config)
+    axios.get(`http://141.94.244.226:5000/api/fermier`, config)
       .then(response => {
         console.log(response.data)
         setFermier(response.data)
@@ -43,12 +43,13 @@ const NewProduct = () => {
     console.log(categorie)
   }, [categorie])
 
-  const newProduct = async () => {
+  const newProduct = async (e) => {
+    e.preventDefault()
     const config = {
       headers: { token: `Bearer ${userToken}` }
   };
     try {
-      const res = await axios.post("http://141.94.244.226:80/api/product", {
+      const res = await axios.post("http://141.94.244.226:5000/api/product", {
           title : title,
           desc: desc,
           img: img,
@@ -79,6 +80,7 @@ const NewProduct = () => {
         <Form.Control  name="img" type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
         <Form.Label class="modal-title">Categorie</Form.Label>
         <Form.Select name="cat" onClick={(e)=>setCategorie(e.target.value)}>
+        <option value="fruit" >Choisissez la catégorie</option>
           <option value="fruit" >Fruit</option>
           <option value="legume">Légume</option>
         </Form.Select>
@@ -89,6 +91,7 @@ const NewProduct = () => {
         
       <label class="modal-title">fermier</label>
         <Form.Select name="fermier" type="text" placeholder="Enter text" onChange={(e)=>setIdFermier(e.target.value)}>
+        <option value="rien">Choisissez le fermier</option>
             {fermier.map(item=>(
               <option value={item._id}>{item.name}</option>
             ))

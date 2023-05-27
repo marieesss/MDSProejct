@@ -6,6 +6,7 @@ import { UserContext } from '../../components/useContext';
 import styles from './commandeDetails.style'
 import HeaderMenu from "../../components/header/Header"
 import { Linking } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
@@ -26,7 +27,7 @@ const CommandeDetails = ({ navigation, route }) => {
       console.log(route.params._id)
   
         try {
-          const res = await axios.get(`http://${BASE_URL}:80/api/order/findOrder/${route.params._id}/${user.id}`, 
+          const res = await axios.get(`http://${BASE_URL}:5000/api/order/findOrder/${route.params._id}/${user.id}`, 
              {
                 headers: { token: `Bearer ${user.token}`,
                 userid: `Bearer ${user.id}`}
@@ -44,7 +45,7 @@ const CommandeDetails = ({ navigation, route }) => {
 
       const getHub = async () => {
           try {
-            const res = await axios.get(`http://${BASE_URL}:80/api/hub/find/${hubId}`);
+            const res = await axios.get(`http://${BASE_URL}:5000/api/hub/find/${hubId}`);
                setHub(res.data[0])
                console.log(res.data[0])
           } catch (error) {
@@ -59,7 +60,7 @@ const CommandeDetails = ({ navigation, route }) => {
   
             for(let i=0; i<productsId.length; i++) {
                 try {
-                          const res = await axios.get(`http://${BASE_URL}:80/api/product/find/${productsId[i].productId}`, 
+                          const res = await axios.get(`http://${BASE_URL}:5000/api/product/find/${productsId[i].productId}`, 
                             {
                                 headers: { token: `Bearer ${user.token}` }
                             });
@@ -96,14 +97,12 @@ const CommandeDetails = ({ navigation, route }) => {
         <ScrollView>
        <HeaderMenu title="Détails de la commande"/>
 
-
-    <Text> Produits </Text>
        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
     {productsListe.map(product=> (
       <View style={styles.product}>
         <View>
         <Image source={{uri: product.product.img}}
-            style={{width: 90, height: 90}}
+            style={{width: 90, height: 90, borderRadius:15}}
             />
       </View>
         <View>
@@ -117,33 +116,50 @@ const CommandeDetails = ({ navigation, route }) => {
       </View>
     ))}
 
-    <View> 
-      <Text> Total {informations.amount}</Text>
-    </View>
-
-    <TouchableOpacity 
+    <View style={{width:"100%", padding: 15}}> 
+      <Text style={styles.paiement}> Paiement </Text>
+      <View style={styles.line}></View>
+      <View style={styles.infopaiement}>
+      <View style={styles.column}>
+      <Text style={{fontSize:16, marginBottom:4}}> {informations.amount}  euros</Text>
+      <Text style={{fontSize:12}}> TVA 20% : {(informations.amount*0.2).toFixed(2)} </Text>
+      {informations.amount < 50 ? 
+        <Text style={{fontSize:12}}> Livraison 3,99 euros </Text>
+      :
+      <Text style={{fontSize:12}}> Livraison gratuite </Text>
+      }
+      
+      </View>
+      
+      <TouchableOpacity 
   onPress={() => {
     const url = informations.receipt_url;
     Linking.openURL(url);
 }}>
     <View style={styles.button}>
-      <Text style={{color: "white", fontSize:23}}> Voir le reçu </Text>
+      <Text style={{color: "white", fontSize:15}}> Voir le reçu </Text>
     </View>
-  
-  <Text> Votre reçu est disponible jusqu'à 30 après le paiement </Text>
-
     </TouchableOpacity>
 
    
 
-</View> 
+    </View>
+    <View style={{marginTop:6, justifyContent:"center", flexDirection:"row", alignItems:"center"}}> 
+    <MaterialCommunityIcons name="information" size={24} color="black" />
+     <Text style={{paddingLeft:5, fontSize:11}}>Votre reçu est disponible jusqu'à 30 après le paiement</Text>
+    </View>
+    </View>
 
-<View> 
-<Text> Adresse de livraison</Text>
+   <View style={{width:"100%", padding: 15}}> 
+<Text style={styles.paiement}> Livraison </Text>
+<View style={styles.line}></View>
+<View style={styles.infopaiement}>
+      <View style={styles.column}>
       <Text> {hub.name}</Text>
       <Text> {hub.adress}</Text>
       <Text> {hub.ville}</Text>
       <Text> {hub.code}</Text>
+      </View>
 
       <TouchableOpacity 
   onPress={() => {
@@ -154,7 +170,14 @@ const CommandeDetails = ({ navigation, route }) => {
       <Text style={{color: "white"}}> Voir l'adresse</Text>
     </View>
     </TouchableOpacity>
+   
     </View>
+ 
+    </View>
+
+</View> 
+
+
         
         </ScrollView>
     </View>

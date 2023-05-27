@@ -14,7 +14,7 @@ const Welcome = () => {
   const BASE_URL = process.env.BASE_URL
 
   useEffect(() => {
-    axios.get(`http://${BASE_URL}:80/api/product`)
+    axios.get(`http://${BASE_URL}:5000/api/product`)
       .then(response => {
         Setdata(response.data);
         
@@ -25,7 +25,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://${BASE_URL}:80/api/product?category=fruit`)
+    axios.get(`http://${BASE_URL}:5000/api/product?category=fruit`)
       .then(response => {
         SetdataFruit(response.data);
         
@@ -36,7 +36,7 @@ const Welcome = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`http://${BASE_URL}:80/api/product?category=legume`)
+    axios.get(`http://${BASE_URL}:5000/api/product?category=legume`)
       .then(response => {
         SetDataLegume(response.data);
         

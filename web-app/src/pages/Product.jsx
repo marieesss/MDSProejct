@@ -17,6 +17,7 @@ const Product = () => {
   const [Fermier, setFermier]=  useState({});
   const [FermierId, setFermierId]=  useState("");
   const [categorie, setCategorie]=  useState("");
+  const [size, setSize]=  useState();
   const [quantity, setQuantity]=  useState(1);
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API_URL;
@@ -31,6 +32,7 @@ const Product = () => {
           setCategorie(res.data.categories.toString())
           console.log(categorie)
           setFermierId(res.data.fermierId)
+          setSize(res.data.size)
           
         }catch(err){
             console.log(err)
@@ -83,7 +85,9 @@ const Product = () => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
-      setQuantity(quantity + 1);
+      if (quantity < size) {
+        setQuantity(quantity + 1);
+      }
     }
   };
 

@@ -47,7 +47,7 @@ export default function NavigationApp() {
 
           {user ? <Drawer.Screen name="Logout" component={LogoutButton} options={{title: 'Se déconnecter'}}/>
             : null}
-            {user ? <Drawer.Screen name="Mes commandes" component={Commandes} options={{headertitle: 'Nos producteurs locaux', title:'Mes commandes'}}/>
+            {user ? <Drawer.Screen name="Mes commandes" component={Commandes} options={{headerTitle: 'Nos producteurs locaux'}}/>
             : null}
             {!user ? <Drawer.Screen name="Connexion" component={Login} options={{ headerTitle:'Nos producteurs locaux' }}/> : null} 
             {!user ? <Drawer.Screen name="S'inscrire" component={Register} options={{ headerTitle:'Nos producteurs locaux' }}/> : null} 

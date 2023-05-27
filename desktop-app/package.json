@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
+  "proxy": "http://localhost:3000",
   "homepage": "./",
   "dependencies": {
     "@devexpress/dx-react-chart": "^4.0.3",
@@ -17,6 +18,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
     "cypress": "^12.12.0",
+    "electron-forge": "^5.2.4",
     "electron-is-dev": "^2.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
@@ -29,27 +31,32 @@
     "web-vitals": "^2.1.4"
   },
   "build": {
-    "appId": "com.electron.NosProducteursLocaux",
-    "productName": "Nos producteurs Locaux",
+    "appId": "com.electron.app",
+    "productName": "My Electron App",
+    "directories": {
+      "output": "dist"
+    },
     "files": [
       "build/**/*",
       "node_modules/**/*"
     ],
-    "directories": {
-      "buildResources": "public"
-    },
-    "win": {
-      "target": "nsis"
-    }
+    "extraResources": [
+      {
+        "from": "public/manifest.json",
+        "to": "manifest.json"
+      }
+    ]
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "electron-builder",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:win:pack": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --out=release-builds  --version-string.ProductName=\"NosProducteursLocaux\"",
-    "electron": "wait-on tcp:3000 | electron ."
+    "electron": "wait-on tcp:3000 | electron .",
+    "electron:package:mac": "npm build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "npm build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
@@ -74,7 +81,6 @@
     "cross-env": "^7.0.3",
     "electron": "^23.1.4",
     "electron-builder": "^23.6.0",
-    "electron-packager": "^17.1.1",
     "wait-on": "^7.0.1"
   }
 }

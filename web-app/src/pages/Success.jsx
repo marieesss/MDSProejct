@@ -30,7 +30,7 @@ const Success = () => {
     const getOrder = async () => {
   
         try {
-          const res = await axios.get(`http://${URL}:80/api/order/find/last/${user}`, 
+          const res = await axios.get(`http://${URL}:5000/api/order/find/last/${user}`, 
              {
                 headers: { token: `Bearer ${userToken}`,
                 userid: `Bearer ${user}`}
@@ -51,7 +51,7 @@ const Success = () => {
       const getHub = async () => {
   
         try {
-          const res = await axios.get(`http://${URL}:80/api/hub/find/${hubId}`);
+          const res = await axios.get(`http://${URL}:5000/api/hub/find/${hubId}`);
            setHub(res.data[0])
            console.log(res.data[0])
 
@@ -67,7 +67,7 @@ const Success = () => {
         const products =[]
         for(let i=0; i<productsId.length; i++) {
               try {
-                        const res = await axios.get(`http://${URL}:80/api/product/find/${productsId[i].productId}`, 
+                        const res = await axios.get(`http://${URL}:5000/api/product/find/${productsId[i].productId}`, 
                           {
                               headers: { token: `Bearer ${userToken}` }
                           });
@@ -85,7 +85,7 @@ const Success = () => {
 
       const putOrder = async () => {
         try {
-          const res = await axios.put(`http://${URL}:80/api/order/${idCart}/${informations[0].userId}`,{
+          const res = await axios.put(`http://${URL}:5000/api/order/${idCart}/${informations[0].userId}`,{
             status: "payé",
             stripeStatus : stripe.status, 
             billingAdress : {

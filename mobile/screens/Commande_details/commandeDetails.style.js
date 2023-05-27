@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    flex: 1,
     paddingBottom:100,
     backgroundColor: "#FFFDFA",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    margin: 0
   },
   welcomeMessage: {
     fontSize: 30,
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
     width: 150
   }, 
   button: {
-   height: 90,
-   width:200,
+   height: 40,
+   width:100,
    backgroundColor:"#4A5D26",
    borderRadius:20,
    shadowColor: 'black',
@@ -51,6 +51,32 @@ const styles = StyleSheet.create({
     color:"white",
     fontSize:20,
     fontFamily: 'Josefin'
+  },
+  paiement :{
+    fontFamily:"Josefin",
+    color:"#4A5D26",
+    margin:0,
+    flexDirection:"row",
+    fontSize:25,
+    marginTop: 15
+  }, 
+  line:{
+    marginTop: 5,
+    borderWidth:1,
+    borderColor:"#4A5D26",
+    borderRadius: 15,
+    marginBottom:10
+  },
+  infopaiement:{
+    flexDirection:"row", 
+    justifyContent:"space-between",
+  },
+  infopaiement2:{
+    flexDirection:"row", 
+    justifyContent:"space-between",
+  },
+  column:{
+    flexDirection:"column",
   },
   titleRow:{
     justifyContent:"center",

@@ -41,7 +41,7 @@ const Home = () => {
   useEffect(() => {
     const getOrderStats = async () => {
       try {
-        const res = await axios.get("http://141.94.244.226:80/api/user/stats", config);
+        const res = await axios.get("http://141.94.244.226:5000/api/user/stats", config);
         console.log(res.data)
         setDataUser(res.data)
         console.log(dataUser)
@@ -74,7 +74,7 @@ const Home = () => {
   useEffect(() => {
     const getStats = async () => {
       try {
-        const res = await axios.get("http://141.94.244.226:80/api/order/stats", config);
+        const res = await axios.get("http://141.94.244.226:5000/api/order/stats", config);
         console.log(res.data)
         setDataOrder(res.data)
       } catch(err){
@@ -87,7 +87,7 @@ const Home = () => {
 
   useEffect(() => {
 
-    axios.get("http://141.94.244.226:80/api/order/adminhomepage", config)
+    axios.get("http://141.94.244.226:5000/api/order/adminhomepage", config)
       .then(response => {
         console.log(response.data)
         setLastOrders(response.data)

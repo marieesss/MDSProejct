@@ -39,17 +39,40 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   commandes: {
-    height : 100,
-    padding: 5,
+    height : 120,
+    padding: 10,
     width:300,
     borderColor: '#4A5D26',
     borderRadius:15,
     borderWidth:2,
     flexDirection:"row",
-    justifyContent:"space-between"
+    justifyContent:"space-between",
+    marginBottom:15,
+    alignItems:"center"
   },
   categorie:{
     padding :10
+  },
+  cart:{
+    width: "25%",
+    flexDirection:"row",
+    justifyContent:"center"
+  },
+  informations:{
+    flexDirection: "column",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button:{
+    color:"white",
+    backgroundColor:"#4A5D26",
+    padding: 10,
+    width: 120,
+    justifyContent:"center",
+    flexDirection:"row",
+    borderRadius: 15,
+    marginBottom:5
   },
   textBanner:{
     paddingLeft:10,
@@ -66,6 +89,10 @@ const styles = StyleSheet.create({
   img:{
     width: 50,
     height : 50
+  }, 
+  text:{
+    fontFamily: "Josefin", 
+    color: "white"
   }
 
 });

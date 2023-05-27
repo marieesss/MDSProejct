@@ -17,7 +17,7 @@ describe('Authentification', () => {
     }
 
     
-    const response = await request("http://141.94.244.226:5000") 
+    const response = await request("https://api.nossproducteurslocaux.fr:5000") 
       .post("/api/auth/register")
       .send(User)
       expect(response.statusCode).toBe(201); 
@@ -26,7 +26,7 @@ describe('Authentification', () => {
 
 
   test("Login pour la suite", async () => { 
-    const response = await request("http://141.94.244.226:5000") 
+    const response = await request("https://api.nossproducteurslocaux.fr:5000") 
       .post("/api/auth/login")
       .send({email : MAIL, password: MDP})
       expect(response.statusCode).toBe(200);
@@ -35,21 +35,21 @@ describe('Authentification', () => {
   });
 
       test("Wrong password", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .post("/api/auth/login")
           .send({email : "bouteille@bouteille.com", password: "bouteill"})
           expect(response.statusCode).toBe(401); // Définit le code de retour attendu
       });
 
       test("Wrong email", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .post("/api/auth/login")
           .send({email : "bouteille@bouteille.co", password: "bouteill"})
           expect(response.statusCode).toBe(401); // Définit le code de retour attendu
       });
 
       test("get All Users", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get("/api/user/")
           .set('token', `Bearer ${token}`)
           
@@ -60,7 +60,7 @@ describe('Authentification', () => {
         const User = {
           username : "Fabrice"
         }
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .put(`/api/user/${UserIdToTest}`)
           .send(User)
           .set('token', `Bearer ${token}`);
@@ -69,14 +69,14 @@ describe('Authentification', () => {
       });
 
       test("get One User", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get(`/api/user/find/${UserIdToTest}`)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 
       });
 
       test("deleteUser", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .delete(`/api/user/${UserIdToTest}`)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 

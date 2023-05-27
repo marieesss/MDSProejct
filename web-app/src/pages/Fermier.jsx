@@ -15,7 +15,7 @@ const Fermier = () => {
     const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`http://${URL}:5000/api/fermier`)
+        axios.get(`https://${URL}:5000/api/fermier`)
           .then(response => {
             const productsData = response.data;
             setFermier(productsData);

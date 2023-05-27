@@ -62,7 +62,7 @@ const Inscription = () => {
           }else{
 
             try {
-                const response = await axios.post(`http://${URL}:5000/api/auth/register`,
+                const response = await axios.post(`https://${URL}:5000/api/auth/register`,
                   { username
                       , password
                       , email},

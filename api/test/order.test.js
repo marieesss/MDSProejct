@@ -10,7 +10,7 @@ describe('Order', () => {
   let token;
 
     test("Login pour la suite", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .post("/api/auth/login")
           .send({email : MAIL, password: MDP})
           UserId= response.body._id
@@ -19,7 +19,7 @@ describe('Order', () => {
 
 
     test("get All Orders", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get("/api/order/")
           .set('token', `Bearer ${token}`)
           
@@ -45,7 +45,7 @@ describe('Order', () => {
         
 
         
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .post("/api/order")
           .send(order)
           .set('token', `Bearer ${token}`)
@@ -57,7 +57,7 @@ describe('Order', () => {
       });
 
       test("getOneOrder", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get(`/api/order/find/${OrderId}`)
           .set('token', `Bearer ${token}`)
           .set('userId', `Bearer ${UserId}`);
@@ -65,7 +65,7 @@ describe('Order', () => {
       });
 
       test("getLastOrderOfUser", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get(`/api/order/find/last/${UserId}`)
           .set('token', `Bearer ${token}`)
           .set('userId', `Bearer ${UserId}`);
@@ -78,7 +78,7 @@ describe('Order', () => {
         const order = {
           status : "payé"
         }
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .put(`/api/order/${OrderId}/${UserId}`)
           .send(order)
           .set('token', `Bearer ${token}`)
@@ -91,7 +91,7 @@ describe('Order', () => {
       
 
       test("deleteOrder", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .delete(`/api/order/${OrderId}`)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 

@@ -25,7 +25,7 @@ const Product = () => {
   useEffect(()=>{
       const getProduct = async ()=> {
         try{
-          const res = await axios.get(`http://${URL}:5000/api/product/find/`+ id);
+          const res = await axios.get(`https://${URL}:5000/api/product/find/`+ id);
           console.log(res.data)
           setProduct(res.data)
           console.log(res.data.categories)
@@ -48,7 +48,7 @@ const Product = () => {
   useEffect(()=>{
     const getProductCategorie = async ()=> {
       try{
-        const res = await axios.get(`http://${URL}:5000/api/product?category=${categorie}` );
+        const res = await axios.get(`https://${URL}:5000/api/product?category=${categorie}` );
         setProductCategorie(res.data.slice(0,4))
         console.log(ProductCategorie)
       }catch(err){
@@ -67,7 +67,7 @@ const Product = () => {
     console.log(FermierId)
     const getFermier = async ()=> {
       try{
-        const res = await axios.get(`http://${URL}:5000/api/fermier/find/${FermierId}` );
+        const res = await axios.get(`https://${URL}:5000/api/fermier/find/${FermierId}` );
   
         setFermier(res.data)
       }catch(err){

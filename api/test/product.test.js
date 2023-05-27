@@ -10,14 +10,14 @@ describe('Product', () => {
 
 
   test("Login pour la suite", async () => { 
-    const response = await request("http://141.94.244.226:5000") 
+    const response = await request("https://api.nossproducteurslocaux.fr:5000") 
       .post("/api/auth/login")
       .send({email : MAIL, password: MDP})
       token= response.body.accessToken
   });
     
     test("get All product", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get("/api/product/");
           expect(response.statusCode).toBe(200); // Définit le code de retour attendu
       });
@@ -35,7 +35,7 @@ describe('Product', () => {
         }
 
         
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .post("/api/product")
           .send(product)
           .set('token', `Bearer ${token}`);
@@ -49,7 +49,7 @@ describe('Product', () => {
         const product = {
           title : "cerises"
         }
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .put(`/api/product/${productId}`)
           .send(product)
           .set('token', `Bearer ${token}`);
@@ -60,13 +60,13 @@ describe('Product', () => {
       });
 
       test("getOneProduct", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .get(`/api/product/find/${productId}`)
         expect(response.statusCode).toBe(200); 
       });
 
       test("deleteProduct", async () => { 
-        const response = await request("http://141.94.244.226:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
           .delete(`/api/product/${productId}`)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 

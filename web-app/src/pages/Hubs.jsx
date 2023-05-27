@@ -8,7 +8,7 @@ const Hubs = () => {
     const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
-        axios.get(`http://${URL}:5000/api/hub`)
+        axios.get(`https://${URL}:5000/api/hub`)
           .then(response => {
             console.log(response.data)
             setHubs(response.data);
@@ -33,7 +33,7 @@ const Hubs = () => {
             <tr>
                 <td>{hub.name}</td>
                 <td>{hub.adress}</td>
-                <td> <a href={`https://www.google.com/maps/search/?api=1&query=${hub.latitude},${hub.longitude}`} target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" style={{color: "#485E1B"}}/></a></td>
+                <td> <a href={`httpss://www.google.com/maps/search/?api=1&query=${hub.latitude},${hub.longitude}`} target="_blank"><i class="fa-solid fa-arrow-up-right-from-square" style={{color: "#485E1B"}}/></a></td>
             </tr>
         ))}
       </tbody>

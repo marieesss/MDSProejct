@@ -22,7 +22,7 @@ const NewHub = () => {
         const newHub = async (e) => {
           e.preventDefault()
             try {
-              const res = await axios.post("http://141.94.244.226:5000/api/hub/", {
+              const res = await axios.post("https://api.nossproducteurslocaux.fr/api/hub/", {
                   name : name,
                   adress: adress,
                   ville: ville,

@@ -30,7 +30,7 @@ const User = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://141.94.244.226:5000/api/user`, config)
+        axios.get(`https://api.nossproducteurslocaux.fr/api/user`, config)
           .then(response => {
             setUserListe(response.data);
             console.log(userListe)
@@ -48,7 +48,7 @@ const User = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.delete(`http://141.94.244.226:5000/api/user/${id}`,config)
+        axios.delete(`https://api.nossproducteurslocaux.fr/api/user/${id}`,config)
           .then(response => {
             console.log(response)
             setMessage("User bien supprimé")
@@ -68,7 +68,7 @@ const User = () => {
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
-        axios.put(`http://141.94.244.226:5000/api/user/${id}`,
+        axios.put(`https://api.nossproducteurslocaux.fr/api/user/${id}`,
         {
             isAdmin:true
         },config)
@@ -91,7 +91,7 @@ const User = () => {
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
-        axios.put(`http://141.94.244.226:5000/api/user/${id}`,
+        axios.put(`https://api.nossproducteurslocaux.fr/api/user/${id}`,
         {
             isAdmin:false
         },config)

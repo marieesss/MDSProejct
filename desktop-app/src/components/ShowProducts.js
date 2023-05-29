@@ -35,7 +35,7 @@ const ShowProducts = () => {
   
     const putDesc = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
             desc: desc,
            }, 
            config);
@@ -47,7 +47,7 @@ const ShowProducts = () => {
   
     const putImg = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
             img: img,
            }, 
            config);
@@ -59,7 +59,7 @@ const ShowProducts = () => {
   
     const putPrice= async (e) => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
             price: price,
            }, 
            config);
@@ -73,7 +73,7 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://141.94.244.226:5000/api/fermier`, config)
+        axios.get(`https://api.nossproducteurslocaux.fr/api/fermier`, config)
           .then(response => {
             console.log(response.data)
             setFermier(response.data)
@@ -92,7 +92,7 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.get(`http://141.94.244.226:5000/api/product/all`, config)
+        axios.get(`https://api.nossproducteurslocaux.fr/api/product/all`, config)
           .then(response => {
             console.log(response.data)
             setProducts(response.data)
@@ -109,7 +109,7 @@ const ShowProducts = () => {
             headers: { token: `Bearer ${userToken}` }
         };
     
-        axios.delete(`http://141.94.244.226:5000/api/product/${id}`,config)
+        axios.delete(`https://api.nossproducteurslocaux.fr/api/product/${id}`,config)
           .then(response => {
             window.location.reload();
     
@@ -122,7 +122,7 @@ const ShowProducts = () => {
 
       const putFermier= async (e) => {
         try {
-          const res = await axios.put(`http://141.94.244.226:5000/api/product/${idProduit}`, {
+          const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
               fermierId: IdFermier,
              }, 
              config);

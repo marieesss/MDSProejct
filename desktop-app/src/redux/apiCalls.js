@@ -8,7 +8,7 @@ export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
     const res = await axios.post(
-      "http://141.94.244.226:5000/api/auth/login",
+      "https://api.nossproducteurslocaux.fr/api/auth/login",
       user,
       {
         headers: {

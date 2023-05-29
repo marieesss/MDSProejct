@@ -31,7 +31,7 @@ const ShowHubs = () => {
 
 
     useEffect(() => {
-        axios.get(`http://141.94.244.226:5000/api/hub/`, config)
+        axios.get(`https://api.nossproducteurslocaux.fr/api/hub/`, config)
           .then(response => {
             console.log(response)
             setHub(response.data)
@@ -44,7 +44,7 @@ const ShowHubs = () => {
   
     const putName = async () => {
       try {
-        const res = await axios.put(`http://141.94.244.226:5000/api/hub/${idProduit}`, {
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/hub/${idProduit}`, {
             name: name,
            }, 
            config);
@@ -62,7 +62,7 @@ const ShowHubs = () => {
           headers: { token: `Bearer ${userToken}` }
       };
   
-      axios.delete(`http://141.94.244.226:5000/api/hub/${id}`,config)
+      axios.delete(`https://api.nossproducteurslocaux.fr/api/hub/${id}`,config)
         .then(response => {
           console.log(response)
           window.location.reload()

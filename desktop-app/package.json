@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "public/electron.js",
-  "proxy": "http://localhost:3000",
-  "homepage": "./",
+  "homepage": ".",
   "dependencies": {
     "@devexpress/dx-react-chart": "^4.0.3",
     "@devexpress/dx-react-chart-material-ui": "^4.0.3",
@@ -33,18 +32,17 @@
   "build": {
     "appId": "com.electron.app",
     "productName": "My Electron App",
+    "win": {
+      "target": "nsis"
+    },
     "directories": {
-      "output": "dist"
+      "output": "release"
     },
     "files": [
       "build/**/*",
-      "node_modules/**/*"
-    ],
-    "extraResources": [
-      {
-        "from": "public/manifest.json",
-        "to": "manifest.json"
-      }
+      "node_modules/**/*",
+      "public/electron.js",
+      "package.json"
     ]
   },
   "scripts": {
@@ -79,8 +77,8 @@
   "devDependencies": {
     "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
+    "wait-on": "^7.0.1",
     "electron": "^23.1.4",
-    "electron-builder": "^23.6.0",
-    "wait-on": "^7.0.1"
+    "electron-builder": "^23.6.0"
   }
 }

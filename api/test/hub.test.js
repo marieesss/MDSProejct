@@ -10,7 +10,7 @@ describe('Hub', () => {
 
 
   test("Login pour la suite", async () => { 
-    const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+    const response = await request("https://api.nossproducteurslocaux.fr") 
       .post("/api/auth/login")
       .send({email : MAIL, password: MDP})
       UserId= response.body._id
@@ -18,7 +18,7 @@ describe('Hub', () => {
   });
 
       test("get All Hubs", async () => { 
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .get("/api/hub/");
           expect(response.statusCode).toBe(200); // Définit le code de retour attendu
           expect(response.body.length).toBeGreaterThan(0);
@@ -33,7 +33,7 @@ describe('Hub', () => {
         }
 
         
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .post("/api/hub")
           .send(hub)
           .set('token', `Bearer ${token}`);
@@ -48,7 +48,7 @@ describe('Hub', () => {
         const hub = {
           name : "Jean"
         }
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .put(`/api/hub/${hubId}`)
           .send(hub)
           .set('token', `Bearer ${token}`);
@@ -57,7 +57,7 @@ describe('Hub', () => {
       });
 
       test("deleteHub", async () => { 
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .delete(`/api/hub/${hubId}`)
           .set('token', `Bearer ${token}`);
           console.log(hubId)

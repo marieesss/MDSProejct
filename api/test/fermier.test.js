@@ -10,7 +10,7 @@ describe('Fermier', () => {
 
     // Effectue une requête POST pour se connecter avec les identifiants de l'administrateur
   test("Login pour la suite", async () => { 
-    const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+    const response = await request("https://api.nossproducteurslocaux.fr") 
       .post("/api/auth/login")
       .send({email : MAIL, password: MDP})
       token= response.body.accessToken
@@ -19,7 +19,7 @@ describe('Fermier', () => {
 // Effectue une requête GET pour obtenir tous les fermiers
       test("get All fermier", async () => { 
         
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .get("/api/fermier/");
           expect(response.statusCode).toBe(200); // Définit le code de retour attendu
           expect(response.body.length).toBeGreaterThan(0);
@@ -32,7 +32,7 @@ describe('Fermier', () => {
             desc: "fermier  de Josiane",
             img: "Josiane.png"
         }
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .post("/api/fermier")
           .send(fermier)
           .set('token', `Bearer ${token}`);
@@ -46,7 +46,7 @@ describe('Fermier', () => {
         const fermier = {
           name : "Jean"
         }
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .put(`/api/hub/${fermierId}`)
           .send(fermier)
           .set('token', `Bearer ${token}`);
@@ -55,7 +55,7 @@ describe('Fermier', () => {
 
       // Effectue une requête DELETE pour supprimer un fermier
       test("deleteFermier", async () => { 
-        const response = await request("https://api.nossproducteurslocaux.fr:5000") 
+        const response = await request("https://api.nossproducteurslocaux.fr") 
           .delete(`/api/hub/${fermierId}`)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 

@@ -25,7 +25,7 @@ const NewProduct = () => {
         headers: { token: `Bearer ${userToken}` }
     };
 
-    axios.get(`http://141.94.244.226:5000/api/fermier`, config)
+    axios.get(`https://api.nossproducteurslocaux.fr/api/fermier`, config)
       .then(response => {
         console.log(response.data)
         setFermier(response.data)
@@ -49,7 +49,7 @@ const NewProduct = () => {
       headers: { token: `Bearer ${userToken}` }
   };
     try {
-      const res = await axios.post("http://141.94.244.226:5000/api/product", {
+      const res = await axios.post("https://api.nossproducteurslocaux.fr/api/product", {
           title : title,
           desc: desc,
           img: img,

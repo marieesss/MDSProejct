@@ -207,6 +207,7 @@ router.get("/adminhomepage", verifyTokenAdmin, async (req, res) => {
                 in: {
                   // Conversion de products.productId en ObjectID
                   productId: { $toObjectId: "$$this.productId" },
+                  quantity: "$$this.quantity", 
                 }
               }
             },
@@ -229,6 +230,9 @@ router.get("/adminhomepage", verifyTokenAdmin, async (req, res) => {
               foreignField: "_id",
               as: "user",
             },
+          },
+          {
+            $sort: { updatedAt: -1 } // Tri par date décroissante
           },
       
       ]).exec();

@@ -17,6 +17,7 @@ const Product = () => {
   const [Fermier, setFermier]=  useState({});
   const [FermierId, setFermierId]=  useState("");
   const [categorie, setCategorie]=  useState("");
+  const [msg, setMsg]=  useState("");
   const [size, setSize]=  useState();
   const [quantity, setQuantity]=  useState(1);
   const dispatch = useDispatch();
@@ -84,9 +85,12 @@ const Product = () => {
   const handleQuantity = (type) => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
+      setMsg("")
     } else {
       if (quantity < size) {
         setQuantity(quantity + 1);
+      }else{
+        setMsg(`Nous n'avons que ${quantity} kilo(s) restant`)
       }
     }
   };
@@ -97,8 +101,8 @@ const Product = () => {
     )
   }
   return (
-    <div>
-     <div class="container-fluid p-0 overflow-hidden">
+    <div class="container-fluid p-0 overflow-hidden">
+     <div >
 
               <Menu/>
       <div class="row justify-content-center" style={{marginTop:"100px"}}>
@@ -120,8 +124,11 @@ const Product = () => {
         <div class="col-2 product-quantity-number">{quantity}</div>
          <button class="col-2 product-quantity" onClick={()=>handleQuantity("inc")}>+</button>
       
-      
       </div>
+      {msg ? 
+      <div class="row justify-content-center errMsg">
+        {msg}
+      </div> : null}
       </div>
       <div class="col-lg-6 col-md-12">
       <button class="button-item" onClick={()=>handleClick()}>
@@ -149,31 +156,33 @@ const Product = () => {
 
       </div>
 
-      <center><h1 class="title-product-fermier-2 mb-4">Produits similiares</h1></center>
+      <center><h1 class="title-product-fermier-2 mb-4">Produits similaires</h1></center>
        
     <div class=" row justify-content-center">
-        {ProductCategorie.map(product =>
-
-        <div class="card-product mb-5">
-        
-            <div class="card card-product">
-                <img class="card-img-top card-img-product" src={product.img}/>
-                <div class="card-body">
-                    <h5 class="card-title">{product.title}</h5>
-                    <p class="card-text">{product.price} euros</p>
-                   
-                </div>
-             </div> 
-             <a href={`/product/${product._id}`}>
-
-                            <button class="button-item mt-2 mb-2">
-                            <i class="fa-solid fa-cart-shopping mx-2" style={{color: "#485E1B"}}></i>
-                             Ajouter au panier </button>
-                    </a>
-
-            </div>
-
-        )}
+    {ProductCategorie.map((product) => (
+      <div class="col-lg-3 col-md-6 col-sm-12 ">
+  <div class="card card-product ">
+    <img src={product.img} alt={product.title} class="img_product" />
+    <div class="card-body">
+      <p class="product-card-title">{product.title}</p>
+      <p>{product.price} euros/kg</p>
+    </div>
+  </div>
+  {product.size < 1 ? (
+      <button class="button-item-nostock mt-2 mb-2">
+        <i class="fa-regular fa-face-frown fa-xl mx-2" style={{ color: "#ff0000" }} />
+        produit épuisé
+      </button>
+    ) : (
+      <Link to={`/product/${product._id}`}>
+        <button class="button-item mt-2 mb-2">
+          <i class="fa-solid fa-cart-shopping mx-2" style={{ color: "#485E1B" }}></i>
+          Ajouter au panier
+        </button>
+      </Link>
+    )}
+  </div>
+))}
     </div>
 
      

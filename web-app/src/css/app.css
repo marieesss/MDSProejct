@@ -35,6 +35,13 @@ body{
     float: right;
     margin-right: 10px;
   }
+
+  .errMsg{
+    background-color: #485E1B;
+    color: white;
+    margin-top: 10px;
+    font-size: 11px;
+  }
   
   /* Change the link color to #111 (black) on hover */
   li#menu:hover {

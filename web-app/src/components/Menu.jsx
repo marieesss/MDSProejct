@@ -23,7 +23,7 @@ const Menu = () => {
     return (
       <div>
     <div className='bandeaux'>
-      Livraison offerte à parti de 50€ d'achat 
+      Livraison offerte à partir de 50€ d'achat 
     </div>
 
     <div class="container-fluid text-align-center">

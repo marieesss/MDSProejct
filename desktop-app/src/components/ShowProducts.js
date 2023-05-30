@@ -24,7 +24,7 @@ const ShowProducts = () => {
     const [desc, setdesc] = useState("");
     const [img, setImg] = useState("");
     const [price, setPrice] = useState("");
-    const [quantity, setQuantity] = useState("");
+    const [quantity, setQuantity] = useState();
     const [idProduit, setIdproduit] = useState("");
     const [IdFermier, setIdFermier] = useState("");
     const [Fermier, setFermier] = useState("");
@@ -132,6 +132,18 @@ const ShowProducts = () => {
         }
       };
     
+      const putSize= async () => {
+        try {
+          const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
+              size: quantity,
+             }, 
+             config);
+             console.log(res.data)
+        } catch (error) {
+          console.log(error)
+        }
+      };
+
   return (
     <div class="row align-content-center">
         {products.map(product =>(
@@ -150,6 +162,10 @@ const ShowProducts = () => {
               
               <Card.Text>
               <i class="fa-solid fa-pen-to-square padding-right" style={{color: "#bac100"}}></i>{product.desc}
+              </Card.Text>
+
+              <Card.Text>
+              <i class="fa-solid fa-layer-group padding-right" style={{color: "#bac100"}}></i>{product.size}
               </Card.Text>
               
               <Card.Text>
@@ -178,22 +194,54 @@ const ShowProducts = () => {
         <Modal.Body>
         <Form>
       <Form.Group className="mb-3">
+        <div class="row justify-content-center align-items-center">
+        <div class="col-9">
         <Form.Label class="mt-3">Description</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setdesc(e.target.value)}/>
-        <Button onClick={putDesc} type="submit" class="button-modal mt-3">
+        </div>
+        <div class="col-3 pt-3">
+        <button onClick={putDesc} type="submit" class="button-modal mt-3">
         Modifier
-      </Button><br/>
+      </button><br/>
+      </div>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-9">
         <Form.Label class="mt-3">Image</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
-        <Button onClick={putImg} class="button-modal mt-3" type="submit">
+        </div>
+        <div class="col-3 pt-3">
+        <button onClick={putImg} type="submit" class="button-modal mt-3">
         Modifier
-      </Button><br/>
+      </button><br/>
+      </div>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-9">
         <Form.Label class="mt-3">Prix</Form.Label>
         <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setPrice(e.target.value)}/>
-        <Button onClick={putPrice} class="button-modal mt-3" type="submit">
+        </div>
+        <div class="col-3 pt-3">
+        <button onClick={putPrice} type="submit" class="button-modal mt-3">
         Modifier
-      </Button><br/>
-      <Form.Label class="mt-3">Id du fermier</Form.Label>
+      </button><br/>
+      </div></div>
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-9">
+      <Form.Label class="mt-3">Quantité</Form.Label>
+        <Form.Control  type="number" placeholder="Enter text" onChange={(e)=>setQuantity(e.target.value)}/>
+        </div>
+        <div class="col-3 pt-3">
+        <button onClick={putSize} type="submit" class="button-modal mt-3">
+        Modifier
+      </button><br/>
+      </div>
+      </div>
+
+      <div class="row justify-content-center align-items-center">
+        <div class="col-9">
+      <Form.Label class="mt-3">fermier</Form.Label>
         <Form.Select type="text" placeholder="Enter text" onClick={(e)=>setIdFermier(e.target.value)}>
         <option>Choisir un fermier</option>
             { Fermier ? Fermier.map(item=>(
@@ -202,10 +250,13 @@ const ShowProducts = () => {
 
             : null }
         </Form.Select>
-
+        </div>
+        <div class="col-3 pt-3">
         <button onClick={putFermier} type="submit" class="button-modal mt-3">
         Modifier
       </button>
+      </div>
+      </div>
 
       
 

@@ -221,7 +221,7 @@ center{
 }
 
 .product-title{
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
 }
 
 .margin-left-4000{
@@ -238,12 +238,12 @@ center{
 .modal-header{
     background-color: #475E1B;
     color:white;
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
 }
 
 .button-modal{
     background-color: #475E1B;
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
     border-radius: 15px;
     padding: 10px;
     color:white;
@@ -255,7 +255,7 @@ center{
 
 .button-modal:hover{
     background-color: white;
-    font-family: Josefin;
+    font-family: "grenadine-mvb", sans-serif;
     color:#475E1B;  
 
 }

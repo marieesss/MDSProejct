@@ -19,18 +19,41 @@ const Order = () => {
     };
 
 
-  useEffect(() => {
-    axios.get(`https://api.nossproducteurslocaux.fr/api/order/adminall`, config)
-      .then(response => {
-        console.log(response)
-        setOrderListe(response.data)
-        
-        
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
+    useEffect(() => {
+      axios.get(`https://api.nossproducteurslocaux.fr/api/order/adminall`, config)
+        .then(response => {
+          const orders = response.data;
+          const updatedOrders = orders.map(order => {
+            // Pour chaque commande, nous parcourons les produits
+            const updatedProducts = order.products.map(product => {
+              // Nous recherchons l'objet productId correspondant au produit en utilisant son _id
+              const productIdObj = order.productId.find(item => item.productId === product._id);
+              if (productIdObj) {
+                // Si un objet productId correspondant est trouvé, je retourne le produit avec la quantité dedans
+                return {
+                  ...product,
+                  quantity: productIdObj.quantity
+                };
+              } else {
+                // Si aucun objet productId correspondant n'est trouvé
+                return product;
+              }
+            });
+            // renvoie de la commande mise à jour avec les produits mis à jour
+            return {
+              ...order,
+              products: updatedProducts
+            };
+          });
+          // la liste des commandes mise à jour dans le state orderListe
+          setOrderListe(updatedOrders);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []);
+    
+    
 
 
   function handleEnvoie (e){
@@ -96,7 +119,8 @@ const Order = () => {
                     <div class="col-6" >
                     <img src={product.img} class="img-order"/>
                       <div class="row justify-content-center">
-                        {product.title}
+                        <div class="col-9"> {product.title} </div>
+                        <div class="col-3" style={{fontSize:"11px"}}>  x {product.quantity} </div>
                       </div>
                   </div>
                 

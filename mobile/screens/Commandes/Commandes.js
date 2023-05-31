@@ -19,9 +19,9 @@ const Commandes = () => {
 
   const BASE_URL = process.env.BASE_URL;
 
-  const getOrder = async () => {
+  const getOrders = async () => {
     try {
-      const res = await axios.get(`http://${BASE_URL}:5000/api/order/find/${user.id}`, {
+      const res = await axios.get(`https://${BASE_URL}/api/order/find/${user.id}`, {
         headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
       });
       console.log(res.data)
@@ -34,7 +34,7 @@ const Commandes = () => {
 
   useEffect(() => {
     if (!hasDataLoaded) {
-      getOrder();
+      getOrders();
     }
   }, [hasDataLoaded]);
 

@@ -16,7 +16,7 @@ const Hubs = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    axios.get(`http://${BASE_URL}:5000/api/hub`)
+    axios.get(`https://${BASE_URL}/api/hub`)
       .then(response => {
         console.log(response.data)
         Setdata(response.data);

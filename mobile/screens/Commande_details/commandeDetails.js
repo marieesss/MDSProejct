@@ -24,10 +24,8 @@ const CommandeDetails = ({ navigation, route }) => {
 
 
     const getOrder = async () => {
-      console.log(route.params._id)
-  
         try {
-          const res = await axios.get(`http://${BASE_URL}:5000/api/order/findOrder/${route.params._id}/${user.id}`, 
+          const res = await axios.get(`https://${BASE_URL}/api/order/findOrder/${route.params._id}/${user.id}`, 
              {
                 headers: { token: `Bearer ${user.token}`,
                 userid: `Bearer ${user.id}`}
@@ -45,7 +43,7 @@ const CommandeDetails = ({ navigation, route }) => {
 
       const getHub = async () => {
           try {
-            const res = await axios.get(`http://${BASE_URL}:5000/api/hub/find/${hubId}`);
+            const res = await axios.get(`https://${BASE_URL}/api/hub/find/${hubId}`);
                setHub(res.data[0])
                console.log(res.data[0])
           } catch (error) {
@@ -60,7 +58,7 @@ const CommandeDetails = ({ navigation, route }) => {
   
             for(let i=0; i<productsId.length; i++) {
                 try {
-                          const res = await axios.get(`http://${BASE_URL}:5000/api/product/find/${productsId[i].productId}`, 
+                          const res = await axios.get(`https://${BASE_URL}/api/product/find/${productsId[i].productId}`, 
                             {
                                 headers: { token: `Bearer ${user.token}` }
                             });

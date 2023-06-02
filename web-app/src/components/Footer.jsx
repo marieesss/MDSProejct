@@ -26,7 +26,9 @@ const Footer = () => {
                 </div>
                 <div class="col-lg-3 col-md-12">
                 <h3> A propos</h3><br/>
+                <Link to={`/contact`} class="link-footer">
                 <p>Nous contacter</p><br/>
+                </Link>
                 <Link to={`/hub`} class="link-footer">
                 <p class="link">Nos Hubs</p><br/>
                 </Link>
@@ -34,7 +36,10 @@ const Footer = () => {
                 </div>
                 <div class="col-lg-3 col-md-12">
                 <h3> Plus </h3><br/>
-                <p>Nous rejoindre</p><br/>
+                <Link to={`/contact`} class="link-footer">
+                <p>Nous rejoindre</p>
+                </Link>
+                <br/>
                 </div>
 
             </div>
@@ -57,16 +62,19 @@ const Footer = () => {
                     <div class="col-lg-8 col-md-12">
                         <h4> Nos producteurs locaux tous droits réservés</h4> <br/>
                         <div class="row justify-content-center">
-                            <a class="col-4 droits-link">Mentions Légales</a>
-                            <a class="col-4 droits-link">Conditions</a>
-                            <a class="col-4 droits-link">Nous Contacter</a>
+                        <Link to={`/mentions-légales`} class=" col-4 link-footer">
+                            <a class=" droits-link">Mentions Légales</a>
+                            </Link>
+                            <Link to={`/CGVU`} class=" col-4 link-footer">
+                            <a class="droits-link">Conditions</a>
+                            </Link>
+                            <Link to={`/contact`} class=" col-4 link-footer">
+                            <a class=" droits-link">Nous Contacter</a>
+                            </Link>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 d-flex align-items-end justify-content-end mb-3 ">
-                    <i class="fa-brands fa-instagram fa-xl mx-2" style={{color: "#ffffff"}}/>
-                    <i class="fa-brands fa-twitter fa-xl mx-2" style={{color: "#ffffff;"}}></i>
-                    <i class="fa-brands fa-facebook fa-xl mx-2" style={{color: "#ffffff;"}}></i>
-                    <i class="fa-brands fa-youtube  fa-xl mx-2" style={{color: "#ffffff;"}}></i>
+                    <a href="https://www.instagram.com/nos_producteurs_locaux/" target='blank'><i class="fa-brands fa-instagram fa-xl mx-2" style={{color: "#ffffff"}}/></a>
                     </div>
                 </div>
             </div>

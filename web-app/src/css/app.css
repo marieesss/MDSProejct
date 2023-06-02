@@ -5,6 +5,16 @@ body{
     box-sizing: border-box;
   }
 
+  p{
+    font-family: 'Avenir', sans-serif;
+    font-size: 18;
+  }
+
+  h5{
+    font-family: 'Avenir', sans-serif;
+    font-size: 20px;
+    font-weight:bold;
+  }
   a:link{
     text-decoration: none;
   }
@@ -51,6 +61,11 @@ body{
   a {
     text-decoration: none;
   }
+
+  a.link-vert{
+    color:#485E1B;
+    text-decoration:underline
+  }
   
   img.companylogo {
     width: 200px;
@@ -76,7 +91,7 @@ body{
     font-size: 55px;
   }
   p#home {  
-    color: #0755ad;
+    color:#485E1B;
     font-size: 20px;
     white-space: pre-line;
   }

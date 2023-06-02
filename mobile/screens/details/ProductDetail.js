@@ -16,7 +16,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
-            const res = await axios.get(`http://${BASE_URL}:5000/api/product/find/`+route.params._id);
+            const res = await axios.get(`https://${BASE_URL}/api/product/find/`+route.params._id);
             setProduct(res.data)
             setFermierId(res.data.fermierId)
             console.log(fermierId)
@@ -34,7 +34,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
-            const res = await axios.get(`http://${BASE_URL}:5000/api/fermier/find/`+fermierId);
+            const res = await axios.get(`https://${BASE_URL}/api/fermier/find/`+fermierId);
             console.log(res.data)
             setFermier(res.data)
 
@@ -52,7 +52,7 @@ const ProductDetail = ({ navigation, route }) => {
     useEffect(()=>{
       const getProducts = async ()=> {
         try{
-          const res = await axios.get(`http://${BASE_URL}:5000/api/product?fermier=`+fermierId);
+          const res = await axios.get(`https://${BASE_URL}/api/product?fermier=`+fermierId);
           console.log(res.data)
           setProducts(res.data)
 

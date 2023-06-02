@@ -13,6 +13,9 @@ import { useSelector } from 'react-redux';
 import Success from './pages/Success';
 import Fermier from './pages/Fermier';
 import Hubs from './pages/Hubs';
+import Contact from './pages/footer_pages/Contact';
+import Mentions from './pages/footer_pages/Mentions';
+import CGVU from './pages/footer_pages/CGVU';
 
 
 
@@ -29,6 +32,9 @@ const App = () => {
       <Route path="/productf" element={<ProductListTest/>} />
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/fermier" element={<Fermier/>} />
+      <Route path="/contact" element={<Contact/>} />
+      <Route path="/mentions-légales" element={<Mentions/>} />
+      <Route path="/CGVU" element={<CGVU/>} />
       {user ? <Route path="/success" element={<Success/>} /> : <Route path="/success" element={<Login/>}/>}
     </Routes>
  

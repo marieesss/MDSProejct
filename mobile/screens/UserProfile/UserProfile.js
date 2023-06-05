@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { UserContext } from '../../components/useContext';
 import styles from './UserProfile.style'
 import { useNavigation } from '@react-navigation/native';
+import HeaderMenu from '../../components/header/Header';
+import { Ionicons } from '@expo/vector-icons';
+
 
 
 
@@ -11,26 +14,33 @@ const UserProfile = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-    <Text style={styles.title}>Mon profile</Text>
+    <View>
+    <HeaderMenu title={"Profil de " + user.username }/>
     {user ? (
-      <View>
-        <Text style={styles.label}>Nom d'utilisateur:</Text>
+      <View style={styles.container}>
+      <Ionicons name="person-circle-sharp" size={36} color="#4A5D26" />
         <Text style={styles.text}>{user.username}</Text>
-        <Text style={styles.label}>Email:</Text>
+        <Ionicons name="mail" size={36} color="#4A5D26" style={{marginTop:20}}/>
         <Text style={styles.text}>{user.email}</Text>
 
-        <TouchableOpacity onPress={() => {
+        <View style={styles.view1}>
+      <TouchableOpacity style={styles.button} onPress={() => {
         navigation.navigate("UpdateUser");
-      }}> 
-            <View>
-              <Text> Modifier mon profil </Text>
-            </View>
-        </TouchableOpacity> 
+      }}>
+        <Text style={styles.buttonText}>Modifier mon profil</Text>
+      </TouchableOpacity>
+      </View> 
+      <View style={styles.view1}>
+      <TouchableOpacity style={styles.button} onPress={() => {
+        navigation.navigate("Mes commandes");
+      }}>
+        <Text style={styles.buttonText}>Voir mes commandess</Text>
+      </TouchableOpacity>
+      </View> 
       </View>
 
     ) : (
-      <Text style={styles.message}>No user data available</Text>
+      <Text style={styles.message}>Pas de données de l'utilisateur</Text>
     )}
   </View>
   );

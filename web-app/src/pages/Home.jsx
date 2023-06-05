@@ -55,18 +55,16 @@ const Home = () => {
 
     return (
             <div class="container-fluid p-0 overflow-hidden">
-        <header>
             <Menu/>    
-        </header> 
     
     <div className="container-home">
         <div class="row m-4">
             <div class="column col-lg-6 col-md-12">
                 <h1 id='home'>LIVRAISON <br/>OFFERTE</h1>
-                <p id='home'> Recevez notre panier frais, directement chez vous <br/>ou dans l'un de nos hubs, gratuitement <br/>dès 50 euros d'achat</p>
+                <p id='home'> Recevez notre panier frais, directement chez vous <br/>ou dans l'un de nos hubs, gratuitement <br/>dès 50 € d'achat</p>
             </div>
             <div class="column col-lg-6 col-md-12" >
-                <img class ="panierhome" src={panierhome} alt="BigCo Inc. logo"/>
+                <img class ="panierhome " src={panierhome} alt="BigCo Inc. logo"/>
             </div>
         </div>
     </div>
@@ -90,10 +88,10 @@ const Home = () => {
         <div class="card-product mb-5">
         
             <div class="card card-product">
-                <img class="card-img-top card-img-product" src={product.img}/>
+                <img class="card--top card-img-product" src={product.img} alt={product.name}/>
                 <div class="card-body">
                     <h5 class="product-card-title">{product.title}</h5>
-                    <p class="card-text">{product.price} euros</p>
+                    <p class="card-text">{product.price} €</p>
                    
                 </div>
              </div> 
@@ -115,14 +113,14 @@ const Home = () => {
 
         </div>
         <div class="box-homepage-imgs2 col-lg-6 col-md-12">
-            <img src={legumes_homepage} class="legume_img"/>
+            <img src={legumes_homepage} class="legume_img" alt="image de légume"/>
 
         </div>
     </div>
 
     <div class="box-homepage-text">
         <span class="text-box-homepage">Rencontrez nos producteurs</span> <br/>
-            Tous engagé pour un avenir plus sain
+            Tous engagés pour un avenir plus sain
     </div>
 
     <div class="row justify-content-between mt-5">
@@ -136,7 +134,7 @@ const Home = () => {
         {fermier.map(fermier =>
         <div class="card-product mb-5">
             <div class="card card-product">
-                <img class="card-img-top card-img-product" src={fermier.img}/>
+                <img class="card-img-top card-img-product" src={fermier.img} alt={fermier.name} />
                 <div class="card-body">
                     <h5 class="product-card-title">{fermier.name}</h5>
                     <p class="card-text">{fermier.desc}</p>

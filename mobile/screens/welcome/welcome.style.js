@@ -56,7 +56,27 @@ const styles = StyleSheet.create({
   img:{
     width: 50,
     height : 50
-  }
+  },
+  button: {
+    height: 50,
+    backgroundColor: '#4A5D26',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    padding: 10
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  view1:{
+    flexDirection: 'row',
+    justifyContent: "center",
+    marginBottom:50,
+    marginTop: 30,
+    paddingLeft: 10
+  },
 
 });
 

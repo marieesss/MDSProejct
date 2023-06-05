@@ -108,14 +108,14 @@ const Product = () => {
       <div class="row justify-content-center" style={{marginTop:"100px"}}>
       <div class="col-lg-6 col-md-12">
         <div class="row justify-content-center">
-      <img src={Product.img} class="img-product" />
+      <img src={Product.img} class="img-product" alt={Product.title} />
       </div>
       </div>
       <div class="col-lg-6 col-md-12 mt-5">
       <div class="column">
         <p class="title-product">{Product.title}</p>
         <p class="title-product-fermier">{Fermier.name}</p>
-      <p class="title-product-price">{Product.price} euros/kg</p>
+      <p class="title-product-price">{Product.price} €/kg</p>
       <p>{Product.desc}</p>
       <div class="row row-product-quantity">
       <div class="col-lg-6 col-md-12">
@@ -145,13 +145,19 @@ const Product = () => {
 
       <center><h1 class="title-product-fermier-2 mb-4"> Rencontrez le producteur</h1></center>
       <div class="row justify-content-center mb-4">
-        <div class="col-lg-6 col-md-12">
-         <p>{Fermier.name}</p>
-         <p>{Fermier.desc}</p>
+        <div class="col-lg-6 col-md-12 p-5">
+        <div class="row justify-content-center align-items-center">
+        <i class="fa-solid fa-wheat-awn col-1 fa-lg" style={{color: "#485E1B"}}/>
+         <p class="col-10">{Fermier.name}</p>
+         </div>
+         <div class="row justify-content-center align-items-center">
+        <i class="fa-solid fa-pen-to-square col-1 fa-lg" style={{color: "#485E1B"}}/>
+         <p class="col-10">{Fermier.desc}</p>
+         </div>
       
         </div>
         <div class="col-lg-6 col-md-12">
-        <img src={Fermier.img} class="product-img-fermier"/>
+        <img src={Fermier.img} class="product-img-fermier" alt={Fermier.name}/>
         </div>
 
       </div>
@@ -160,12 +166,12 @@ const Product = () => {
        
     <div class=" row justify-content-center">
     {ProductCategorie.map((product) => (
-      <div class="col-lg-3 col-md-6 col-sm-12 ">
+      <div class=" mx-3 col-lg-2 col-md-5 col-sm-10 ">
   <div class="card card-product ">
     <img src={product.img} alt={product.title} class="img_product" />
     <div class="card-body">
       <p class="product-card-title">{product.title}</p>
-      <p>{product.price} euros/kg</p>
+      <p>{product.price} €/kg</p>
     </div>
   </div>
   {product.size < 1 ? (

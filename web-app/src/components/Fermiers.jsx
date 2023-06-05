@@ -40,7 +40,7 @@ const Fermiers = () => {
   return (
     <div>
         <div>
-           <img src={Fermiers.img}/>
+           <img src={Fermiers.img} alt={Fermiers.name}/>
         </div>
         <div>
            {Fermiers.name}

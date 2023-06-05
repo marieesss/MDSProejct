@@ -15,7 +15,7 @@ const Fermiers = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    axios.get(`https://${BASE_URL}/api/fermier`)
+    axios.get(`https://${BASE_URL}.fr/api/fermier`)
       .then(response => {
         console.log(response.data)
         Setdata(response.data);

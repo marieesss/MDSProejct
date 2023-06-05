@@ -22,7 +22,7 @@ const Login = () => {
 
   const handleLogin= async() => {
    try {
-    const res= await axios.post(`https://${BASE_URL}/api/auth/login`, {email,password})
+    const res= await axios.post(`https://${BASE_URL}.fr/api/auth/login`, {email,password})
     const loggedInUser = { username : res.data.username, email:res.data.email, id : res.data._id, token : res.data.accessToken };
     dispatch({ type: 'LOGIN', payload: loggedInUser });
     console.log(user)

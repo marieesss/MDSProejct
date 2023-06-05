@@ -44,7 +44,7 @@ const Login = () => {
           </div>
         </div>}
 
-        <p> Pas inscrit ? <Link to="/inscription">Cliquez ici</Link></p>
+        <p> Pas encore inscrit ? <Link to="/inscription">Cliquez ici</Link></p>
       </form>
       </div>
       

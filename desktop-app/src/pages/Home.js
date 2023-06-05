@@ -143,7 +143,7 @@ const Home = () => {
             <div class="card-body">
               <h5 class="card-title">{order.status}</h5>
               <h6 class="card-subtitle mb-2 text-muted">{order.user[0].email}</h6>
-              <p class="card-text">{order.amount} euros</p>
+              <p class="card-text">{order.amount} €</p>
             </div>
           </div>
           ))}

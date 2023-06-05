@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <div class="row justify-content-center footer">
         <div class="col-lg-6 col-md-12">
-            <img src={companyLogo} class="companylogo_footer"/>
+            <img src={companyLogo} class="companylogo_footer" alt="logo du footer"/>
         </div>
         <div class="col-lg-6 col-md-12">
             <div class ="row justify-content-center container-flex-wrap">

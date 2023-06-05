@@ -1,8 +1,6 @@
 const path = require('path');
-
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function createWindow() {
   // Create the browser window.
@@ -14,8 +12,7 @@ function createWindow() {
     },
   });
 
-  // and load the index.html of the app.
-  // win.loadFile("index.html");
+ 
   if (app.isPackaged) {
     win.loadFile(`file://${path.join(__dirname, '../build/index.html')}`); // prod
   } else {
@@ -27,14 +24,12 @@ function createWindow() {
   }
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
+// Cette méthode sera appelée lorsque Electron aura terminé l'initialisation et 
+// sera prêt à créer des fenêtres de navigation.
+ //Certaines API ne peuvent être utilisées qu'après cet événement.
 app.whenReady().then(createWindow);
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
+// Quitte lorsque toutes les fenêtres sont fermées
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();

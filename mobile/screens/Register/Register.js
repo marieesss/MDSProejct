@@ -53,7 +53,7 @@ useEffect(() => {
   const handleRegister= async() => {
 
    try {
-    const res= await axios.post(`https://${BASE_URL}/api/auth/register`, {email,password, username})
+    const res= await axios.post(`https://${BASE_URL}.fr/api/auth/register`, {email,password, username})
     navigation.navigate('Connexion')
 
    } catch (error) {

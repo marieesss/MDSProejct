@@ -92,13 +92,13 @@ body{
   }
   p#home {  
     color:#485E1B;
-    font-size: 20px;
+    font-size: 20px; 
     white-space: pre-line;
   }
   
   .container-home {
     padding-top: 5%;
-    margin-bottom: 100px;
+    margin-bottom: 125px;
   }
 
   .product-quantity-number{
@@ -500,6 +500,41 @@ font-style: normal;
   width:auto
 }
 
+select.filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(../assets/fleche.png) no-repeat calc(100% - 10px) center;  border-color: #485E1B;
+  border-width: 2px;
+  height: 40px;
+  padding-left: 5px;;
+  width: 100%;
+  font-size: 12px
+}
+
+option{
+  font-size: 15px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper input.filter,
+.search-wrapper select.filter {
+  width: 100%; /* Définir la largeur sur 100% */
+  padding-right: 40px; /* Ajout d'un espace pour l'icône */
+}
+
+.search-wrapper i.fa-magnifying-glass {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #485E1B;
+}
+
+
 
   @media only screen and (max-width: 1200px) {
     
@@ -524,6 +559,29 @@ font-style: normal;
       width:auto
     }
 
+    
 
 
+
+
+  }
+
+  
+  @media only screen and (max-width: 600px) {
+    .panierhome{
+      height: 200px;
+    }
+    h1#home{
+      font-size: 18px;
+    }
+    h1{
+      font-size: 18px;
+    }
+    p{
+      font-size: 15px;
+    }
+    .container-home{
+      margin-bottom: 30px;
+    }
+  
   }

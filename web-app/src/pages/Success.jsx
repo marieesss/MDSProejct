@@ -132,7 +132,7 @@ return (
   <div class="overflow-hidden">
     <Menu/>
     <div class="row justify-content-center mt-3">
-    <img src={SuccessLogo} class="successImg"/>
+    <img src={SuccessLogo} class="successImg" alt="image pouce en l'air"/>
     </div>
     <div class="container mt-5">
     <div class="row justify-content-center">
@@ -153,10 +153,10 @@ return (
           { productsTab ? productsTab.map(product =>(
         <div class="row justify-content-start padding-100 mb-3"> 
           <div class="product-cart row  justify-content-start p-0 col-6">
-          <img src={product.img} class="product-img-cart col-6 p-0" />
+          <img src={product.img} class="product-img-cart col-6 p-0" alt={product.title}/>
           <div class="col-6 d-flex flex-column trash proxima">
           <p style={{fontSize:"14px", fontWeight:"700"}}>{product.title}</p>
-          <p style={{fontSize:"12px"}}>{product.price} euros </p>
+          <p style={{fontSize:"12px"}}>{product.price} € </p>
           </div>
           </div>
          </div>
@@ -168,7 +168,7 @@ return (
         <div class="total-cart-column" style={{width:"300px"}}>
           <div class="row justify-content-between">
             <div class="col-6 p-0">Total</div>
-            <div class="col-6 p-0">{amount} euros</div>
+            <div class="col-6 p-0">{amount} €</div>
           </div>
 
           <div class="line-green-cart p-0">
@@ -176,13 +176,13 @@ return (
 
           <div class="row justify-content-between">
             <div class="col-6 p-0">Dont TVA</div>
-            <div class="col-6 p-0">{((amount * 20)/100).toFixed(2)} euros</div>
+            <div class="col-6 p-0">{((amount * 20)/100).toFixed(2)} €</div>
           </div>
 
           <div class="row justify-content-between">
             <div class="col-6 p-0">Dont Livraison</div>
             <div class="col-6 p-0">{amount - 3.99 > 50 ? 
-             <p>0 euros</p> : <p> 3.99 euros </p>}</div>
+             <p>0 €</p> : <p> 3.99 € </p>}</div>
           </div>
           <a href={stripe.receipt_url}><button class="button-item "> Voir le reçu </button></a>
       </div>

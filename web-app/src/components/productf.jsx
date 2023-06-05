@@ -110,23 +110,30 @@ const searchItems = (searchValue) => {
             </div>
 
     <div class="row justify-content-center">
-      <div class="col-2">
-      <input class="filter"
-                        placeholder='Search...'
-                        onChange={(e) => searchItems(e.target.value)}
-                    />
-        <select class="filter" name="categorie" id='select' onChange={sort}>
-                  <option value="rien">Tout les produits</option>
-                  <option value="legume">Légume</option>
-                  <option value="fruit">Fruit</option>
-              </select>
+    <div class="col-lg-2 col-md-12 px-5 mb-4">
+    <h5 class="text-center" style={{color:"#485E1B"}}> Filtres</h5>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="search-wrapper">
+        <input class="filter col-10" placeholder='Recherchez' onChange={(e) => searchItems(e.target.value)} />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <select class="filter mt-4" name="categorie" id="select" onChange={sort}>
+        <option value="rien">Tous les produits</option>
+        <option value="legume">Légume</option>
+        <option value="fruit">Fruit</option>
+      </select>
+    </div>
+  </div>
+</div>
 
-
-
-        </div>
 
               
-          <div class="col-10">
+          <div class="col-lg-10 col-md-12">
               <div className="row justify-content-center px-5">
               {
                 produitsFiltres.length > 0  // if produitsFiltres = resultat affiche moi valeurs !
@@ -138,7 +145,7 @@ const searchItems = (searchValue) => {
                   <img src={product.img} alt={product.title} class="img_product"/>
                     <div class="card-body">
                     <p class="product-card-title">{product.title}</p>
-                    <p>{product.price} euros/kg</p>
+                    <p>{product.price} €/kg</p>
                     </div>
                      
                   </div>
@@ -161,7 +168,7 @@ const searchItems = (searchValue) => {
                     
                   </div>
                   ))
-                :   // else championsSort = nul affiche moi tout !
+                : 
                 products.map(product => (
                   <div key={product.id} class="col-lg-4 col-md-12">
 
@@ -169,7 +176,7 @@ const searchItems = (searchValue) => {
                   <img src={product.img} alt={product.title} class="img_product"/>
                     <div class="card-body">
                     <p class="product-card-title">{product.title}</p>
-                    <p>{product.price} euros/kg</p>
+                    <p>{product.price} €/kg</p>
                     </div>
                      
                   </div>

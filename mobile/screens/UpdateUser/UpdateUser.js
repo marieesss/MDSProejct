@@ -22,7 +22,7 @@ const UpdateUser = () => {
 
   const handleUpdate= async() => {
    try {
-    const res= await axios.put(`https://${BASE_URL}/api/user/updatebyuser/${user.id}`,
+    const res= await axios.put(`https://${BASE_URL}.fr/api/user/updatebyuser/${user.id}`,
      {
       email : email, 
       password : password,

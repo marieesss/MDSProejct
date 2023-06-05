@@ -25,7 +25,7 @@ const CommandeDetails = ({ navigation, route }) => {
 
     const getOrder = async () => {
         try {
-          const res = await axios.get(`https://${BASE_URL}/api/order/findOrder/${route.params._id}/${user.id}`, 
+          const res = await axios.get(`https://${BASE_URL}.fr/api/order/findOrder/${route.params._id}/${user.id}`, 
              {
                 headers: { token: `Bearer ${user.token}`,
                 userid: `Bearer ${user.id}`}
@@ -43,7 +43,7 @@ const CommandeDetails = ({ navigation, route }) => {
 
       const getHub = async () => {
           try {
-            const res = await axios.get(`https://${BASE_URL}/api/hub/find/${hubId}`);
+            const res = await axios.get(`https://${BASE_URL}.fr/api/hub/find/${hubId}`);
                setHub(res.data[0])
                console.log(res.data[0])
           } catch (error) {
@@ -58,7 +58,7 @@ const CommandeDetails = ({ navigation, route }) => {
   
             for(let i=0; i<productsId.length; i++) {
                 try {
-                          const res = await axios.get(`https://${BASE_URL}/api/product/find/${productsId[i].productId}`, 
+                          const res = await axios.get(`https://${BASE_URL}.fr/api/product/find/${productsId[i].productId}`, 
                             {
                                 headers: { token: `Bearer ${user.token}` }
                             });
@@ -108,7 +108,7 @@ const CommandeDetails = ({ navigation, route }) => {
             {product.product.title}
         </Text>
         <Text>
-            {product.product.price} euros x {product.quantity}
+            {product.product.price} € x {product.quantity}
         </Text>
       </View>
       </View>
@@ -119,10 +119,10 @@ const CommandeDetails = ({ navigation, route }) => {
       <View style={styles.line}></View>
       <View style={styles.infopaiement}>
       <View style={styles.column}>
-      <Text style={{fontSize:16, marginBottom:4}}> {informations.amount}  euros</Text>
+      <Text style={{fontSize:16, marginBottom:4}}> {informations.amount}  €</Text>
       <Text style={{fontSize:12}}> TVA 20% : {(informations.amount*0.2).toFixed(2)} </Text>
       {informations.amount < 50 ? 
-        <Text style={{fontSize:12}}> Livraison 3,99 euros </Text>
+        <Text style={{fontSize:12}}> Livraison 3,99 € </Text>
       :
       <Text style={{fontSize:12}}> Livraison gratuite </Text>
       }

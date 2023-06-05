@@ -151,10 +151,10 @@ const Cart = () => {
        { cart.Product.map(product =>(
         <div class="row justify-content-start padding-100 mb-3"> 
           <div class="product-cart row  justify-content-start p-0 col-6">
-          <img src={product.img} class="product-img-cart col-6 p-0" />
+          <img src={product.img} class="product-img-cart col-6 p-0" alt={product.title} />
           <div class="col-6 d-flex flex-column trash proxima">
           <p style={{fontSize:"14px", fontWeight:"700"}}>{product.title}</p>
-          <p style={{fontSize:"12px"}}>{product.price} euros x {product.quantity} </p>
+          <p style={{fontSize:"12px"}}>{product.price} € x {product.quantity} </p>
           </div>
           </div>
           <div class="col-3 trash p-0">
@@ -185,15 +185,15 @@ const Cart = () => {
         <div class="total-cart-column" style={{width:"300px"}}>
           <div class="row justify-content-between">
             <div class="col-6 p-0">Produits: {cart.quantity}</div>
-            <div class="col-6 p-0">{cart.total} euros</div>
+            <div class="col-6 p-0">{cart.total} €</div>
           </div>
           <div class="row justify-content-between">
             <div class="col-6 p-0 text-left">TVA 20% </div>
-            <div class="col-6 p-0">{TVA} euros</div>
+            <div class="col-6 p-0">{TVA} €</div>
           </div>
           <div class="row justify-content-between">
             <div class="col-6 p-0">Livraison</div>
-            <div class="col-6 p-0">{livraisonFees ? <div> 3,99 euros</div> : <div> Livraison gratuite </div>}</div>
+            <div class="col-6 p-0">{livraisonFees ? <div> 3,99 €</div> : <div> Livraison gratuite </div>}</div>
           </div>
 
           <div class="line-green-cart p-0">

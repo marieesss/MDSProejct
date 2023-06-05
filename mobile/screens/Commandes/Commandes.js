@@ -21,7 +21,7 @@ const Commandes = () => {
 
   const getOrders = async () => {
     try {
-      const res = await axios.get(`https://${BASE_URL}/api/order/find/${user.id}`, {
+      const res = await axios.get(`https://${BASE_URL}.fr/api/order/find/${user.id}`, {
         headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
       });
       console.log(res.data)
@@ -86,7 +86,7 @@ const Commandes = () => {
                       <Text>{formatOrderDate(commande.updatedAt)}</Text>
                     </View>
                     <View>
-                      <Text>{commande.amount} euros</Text>
+                      <Text>{commande.amount} €</Text>
                     </View>
                     </View>
                   </View>

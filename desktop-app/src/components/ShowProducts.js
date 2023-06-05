@@ -156,7 +156,7 @@ const ShowProducts = () => {
                 <Card.Title>
                 <i class="fa-solid fa-tag padding-right" style={{color:" #bac100"}}></i> {product.title}</Card.Title>
                 <Card.Text>
-                <i class="fa-solid fa-euro-sign padding-right" style={{color: "#bac100"}}></i>{product.price} euros
+                <i class="fa-solid fa-euro-sign padding-right" style={{color: "#bac100"}}></i>{product.price} €
               </Card.Text>
               </div>
               

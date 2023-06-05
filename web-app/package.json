@@ -2,6 +2,8 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "author": "Marie Espinosa",
+  "description": "Admin app for Nos producteurs locaux",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/user-event": "^13.5.0",

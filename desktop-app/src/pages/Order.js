@@ -130,7 +130,7 @@ const Order = () => {
                 </ul>
                 <div> <i class="fa-solid fa-check padding-right"></i> {order.status} </div>
                 <div> <i class="fa-solid fa-check padding-right"></i> Retour stripe : {order.stripeStatus} </div>
-                <div><i class="fa-solid fa-euro-sign padding-right"></i> Total {order.amount} euros </div>
+                <div><i class="fa-solid fa-euro-sign padding-right"></i> Total {order.amount} € </div>
                 {order.receipt_url ? <div> <i class="fa-solid fa-link padding-right" style={{color: "#475E1B;"}}></i> 
                 <a href={order.receipt_url}>Voir le reçu</a></div> : <div/>}
                 

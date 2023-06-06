@@ -1,5 +1,9 @@
-
-
+@font-face {
+  font-family: 'AvenirBlack';
+  src: local('AvenirBlack'), url(../assets/fonts/AvenirBlack.ttf) format('truetype');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
 body{
     margin: 0px;
     box-sizing: border-box;
@@ -7,7 +11,7 @@ body{
 
   p{
     font-family: 'Avenir', sans-serif;
-    font-size: 18;
+    font-size: 12px;
   }
 
   h5{
@@ -186,6 +190,8 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: "Arial";
+    color:#485E1B
   }
 
   .pt-site-footer__submit{
@@ -216,19 +222,45 @@ body{
   .card-product{
     width:  250px;
     margin-right:15px;
-    
-  }
+    line-height: 5px;
+    }
 
   .product-card-title{
-    font-weight: 800;
     color: #485E1B;
+    font-family: "AvenirBlack";
+    font-size: 14px;
+  }
+
+  .card-text-price{
+    font-family: "Avenir";
+    font-size: 12px;
+  }
+
+  .margin-100{
+    margin-bottom: 100px;
+  }
+
+  .card-body{
+    padding:10px
+  }
+
+  .margin-100{
+    margin-bottom: 100px;
   }
 
   .options-carroussel{
-    padding-left: 250px;
-    padding-right: 250px;
     margin-top:50px;
     margin-bottom:20px;
+    display: flex;
+    justify-content: space-between;
+    padding-left : 100px;
+    padding-right : 100px;
+    color:#485E1B;
+    font-family: "AvenirBlack";
+  }
+
+.options-carroussel-text{
+    color:#485E1B
   }
 
   .card-img-product{
@@ -559,6 +591,15 @@ option{
       width:auto
     }
 
+    .options-carroussel{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .options-carroussel-text{
+     width:160px
+    }
+
     
 
 
@@ -582,6 +623,11 @@ option{
     }
     .container-home{
       margin-bottom: 30px;
+    }
+
+    .options-carroussel{
+      padding-left: 50px;
+      padding-right: 50px;
     }
   
   }

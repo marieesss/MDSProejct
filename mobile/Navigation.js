@@ -16,6 +16,9 @@ import Commandes from './screens/Commandes/Commandes';
 import CommandeDetails from './screens/Commande_details/commandeDetails';
 import UpdateUser from './screens/UpdateUser/UpdateUser';
 import Register from './screens/Register/Register';
+import { Linking } from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import WebsiteButton from './components/website';
 
 
 const Drawer = createDrawerNavigator();
@@ -36,10 +39,14 @@ export default function NavigationApp() {
           drawerStyle:{
             backgroundColor: "#4A5D26"
           }
-        }}>
+        }} >
           <Drawer.Screen name="Welcome" component={Welcome} options={{ title: 'Nos producteurs locaux' }}/>
           <Drawer.Screen name="About" component={About} options={{ headerTitle:'Nos producteurs locaux' }}/>
-          <Drawer.Screen name="Fermier" component={Fermiers} options={{ headerTitle:'Nos producteurs locaux' }}/>
+          <Drawer.Screen name="Fermier" component={Fermiers} options={{ headerTitle:'Nos producteurs locaux',
+          title:"Nos producteurs" }}/>
+           <Drawer.Screen name="Site Web" component={WebsiteButton} options={{ headerTitle:'Nos producteurs locaux',
+          title:"Site web" }}/>
+          <Drawer.Screen name="Website" component={WebsiteButton} options={{title: 'Website'}}/>
           <Drawer.Screen name="Hubs" component={Hubs} options={{ headerTitle:'Nos producteurs locaux' }}/>
           {user ?
             <Drawer.Screen name="Profile" component={UserProfile} options={{ headerTitle:'Nos producteurs locaux' }}/>          
@@ -68,6 +75,7 @@ export default function NavigationApp() {
             drawerItemStyle: { height: 0 },
             headerTitle:'Nos producteurs locaux'
           }}/>
+
         </Drawer.Navigator>
       </NavigationContainer>
   );

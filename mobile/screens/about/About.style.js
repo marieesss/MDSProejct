@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   img: {
-    width: 15000,
+    width: 150,
     height:100,
     resizeMode: 'contain'
   },
@@ -46,11 +46,69 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 5,
   },
+  button2: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#4A5D26',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginTop:10
+  },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
+    fontFamily:'Josefin'
   },
+  container2:{
+  flexDirection:"row",
+  justifyContent:"center",
+  },
+  card: {
+    backgroundColor: 'white',
+    width:'40%',
+    borderRadius: 10,
+    padding: 20,
+    margin: 10,
+    elevation: 2,
+    marginBottom:50,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  circle: {
+    width: '70%',
+    height: 80,
+    borderRadius: 50,
+    backgroundColor: "#4A5D26",
+    position: 'absolute',
+    top: -40,
+    alignItems: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    elevation: 2,
+    padding:5
+  },
+  circleText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color:"white",
+    fontFamily:"Josefin"
+  },
+  cardText: {
+    fontSize: 13,
+    marginTop: 25,
+    textAlign: 'center',
+  },
+  title:{
+    textAlign:"center",
+    fontFamily:"Josefin",
+    fontSize:20,
+    padding: 10,
+    color:"#4A5D26"
+  }
 
 
 });

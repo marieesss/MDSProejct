@@ -59,14 +59,18 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 50,
-    backgroundColor: '#4A5D26',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
-    padding: 10
+    padding: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   buttonText: {
-    color: '#fff',
+    color: '#4A5D26',
     fontSize: 18,
     fontWeight: 'bold',
   },

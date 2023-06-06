@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     width:200,
     borderWidth: 1,
     borderRadius:15,
-    borderColor: "#4A5D26",
     flexDirection:"row",
     justifyContent:"space-between",
     alignItems:"center",
     padding:15,
     marginBottom: 15
+    
   }, 
   split:{
     width: 150
@@ -42,6 +42,10 @@ const styles = StyleSheet.create({
    flexDirection: "row",
     justifyContent:"center",
     alignItems:"center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   categorie:{
     padding :10

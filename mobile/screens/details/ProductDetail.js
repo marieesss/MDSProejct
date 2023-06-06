@@ -121,10 +121,15 @@ const ProductDetail = ({ navigation, route }) => {
                     <Text style={styles.text}> {fermier.name}</Text>
                     <Text style={styles.text}> {fermier.desc}</Text>
                     </View>
+                    <TouchableOpacity key={fermier._id} onPress={() => {
+        navigation.navigate("FermierDetails", {_id : fermier._id});
+      }}>
                       <Image source={{uri: fermier.img}}
                     style={{width: 200, height: 200, borderRadius:15}}
                     />
+                    </TouchableOpacity>
                 </View>
+                
             
            
         </ScrollView>

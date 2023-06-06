@@ -33,11 +33,11 @@ const Fermiers = () => {
   <View style={styles.container}>
 
   
-  <HeaderMenu title="Fermiers"/>
+  <HeaderMenu title="Nos producteurs"/>
 
  
 <View style={styles.banner}>
-  <Text style={styles.textBanner}>Tout les fermiers</Text>
+  <Text style={styles.textBanner}>Tous engagés pour un avenir plus sain !</Text>
   </View>
 
   <View style={{

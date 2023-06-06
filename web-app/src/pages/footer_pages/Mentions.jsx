@@ -11,9 +11,9 @@ const Mentions = () => {
             </div>
             <div class="row justify-content-center">
                 <div class="col-10">
-                    <h5 style={{textDecoration:"underline"}}>Mentions légales du site www.web.nosproducteurslocaux.fr</h5>
+                    <h5 style={{textDecoration:"underline"}}>Mentions légales du site www.web.nossproducteurslocaux.fr</h5>
                     <h5>Édition du site</h5>
-                    <p>Le site www.web.nossproducteurslocaux.fr est édité par la société Nos Producteurs Locaux, au capital de 1000€, immatriculée au RCS de NICE sous le numéro 986 628 629 082611, 
+                    <p>Le site www.web.nossproducteurslocaux.fr est édité par la société Nos Producteurs Locaux, au capital de 4000€, immatriculée au RCS de NICE sous le numéro 986 628 629 082611, 
                     dont le siège social est situé au 150 Boulevard des Jardiniers, 06200 NICE.</p>
                     <div class="row justify-content-start">
                         <h5 class="col-3" > Numéro de téléphone :</h5> 
@@ -28,7 +28,7 @@ const Mentions = () => {
                         <p class="col-3">Marie Espinosa</p>
                     </div>
                     <h5> Hébergement du site</h5>
-                    <p>Le site www.web.nossproducteurslocaux.fr est hébergé par OVH, dont le siège social est situé au 2 rue Kellermann - 59100 Roubaix - France.</p>
+                    <p>Le site web.nossproducteurslocaux.fr est hébergé par OVH, dont le siège social est situé au 2 rue Kellermann - 59100 Roubaix - France.</p>
 
                     <h5> Données personnelles</h5>
                     <p>
@@ -39,7 +39,7 @@ const Mentions = () => {
                     </p>
                     <h5>Propriété intellectuelle</h5>
                     <p>
-                    Tous les éléments du site www.nosproducteurslocaux.fr, y compris les textes, graphiques, logos, animations, sont la propriété exclusive de la société Nos Producteurs Locaux,
+                    Tous les éléments du site web.nosproducteurslocaux.fr, y compris les textes, graphiques, logos, animations, sont la propriété exclusive de la société Nos Producteurs Locaux,
                      à l’exception des marques, logos ou contenus appartenant à d’autres sociétés partenaires ou auteurs. <br /> <br />
 
                     Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle, 

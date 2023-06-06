@@ -75,10 +75,8 @@ const CommandeDetails = ({ navigation, route }) => {
         }
 
       useEffect(() => {
-        if (callFunction) {
           getOrder();
-          setCallFunction(false)
-        }
+
       }, [route.params._id]);
 
       useEffect(()=>{
@@ -97,11 +95,19 @@ const CommandeDetails = ({ navigation, route }) => {
 
        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
     {productsListe.map(product=> (
-      <View style={styles.product}>
+      
+      <View>
+      {product.product ? 
+        <View style={styles.product}>
         <View>
-        <Image source={{uri: product.product.img}}
+        <TouchableOpacity key={product.product._id} onPress={() => {
+        navigation.navigate("ProductDetail", {_id : product.product._id});
+      }}>
+       <Image source={{uri: product.product.img}}
             style={{width: 90, height: 90, borderRadius:15}}
-            />
+            /> 
+        </TouchableOpacity>
+        
       </View>
         <View>
           <Text>
@@ -112,6 +118,16 @@ const CommandeDetails = ({ navigation, route }) => {
         </Text>
       </View>
       </View>
+      :  <View style={styles.product}>
+      <View>
+      <Text> Produit plus disponible</Text>
+      <Text> quantité : {product.quantity}</Text>
+      </View>
+      </View>}
+       
+
+      </View>
+      
     ))}
 
     <View style={{width:"100%", padding: 15}}> 
@@ -148,7 +164,7 @@ const CommandeDetails = ({ navigation, route }) => {
     </View>
     </View>
 
-   <View style={{width:"100%", padding: 15}}> 
+   <View style={{width:"100%", padding: 15, marginBottom:20}}> 
 <Text style={styles.paiement}> Livraison </Text>
 <View style={styles.line}></View>
 <View style={styles.infopaiement}>

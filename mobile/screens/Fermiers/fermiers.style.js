@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    flex: 1,
     paddingBottom:100,
     backgroundColor: "#FFFDFA",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
+    height: "100%"
   },
   welcomeMessage: {
     fontSize: 30,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     width: 150
   }, 
   banner: {
-    height : 60,
+    height : 80,
     padding: 5,
     backgroundColor:'#4A5D26',
     flexDirection:'row',

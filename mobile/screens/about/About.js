@@ -3,6 +3,8 @@ import { View, ScrollView, Text, Image, TouchableOpacity} from 'react-native'
 import HeaderMenu from '../../components/header/Header';
 import styles from './About.style'
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
@@ -26,6 +28,35 @@ const About = () => {
       </View>
     </View>
 
+    <View style={styles.container2}>
+    <View style={styles.card}>
+        <View style={styles.circle}>
+        <AntDesign name="star" size={15} color="white" />
+          <Text style={styles.circleText}>Qualité</Text>
+        </View>
+        <Text style={styles.cardText}>Des produits et un service de qualité</Text>
+      </View>
+      <View style={styles.card}>
+        <View style={styles.circle}>
+        <MaterialCommunityIcons name="package-variant-closed" size={20} color="white" />
+          <Text style={styles.circleText}>Proximité</Text>
+        </View>
+        <Text style={styles.cardText}>Des produits issus d'une agriculture régionale</Text>
+      </View>
+     
+    </View>
+
+    <View style={styles.container2}>
+    <View style={styles.card}>
+        <View style={styles.circle}>
+        <MaterialCommunityIcons name="hand-heart" size={15} color="white" />
+          <Text style={styles.circleText}>Respect</Text>
+        </View>
+        <Text style={styles.cardText}>Des prix justes fixés par les producteurs</Text>
+      </View>
+     
+    </View>
+
     <View style={styles.view1}>
       <TouchableOpacity style={styles.button} onPress={() => {
         navigation.navigate("Welcome");
@@ -34,13 +65,24 @@ const About = () => {
       </TouchableOpacity>
       </View>
 
+      <Text style={styles.title}>
+          Vous ne pouvez pas vous faire livrer chez vous ? 
+        </Text>
 
     <View style={styles.view1}>
       
       <View style={styles.view1child}>
         <Text>
-        Ici, la qualité, la proximité et la personnalisation sont nos maîtres mots pour vous offrir une expérience unique. Une solution innovante pour soutenir les producteurs locaux et consommer des produits frais et de saison.
+          Nos producteurs locaux livrent vos commandes dans des hubs au choix afin que vous puissiez récupérer votre commande où vous voulez et quand vous voulez
         </Text>
+        <View style={styles.view1}>
+
+        <TouchableOpacity style={styles.button2} onPress={() => {
+        navigation.navigate("Welcome");
+      }}>
+        <Text style={styles.buttonText}>Nos hubs</Text>
+      </TouchableOpacity>
+      </View>
       </View>
       <View style={styles.view1child}>
       <Image source={require('../../assets/img/legumes.jpg')} style={styles.img2}/>

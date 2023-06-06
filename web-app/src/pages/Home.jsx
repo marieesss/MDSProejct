@@ -91,7 +91,7 @@ const Home = () => {
                 <img class="card--top card-img-product" src={product.img} alt={product.name}/>
                 <div class="card-body">
                     <h5 class="product-card-title">{product.title}</h5>
-                    <p class="card-text">{product.price} €</p>
+                    <p class="card-text">{product.price} € /kg</p>
                    
                 </div>
              </div> 

@@ -74,10 +74,10 @@ const Home = () => {
     </div>
 
 
-    <div class="row justify-content-between options-carroussel">
-    <div class=" col-3" > Les dernières nouveautés </div>
-    <Link to={`/product`} class="col-3" >
-    <div> Voir les derniers produits </div>
+    <div class="options-carroussel ">
+    <div class="" > Nos produits stars </div>
+    <Link to={`/product`}>
+    <div class="options-carroussel-text"> Voir les derniers produits </div>
     </Link>
 
     </div>
@@ -123,10 +123,10 @@ const Home = () => {
             Tous engagés pour un avenir plus sain
     </div>
 
-    <div class="row justify-content-between mt-5">
-    <div class="col-2" > Nos fermiers stars </div>
+    <div class="options-carroussel ">
+    <div> Nos fermiers stars </div>
     <Link to={`/fermier`} class="col-2" >
-    <div> Voir tout les fermiers </div>
+    <div  class="options-carroussel-text"> Voir tout les fermiers </div>
     </Link>
 
     </div>

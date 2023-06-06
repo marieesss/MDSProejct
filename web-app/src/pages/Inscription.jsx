@@ -131,7 +131,7 @@ const Inscription = () => {
                 <center><h1> Inscription</h1></center>
                 <form onSubmit={handleSubmit} class="col-6">
                     <label htmlFor="username">
-                        Username:
+                        Nom d'utilisateur
                         <i class="fa-solid fa-check" style={{color: "white"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
@@ -182,7 +182,7 @@ const Inscription = () => {
                     
 
                     <label htmlFor="password ">
-                        Password:                        
+                        Mot de passe :                        
                         <i class="fa-solid fa-check" style={{color: "#ff000d"}} className={validName ? "valid" : "hide"}></i>
                         <i class="fa-solid fa-circle-xmark" style={{color: "#ff0000"}} className={validName || !username ? "hide" : "invalid"}></i>
                     </label>
@@ -206,7 +206,7 @@ const Inscription = () => {
                         <p id="pwdnote" className={!validPwd ? "instructions" : "offscreen"}>
                     <i class="fa-solid fa-circle-info" style={{color: "white"}}></i>                       
                         8 à 24 caractères.<br />
-                        Il doit inclure minuscule, majuscule et un caractère spécial<br />
+                        Il doit inclure minuscule, majuscule, un chiffre et un caractère spécial<br />
                         caractères utilisés: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
                     </p>
                         : <div/>
@@ -240,7 +240,7 @@ const Inscription = () => {
 
                     <button  class="button-auth mt-4" 
                     disabled={!validName || !validPwd || !validMatch || !validEmail ? true : false}>
-                    Sign Up</button>
+                    Inscrivez-vous</button>
                 
                     <p>
                     Déjà enregistré ?<br />

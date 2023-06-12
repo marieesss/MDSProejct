@@ -158,7 +158,7 @@ const searchItems = (searchValue) => {
                       :
 
                       <Link to={`/product/${product._id}`}>
-                              <button class="button-item mt-5 mb-5">
+                              <button class="button-item mt-2 mb-5">
                               <i class="fa-solid fa-cart-shopping mx-2" style={{color: "#485E1B"}}></i>
                               Ajouter au panier </button>
                       </Link>

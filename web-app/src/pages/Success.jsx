@@ -142,7 +142,7 @@ return (
 
     <div class="row justify-content-between"> 
     <p class="font-vert col-6">Nous vous ferons savoir quand elle embarquera et se dirigera vers vous.</p>
-    <p class="col-3 font-vert"><a href='/'> Retourner à la boutique</a></p>
+    <p class="col-3 font-vert"><a href='/' class="options-carroussel-text"> Retourner à la boutique</a></p>
     </div>
 
     <div class="line-green-cart p-0">
@@ -192,7 +192,7 @@ return (
           </div>
 
       <div class="proxima mt-2" style={{fontSize:"14px", fontWeight:"700"}}>
-      Votre commande s’apprête à être livrée au :       
+      Votre commande s’apprête à être livrée dans les 24 heures au :       
       </div>
       <div>
       {hub.name}

@@ -2,17 +2,16 @@ import React, { useContext } from 'react';
 import { Button } from 'react-native';
 import { UserContext } from './useContext';
 import { Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const LogoutButton = () => {
-  const { dispatch, user } = useContext(UserContext);
 
-  const handlePress = () => {
-    Linking.openURL("https://web.nossproducteurslocaux.fr/");
-  };
+const WebsiteButton = () => {
+  const navigation = useNavigation();
 
-  return (
-    <Button title="Se déconnecter" onPress={handlePress} />
-  );
+    Linking.openURL("https://web.nossproducteurslocaux.fr/")
+    navigation.navigate('Welcome')
+
+
 };
 
-export default LogoutButton;
+export default WebsiteButton;

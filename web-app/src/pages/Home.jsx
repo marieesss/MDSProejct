@@ -76,7 +76,7 @@ const Home = () => {
 
     <div class="options-carroussel ">
     <div class="" > Nos produits stars </div>
-    <Link to={`/product`}>
+    <Link to={`/productf`}>
     <div class="options-carroussel-text"> Voir les derniers produits </div>
     </Link>
 

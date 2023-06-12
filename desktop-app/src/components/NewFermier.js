@@ -5,8 +5,10 @@ import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux'
 import axios from 'axios';
 import {useState, useEffect} from 'react'
+import "../css/app.css";
 
-const NewFermier = () => {
+
+const NewFermier = ({handleClose, setErrorMessage, setSuccessMessage}) => {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
@@ -25,14 +27,24 @@ const NewFermier = () => {
                   img: img
                  }, 
                  config);
-                 console.log(res.data)
-                 window.location.reload();
-              
-            } catch (error) {
-              console.log(error)
-              console.log(error.config.data)
-            }
-          };
+                 if (res.status === 200) {
+                  setSuccessMessage(200);
+                }
+              } catch (error) {
+                if (error.response.status === 400) {
+                  setErrorMessage("Erreur 404 : Veuillez réessayer");
+                } else {
+                  // Erreur serveur
+                  setErrorMessage("Erreur 500: problème serveur");
+                }
+              }
+            };
+
+          const handleCreate = (e)=>{
+            e.preventDefault();
+            newFermier()
+            handleClose()
+          }
 
   return (
     <div>
@@ -45,9 +57,9 @@ const NewFermier = () => {
         <Form.Label>image</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setImg(e.target.value)}/>
       </Form.Group>
-      <Button onClick={newFermier}  type="submit" class="button-modal">
+      <button onClick={handleCreate}  type="submit" class="button-modal">
         créer
-      </Button>
+      </button>
     </Form>
     </div>
   )

@@ -18,6 +18,15 @@
   list-style: none;
 }
 
+.errMsg{
+    background-color: #485E1B;
+    color: white;
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+
 .margin-50{
     margin-top: 50px;
 }
@@ -263,6 +272,8 @@ center{
 .modal-title{
     margin-top: 10px;
 }
+
+
 
 .button-delete{
     background-color: #DB2323 !important;

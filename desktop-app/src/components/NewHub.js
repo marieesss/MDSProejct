@@ -6,46 +6,50 @@ import { useSelector } from 'react-redux'
 import axios from 'axios';
 import {useState, useEffect} from 'react'
 
-const NewHub = () => {
-    const [show, setShow] = useState(false);
-    const [name, setName] = useState("");
-    const [adress, setAdress] = useState("");
-    const [ville, setVille] = useState("");
-    const [code, setCode] = useState("");
-    const [message, setMessage] = useState("");
-    const userToken = useSelector((state) => state.user.currentUser.accessToken);
+const NewHub = ({handleClose, setErrorMessage, setSuccessMessage}) => {
+      
+  const [name, setName] = useState("");
+  const [adress, setAdress] = useState("");
+  const [ville, setVille] = useState("");
+  const [code, setCode] = useState("");
 
-        const config = {
-            headers: { token: `Bearer ${userToken}` }
-        };
+  const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
-        const newHub = async (e) => {
-          e.preventDefault()
-            try {
-              const res = await axios.post("https://api.nossproducteurslocaux.fr/api/hub/", {
-                  name : name,
-                  adress: adress,
-                  ville: ville,
-                  code : code
-                 }, 
-                 config);
-                 console.log(res.data)
-                 
-                 if (res.status === 200) {
-                  setMessage("créé avec succès")
-                } else if (res.status === 400) {
-                  setMessage("adresse invalide")
-                } else {
-                  // Erreur serveur
-                  setMessage(" problème serveur")
-                }
-              
-            } catch (error) {
-              console.log(error)
-              console.log(error.config.data)
-            }
-          };
-          
+
+  const config = {
+     headers: { token: `Bearer ${userToken}` }
+ };
+
+const hancleCreate = (e)=>{
+  e.preventDefault();
+  newhub()
+    handleClose()
+  
+}
+
+
+
+const newhub = async () => {
+  try {
+    const res = await axios.post("https://api.nossproducteurslocaux.fr/api/hub/", {
+      name: name,
+      adress: adress,
+      ville: ville,
+      code: code
+    }, config);
+    console.log(res.data)
+    if (res.status===201){
+      setSuccessMessage(201)
+    }
+  } catch (error) {
+    if (error.response.status === 400) {
+      setErrorMessage("Erreur 404 : Addresse non trouvée par Google, veuillez réessayer");
+    } else {
+      // Erreur serveur
+      setErrorMessage("Problème serveur");
+    }
+  }
+};
 
   return (
     <div>
@@ -60,7 +64,7 @@ const NewHub = () => {
         <Form.Label>Code Postal</Form.Label>
         <Form.Control type="text" placeholder="Enter text" onChange={(e)=>setCode(e.target.value)}/>
       </Form.Group>
-      <button onClick={newHub} variant="primary" type="submit" class="button-modal">
+      <button onClick={hancleCreate} class="button-modal">
         créer
       </button>
     </Form>

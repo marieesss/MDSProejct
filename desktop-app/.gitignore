@@ -15,6 +15,7 @@
 /release-builds
 /out
 /release
+/desktop-app-win32-x64
 
 # misc
 .DS_Store

@@ -142,7 +142,7 @@ const Home = () => {
                     
                 </div>
                 </div>
-                 <button class="button-item" onClick={() => handleClick(fermier._id)}>Voir ses produits</button>
+                 <button class="button-item mt-2" onClick={() => handleClick(fermier._id)}>Voir ses produits</button>
                 </div>
 
         )}

@@ -85,6 +85,10 @@ const Cart = () => {
     }
   },[cart.total])
 
+  useEffect(()=> {
+    console.log((total*100).toFixed(0))
+  },[total])
+
 
   useEffect(()=>{
     // fonction qui envoie une requête de paiement à notre backend
@@ -93,7 +97,7 @@ const Cart = () => {
         // envoie une requête POST avec les informations de paiement au backend
         const res = await axios.post(`https://${URL}/api/checkout/payment`, {
           tokenId: stripeToken.id, // identifiant du token de paiement
-          amount:total*100, // montant total de la commande en centimes (pour Stripe)
+          amount:(total*100).toFixed(0), // montant total de la commande en centimes (pour Stripe)
         });
         // met à jour l'état avec les informations de paiement renvoyées par le backend
         setStripe(res.data)

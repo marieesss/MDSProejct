@@ -49,7 +49,7 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
      // Sauvegarde de l'adresse dans la base de données
      await hub.save();
 
-     res.status(201).json(hub);
+     res.status(201).json(response);
    } else {
      res.status(400).json({ message: 'Adresse invalide' });
    }

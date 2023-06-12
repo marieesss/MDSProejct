@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 
 const Product = () => {
   const location = useLocation();
-  const id = location.pathname.split('/')[2];
   const [Product, setProduct]=  useState({});
   const [ProductCategorie, setProductCategorie]=  useState([]);
   const [Fermier, setFermier]=  useState({});
@@ -20,8 +19,15 @@ const Product = () => {
   const [msg, setMsg]=  useState("");
   const [size, setSize]=  useState();
   const [quantity, setQuantity]=  useState(1);
+  const [id, setId]=  useState(1);
+
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API_URL;
+
+  useEffect(()=>{
+    setId(location.pathname.split('/')[2]);
+    window.scrollTo(0, 0)
+}, [location.pathname])
 
   useEffect(()=>{
       const getProduct = async ()=> {
@@ -43,7 +49,10 @@ const Product = () => {
      
     
       
-  }, [])
+  }, [id])
+
+
+
 
 
   useEffect(()=>{
@@ -147,16 +156,14 @@ const Product = () => {
       <div class="row justify-content-center mb-4">
         <div class="col-lg-6 col-md-12 p-5">
         <div class="row justify-content-center align-items-center">
-        <i class="fa-solid fa-wheat-awn col-1 fa-lg" style={{color: "#485E1B"}}/>
-         <p class="col-10">{Fermier.name}</p>
+         <h2 class="col-10">{Fermier.name}</h2>
          </div>
          <div class="row justify-content-center align-items-center">
-        <i class="fa-solid fa-pen-to-square col-1 fa-lg" style={{color: "#485E1B"}}/>
          <p class="col-10">{Fermier.desc}</p>
          </div>
       
         </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-12 align-self-center justify-content-center row">
         <img src={Fermier.img} class="product-img-fermier" alt={Fermier.name}/>
         </div>
 

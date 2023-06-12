@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import NewProduct from '../components/newProduct';
@@ -11,8 +11,19 @@ import "../css/app.css";
 
 const Product = () => {
     const [show, setShow] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(); // Variable d'état pour le message d'erreur
+    const [successMessage, setSuccessMessage] = useState(); // Variable d'état pour le message de succès
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(()=>{
+    if(successMessage===200){
+      window.location.reload()
+    }
+   },[successMessage])
+
+
   return (
     <div>
         <Menu/>
@@ -27,6 +38,8 @@ const Product = () => {
         créer un produit
       </button>
 
+      {errorMessage ? <div class="errMsg"> {errorMessage}</div>:  null}
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton class="modal-header">
           <Modal.Title>Créer un produit
@@ -34,7 +47,7 @@ const Product = () => {
         </Modal.Header>
         <newProduct/>
         <Modal.Body class="modal-body">
-        <NewProduct/>
+        <NewProduct handleClose={handleClose} setErrorMessage={setErrorMessage} setSuccessMessage={setSuccessMessage}/>
         </Modal.Body>
       </Modal>
       <ShowProducts/>

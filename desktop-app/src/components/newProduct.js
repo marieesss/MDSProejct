@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios';
 import "../css/app.css";
 
-const NewProduct = () => {
+const NewProduct = ({handleClose, setErrorMessage, setSuccessMessage}) => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("");
   const [desc, setdesc] = useState("");
@@ -43,8 +43,7 @@ const NewProduct = () => {
     console.log(categorie)
   }, [categorie])
 
-  const newProduct = async (e) => {
-    e.preventDefault()
+  const newProduct = async () => {
     const config = {
       headers: { token: `Bearer ${userToken}` }
   };
@@ -59,14 +58,24 @@ const NewProduct = () => {
           fermierId: Idfermier
          }, 
          config);
-         console.log(res.data)
-         setMessage("Produit bien crée, veuillez rafraichir la page")
-      
-    } catch (error) {
-      console.log(error)
-      console.log(error.config.data)
-    }
-  };
+         if (res.status === 200) {
+          setSuccessMessage(200);
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          setErrorMessage("Erreur 404 : Veuillez réessayer");
+        } else {
+          // Erreur serveur
+          setErrorMessage("problème serveur");
+        }
+      }
+    };
+
+  const handleCreate = (e)=>{
+    e.preventDefault();
+    newProduct()
+    handleClose()
+  }
 
   return (
     <div>
@@ -101,7 +110,7 @@ const NewProduct = () => {
 
       </Form.Group>
       <div class="row justify-content-center">
-      <button onClick={newProduct} type="submit" class="button-modal">
+      <button onClick={handleCreate} type="submit" class="button-modal">
         créer
       </button>
       </div>

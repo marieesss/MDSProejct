@@ -37,7 +37,7 @@ describe('Hub', () => {
           .post("/api/hub")
           .send(hub)
           .set('token', `Bearer ${token}`);
-          expect(response.statusCode).toBe(201); // Définit le code de retour attendu
+          expect(response.status).toBe(201); // Définit le code de retour attendu
           hubId = response.body._id;
           expect(response.body.code).toBe("06000");
 

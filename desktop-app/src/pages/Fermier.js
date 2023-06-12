@@ -19,14 +19,20 @@ const Fermier = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [desc, setDesc] = useState("");
-    const [img, setImg] = useState("");
-    const [name, setName] = useState("");
-    const [idFermier, setIdFermier] = useState("");
+    const [errorMessage, setErrorMessage] = useState(); // Variable d'état pour le message d'erreur
+    const [successMessage, setSuccessMessage] = useState(); // Variable d'état pour le message de succès
+
+
 
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
 
+    
+    useEffect(()=>{
+      if(successMessage===200){
+        window.location.reload()
+      }
+     },[successMessage])
 
     const config = {
        headers: { token: `Bearer ${userToken}` }
@@ -54,13 +60,17 @@ const Fermier = () => {
   </div>  
 
         <button onClick={handleShow} class="button-green margin-50 margin-left">Ajouter un fermier</button>
+
+        {errorMessage ? <div class="errMsg"> {errorMessage}</div>:  null}
+
+
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton class="modal-header">
           <Modal.Title>Ajouter un fermier
 </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <NewFermier/>
+        <NewFermier handleClose={handleClose} setErrorMessage={setErrorMessage} setSuccessMessage={setSuccessMessage}/>
         </Modal.Body>
       </Modal>
       <ShowFermier/>

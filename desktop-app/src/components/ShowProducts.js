@@ -159,10 +159,7 @@ const ShowProducts = () => {
                 <i class="fa-solid fa-euro-sign padding-right" style={{color: "#bac100"}}></i>{product.price} €
               </Card.Text>
               </div>
-              
-              <Card.Text>
-              <i class="fa-solid fa-pen-to-square padding-right" style={{color: "#bac100"}}></i>{product.desc}
-              </Card.Text>
+            
 
               <Card.Text>
               <i class="fa-solid fa-layer-group padding-right" style={{color: "#bac100"}}></i>{product.size}

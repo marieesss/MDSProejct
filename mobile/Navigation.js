@@ -4,7 +4,7 @@ import Welcome from './screens/welcome/Welcome';
 import About from './screens/about/About';
 import ProductDetail from './screens/details/ProductDetail';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItemList, DrawerItem, DrawerContentScrollView} from '@react-navigation/drawer';
 import Fermiers from './screens/Fermiers/Fermiers';
 import FermierDetails from './screens/fermierdetails/FermiersDetails';
 import Hubs from './screens/Hubs/Hubs';
@@ -23,6 +23,27 @@ import WebsiteButton from './components/website';
 
 const Drawer = createDrawerNavigator();
 
+function CustomDrawerContent(props) {
+  const { user } = useContext(UserContext);
+
+  const handleWebsitePress = () => {
+    Linking.openURL('https://www.example.com');
+  };
+
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Website"
+        onPress={handleWebsitePress}
+        icon={({ focused, color, size }) => (
+          <Feather name="globe" size={size} color={color} />
+        )}
+      />
+    </DrawerContentScrollView>
+  );
+}
+
 export default function NavigationApp() {
   const {user} = useContext(UserContext);
 
@@ -39,13 +60,12 @@ export default function NavigationApp() {
           drawerStyle:{
             backgroundColor: "#4A5D26"
           }
-        }} >
+        }} 
+        drawerContent={CustomDrawerContent}>
           <Drawer.Screen name="Welcome" component={Welcome} options={{ title: 'Nos producteurs locaux' }}/>
           <Drawer.Screen name="About" component={About} options={{ headerTitle:'Nos producteurs locaux' }}/>
           <Drawer.Screen name="Fermier" component={Fermiers} options={{ headerTitle:'Nos producteurs locaux',
           title:"Nos producteurs" }}/>
-           <Drawer.Screen name="Site Web" component={WebsiteButton} options={{ headerTitle:'Nos producteurs locaux',
-          title:"Site web" }}/>
           <Drawer.Screen name="Website" component={WebsiteButton} options={{title: 'Website'}}/>
           <Drawer.Screen name="Hubs" component={Hubs} options={{ headerTitle:'Nos producteurs locaux' }}/>
           {user ?

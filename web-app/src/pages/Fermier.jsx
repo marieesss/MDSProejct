@@ -37,7 +37,6 @@ const Fermier = () => {
                 <img class="card-img-top card-img-product" src={fermier.img} alt={fermier.name}/>
                 <div class="card-body">
                     <h5 class="product-card-title">{fermier.name}</h5>
-                    <p class="card-text">{fermier.desc}</p>
                    
                     
                 </div>

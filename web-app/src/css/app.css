@@ -11,7 +11,8 @@ body{
 
   p{
     font-family: 'Avenir', sans-serif;
-    font-size: 12px;
+    font-size: 14px;
+    text-align: justify;
   }
 
   h5{
@@ -121,6 +122,13 @@ body{
   
   .container {
     width: 100%;
+  }
+
+  h2{
+    font-family: "grenadine-mvb", sans-serif;
+    font-size: "17px";
+    color:#485E1B
+
   }
 
 

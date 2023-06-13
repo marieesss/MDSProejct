@@ -84,7 +84,7 @@ router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => 
 
     router.get("/find/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
         try {
-          const orders = await Order.find({ userId: req.params.userId }).sort({ updatedAt: 1 });
+          const orders = await Order.find({ userId: req.params.userId }).sort({ updatedAt: -1 });
           res.status(200).json(orders);
         } catch (err) {
           res.status(500).json(err);

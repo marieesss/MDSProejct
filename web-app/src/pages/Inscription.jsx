@@ -148,7 +148,7 @@ const Inscription = () => {
                     {username && !validName ? 
                         <p className={"instructions"}>
                     <i class="fa-solid fa-circle-info mx-2" style={{color: "white"}}></i>                       
-                    8 à 24 caractères.<br />
+                    3 à 24 caractères.<br />
                         Il doit être commencé par une lettre<br />
                         Lettres, chiffres, soulignés, traits d'union autorisés.
                     </p>

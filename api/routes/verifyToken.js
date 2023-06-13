@@ -54,10 +54,14 @@ const verifyTokenUser = (req, res, next) => {
 
 
 const verifyTokenAdmin = (req, res, next) => {
+  // appelle la fonction verifyToken pour vérifier la validité du token
+  // et pour voir l'objet du token
   verifyToken(req, res, () => {
     if (req.user.isAdmin) {
+      //si l'utilisateur est admin on passe au middleware suivant
       next();
     } else {
+      //si l'utilisateur n'est pas admin la requête n'abouti pas
       res.status(403).json("You are not alowed to do that!");
     }
   });

@@ -137,10 +137,9 @@ const Order = () => {
                 <div class=" row justify-content-center">
                     {order.status !== "envoyé" ? 
                     <button class="button-green" value={order._id} onClick={handleEnvoie}> Commande envoyée </button> :
-                      <div>
-                      <div>Commande envoyée</div>
-                      <button class="button-green" value={order._id} onClick={handleDelete}>Supprimer</button>
-                      </div>}
+                    
+                      <button class="button-green" value={order._id} onClick={handleDelete}>Supprimer la commande</button>
+                      }
 
                       
                 </div>

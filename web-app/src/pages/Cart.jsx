@@ -173,7 +173,7 @@ const Cart = () => {
       <div class="padding-100 mt-5">
       <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>livraison</div>
       <div class="proxima" style={{fontSize:"14px", fontWeight:"700"}}>A retirer dans nos hubs</div>
-<select name="_id" onClick={handleFilter}>
+<select name="_id" onChange={handleFilter}>
           <option value="">Choisir un point de livraison</option>
               {hub.map(hub =>(
             <option value={hub._id}>{hub.name}</option>
@@ -211,7 +211,6 @@ const Cart = () => {
           
           <StripeCheckout
       name="Nos producteurs locaux"
-      image="httpss://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png"
       description='Votre total est de'
       billingAddress
       amount={(total*100).toFixed(0)}

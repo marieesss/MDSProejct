@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     height : 50
   },
   row:{
-    flexDirection:"row",
-    alignItems:'flex-end',
-    padding: 15
+    flexDirection:"column",
+    alignItems: 'center',
+    justifyContent: "center",
+    padding: 15,
   },
   back:{
     width: 20,
@@ -69,6 +70,19 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   text:{
+    fontFamily:"Avenir",
+    textAlign:"justify",
+    fontSize:15
+  }, 
+  name:{
+    fontSize:22,
+    marginTop:20,
+    marginBottom:20,
+    fontFamily:"Josefin",
+    textAlign:"center"
+  },
+  desc:{
+    fontSize: 18,
     fontFamily:"Avenir"
   }
 

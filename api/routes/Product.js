@@ -11,16 +11,18 @@ const {
 // CREATE 
 
 router.post("/", verifyTokenAdmin ,async (req, res) => {
+  // récupération des données de la requête
     const newProduct= new Product(req.body);
-
     try{
+  // enregistrement à la base de donnée
         const savedProduct = await newProduct.save();
-        res.status(200).json(savedProduct);
+        res.status(201).json(savedProduct);
     }catch(err){
         res.status(500).json(err);
     }
 
 })
+
 
 //UPDATE
 router.put("/:id", verifyTokenAdmin, async (req, res) => {

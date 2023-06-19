@@ -32,20 +32,23 @@ const Inscription = () => {
     const URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
+        // Vérification si l'email est valide en utilisant une expression régulière
         setValidEmail(EMAIL_REGEX.test(email));
-        console.log(validEmail)
-    }, [email])
-
-    useEffect(() => {
+      }, [email]);
+      
+      useEffect(() => {
+        // Vérification si le mot de passe est valide en utilisant une expression régulière
         setValidPwd(PWD_REGEX.test(password));
+      
+        // Vérification si le mot de passe correspond à la confirmation
         setValidMatch(password === matchPwd);
-        console.log(validPwd)
-    }, [password, matchPwd])
-
-    useEffect(() => {
+      }, [password, matchPwd]);
+      
+      useEffect(() => {
+        // Vérification si le nom d'utilisateur est valide en utilisant une expression régulière
         setValidName(USER_REGEX.test(username));
-        console.log( "Valid name", validName)
-    }, [username])
+      }, [username]);
+      
 
     useEffect(() => {
         setErrMsg('');
@@ -53,68 +56,90 @@ const Inscription = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+      
+        // Vérification de la validité de l'email, du mot de passe et 
+        //du nom d'utilisateur en utilisant les expressions régulières
         const v1 = EMAIL_REGEX.test(email);
         const v2 = PWD_REGEX.test(password);
         const v3 = USER_REGEX.test(username);
+      
         if (!v1 || !v2 || !v3) {
-            window.alert("entrées invalides")
-        
-          }else{
-
-            try {
-                const response = await axios.post(`https://${URL}/api/auth/register`,
-                  { username
-                      , password
-                      , email},
-                    
-                );
-                setUsername('');
-                setPassword('');
-                setMatchPwd('');
-                window.alert(`Votre compte a bien été créé ${response.data.username}`)
-                navigate("/login")
-    
-            } catch (err) {
-                if (!err?.response) {
-                    setErrMsg('No Server Response');
-                    console.log(err)
-                } else if (err.response?.data?.message) {
-                    window.alert(err.response?.data?.message)
-                } else {
-                    setErrMsg('Veuillez choisir un autre username ou adresse email')
-                    console.log(err)
-                }
+          // Si une des validations échoue, affichage d'une alerte indiquant que les entrées sont invalides
+          window.alert("Entrées invalides");
+        } else {
+          try {
+            // Appel à l'API pour créer un compte utilisateur
+            const response = await axios.post(`https://${URL}/api/auth/register`, {
+              username,
+              password,
+              email,
+            });
+      
+            // Réinitialisation des valeurs des champs de saisie
+            setUsername('');
+            setPassword('');
+            setMatchPwd('');
+      
+            // Affichage d'une alerte indiquant que le compte a été créé avec succès
+            window.alert(`Votre compte a bien été créé ${response.data.username}`);
+      
+            // Redirection vers la page de connexion
+            navigate("/login");
+          } catch (err) {
+            if (!err?.response) {
+              // Si aucune réponse du serveur n'est reçue, définir un message d'erreur approprié
+              setErrMsg('No Server Response');
+            } else if (err.response?.data?.message) {
+              // Si un message d'erreur est renvoyé par l'API, affichage de l'alerte correspondante
+              window.alert(err.response?.data?.message);
+            } else {
+              // Si une autre erreur survient, affichage d'un message générique et affichage de l'erreur dans la console
+              setErrMsg('Veuillez choisir un autre nom d\'utilisateur ou une autre adresse email');
+              console.log(err);
             }
-
           }
-          
-        
-    }
+        }
+      };
+      
 
-    const handlePasswordClick = () =>{
+      const handlePasswordClick = () => {
+        // Récupération de l'élément input pour le mot de passe
         const pwd = document.getElementById('password');
+        // Récupération de l'élément icône pour le mot de passe
         const icon = document.getElementById('icon');
-        if(pwd.getAttribute("type")=="password"){
-            pwd.setAttribute("type","text");
-            icon.setAttribute("class","fa-sharp fa-solid fa-eye-slash")
+      
+        if (pwd.getAttribute("type") == "password") {
+          // Si le type d'attribut est "password", le mot de passe est masqué
+          pwd.setAttribute("type", "text");
+          // Changement de l'icône pour afficher une icône "eye slash" (mot de passe masqué)
+          icon.setAttribute("class", "fa-sharp fa-solid fa-eye-slash");
         } else {
-            pwd.setAttribute("type","password");
-            icon.setAttribute("class","fa-sharp fa-solid fa-eye")
+          // Si le type d'attribut est différent de "password", le mot de passe est affiché
+          pwd.setAttribute("type", "password");
+          // Changement de l'icône pour afficher une icône "eye" (mot de passe visible)
+          icon.setAttribute("class", "fa-sharp fa-solid fa-eye");
         }
-
-    }
-
-    const handleConfirmPasswordClick = ()=>{
+      };
+      
+      const handleConfirmPasswordClick = () => {
+        // Récupération de l'élément input pour la confirmation du mot de passe
         const pwd = document.getElementById('confirm_pwd');
+        // Récupération de l'élément icône pour la confirmation du mot de passe
         const icon = document.getElementById('icon-confirm');
-        if(pwd.getAttribute("type")=="password"){
-            pwd.setAttribute("type","text");
-            icon.setAttribute("class","fa-sharp fa-solid fa-eye-slash")
+      
+        if (pwd.getAttribute("type") == "password") {
+          // Si le type d'attribut est "password", la confirmation du mot de passe est masquée
+          pwd.setAttribute("type", "text");
+          // Changement de l'icône pour afficher une icône "eye slash" (mot de passe masqué)
+          icon.setAttribute("class", "fa-sharp fa-solid fa-eye-slash");
         } else {
-            pwd.setAttribute("type","password");
-            icon.setAttribute("class","fa-sharp fa-solid fa-eye")
+          // Si le type d'attribut est différent de "password", la confirmation du mot de passe est affichée
+          pwd.setAttribute("type", "password");
+          // Changement de l'icône pour afficher une icône "eye" (mot de passe visible)
+          icon.setAttribute("class", "fa-sharp fa-solid fa-eye");
         }
-    }
+      };
+      
     return (
         <div class="container-fluid p-0 overflow-hidden">
         <Menu/>

@@ -33,7 +33,6 @@ const User = () => {
         axios.get(`https://api.nossproducteurslocaux.fr/api/user`, config)
           .then(response => {
             setUserListe(response.data);
-            console.log(userListe)
           })
           .catch(error => {
             console.log(error);
@@ -41,7 +40,6 @@ const User = () => {
       }, []);
 
       function handleDelete (e){
-        console.log(e.target.value)
         const id= e.target.value
     
         const config = {
@@ -50,7 +48,6 @@ const User = () => {
     
         axios.delete(`https://api.nossproducteurslocaux.fr/api/user/${id}`,config)
           .then(response => {
-            console.log(response)
             setMessage("User bien supprimé")
             handleShow()
             window.location.reload()
@@ -63,7 +60,6 @@ const User = () => {
       }
 
       function handleAdmin (e){
-        console.log(e.target.value)
         const id= e.target.value
         const config = {
             headers: { token: `Bearer ${userToken}` }
@@ -73,7 +69,6 @@ const User = () => {
             isAdmin:true
         },config)
           .then(response => {
-            console.log(response)
             setMessage("User bien modifié")
             handleShow()
             window.location.reload()
@@ -86,7 +81,6 @@ const User = () => {
       }
 
       function DeleteAdmin (e){
-        console.log(e.target.value)
         const id= e.target.value
         const config = {
             headers: { token: `Bearer ${userToken}` }
@@ -96,7 +90,6 @@ const User = () => {
             isAdmin:false
         },config)
           .then(response => {
-            console.log(response)
             setMessage("User bien modifié")
             handleShow()
     

@@ -260,6 +260,7 @@ center{
     border:none;
     width:100px;
     transition: all 0.5s ease;
+    font-size: 13px;
 }
 
 .button-modal:hover{

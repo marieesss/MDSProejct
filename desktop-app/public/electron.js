@@ -16,7 +16,7 @@ function createWindow() {
   if (app.isPackaged) {
     win.loadFile(`file://${path.join(__dirname, '../build/index.html')}`); // prod
   } else {
-    win.loadURL('http://localhost:3000'); // dev
+    win.loadURL('http://localhost:3001'); // dev
   }
   // Open the DevTools.
   if (isDev) {

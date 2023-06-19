@@ -41,26 +41,16 @@ const styles = StyleSheet.create({
   categorie:{
     padding :10
   },
-  textBanner:{
-    paddingLeft:10,
-    color:"white",
-    fontSize:20,
-    fontFamily: 'Josefin'
-  },
-  titleRow:{
-    justifyContent:"center",
-    flexDirection: "row",
-    alignItems:"center",
-    padding:30
-  },
   img:{
     width: 50,
     height : 50
   },
   row:{
-    flexDirection:"row",
-    alignItems:'flex-end',
-    padding: 15
+    flexDirection:"column",
+    alignItems: 'center',
+    justifyContent: "center",
+    padding: 15,
+    textAlign:"justify"
   },
   back:{
     width: 20,
@@ -69,7 +59,10 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   text:{
-    fontFamily:"Avenir"
+    fontFamily:"Avenir",
+    textAlign:"justify",
+    fontSize:15,
+    marginTop:50
   }
 
 });

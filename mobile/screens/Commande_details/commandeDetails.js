@@ -23,23 +23,28 @@ const CommandeDetails = ({ navigation, route }) => {
   const { user } = useContext(UserContext);
 
 
-    const getOrder = async () => {
-        try {
-          const res = await axios.get(`https://${BASE_URL}.fr/api/order/findOrder/${route.params._id}/${user.id}`, 
-             {
-                headers: { token: `Bearer ${user.token}`,
-                userid: `Bearer ${user.id}`}
-             });
-             setInformations(res.data[0])
-             setproductsId(res.data[0].products)
-             setHubId(res.data[0].hubId)
-             
-
-        } catch (error) {
-          console.log(error)
+  const getOrder = async () => {
+    try {
+      const res = await axios.get(
+        `https://${BASE_URL}.fr/api/order/findOrder/${route.params._id}/${user.id}`,
+        {
+          // Configuration des en-têtes de la requête
+          headers: {
+            token: `Bearer ${user.token}`, // En-tête "token" avec la valeur du token de l'utilisateur
+            userid: `Bearer ${user.id}`, // En-tête "userid" avec la valeur de l'ID de l'utilisateur
+          },
         }
-
-      };
+      );
+  
+      // Mise à jour des informations avec la réponse de la requête
+      setInformations(res.data[0]);
+      setproductsId(res.data[0].products);
+      setHubId(res.data[0].hubId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
       const getHub = async () => {
           try {
@@ -52,27 +57,30 @@ const CommandeDetails = ({ navigation, route }) => {
   
         };
 
-      const getProducts = async () => {
+        const getProducts = async () => {
+          const products = []; // Tableau pour stocker les produits récupérés
         
-        const products =[]
+          for (let i = 0; i < productsId.length; i++) {
+            try {
+              // Effectue une requête GET pour récupérer les détails d'un produit spécifique
+              const res = await axios.get(
+                `https://${BASE_URL}.fr/api/product/find/${productsId[i].productId}`,
+                {
+                  headers: { token: `Bearer ${user.token}` },
+                }
+              );
+        
+              // Ajoute le produit récupéré avec sa quantité au tableau "products"
+              products.push({ product: res.data, quantity: productsId[i].quantity });
   
-            for(let i=0; i<productsId.length; i++) {
-                try {
-                          const res = await axios.get(`https://${BASE_URL}.fr/api/product/find/${productsId[i].productId}`, 
-                            {
-                                headers: { token: `Bearer ${user.token}` }
-                            });
-                            products.push({product : res.data, quantity : productsId[i].quantity})
-                            console.log(products)
-                            
-                        } catch (error) {
-                          console.log(error)
-                        }
+            } catch (error) {
+              console.log(error);
+            }
           }
-          setproducts(products)
-          
-          
-        }
+          // Met à jour l'état "products" avec les produits récupérés
+          setproducts(products);
+        };
+        
 
       useEffect(() => {
           getOrder();

@@ -38,18 +38,23 @@ const Commandes = () => {
     }
   }, [hasDataLoaded]);
 
-  const isOrderExpired = (orderDate) => {
-    const currentDate = new Date();
-    const orderDateTime = new Date(orderDate);
-    const diffInDays = Math.floor((currentDate - orderDateTime) / (1000 * 60 * 60 * 24));
+ // Vérifie si une commande a expiré (plus de 30 jours depuis la date de commande)
+const isOrderExpired = (orderDate) => {
+  const currentDate = new Date();
+  const orderDateTime = new Date(orderDate);
 
-    return diffInDays > 30;
-  };
+  // Calcul de la différence en jours entre la date actuelle et la date de commande
+  const diffInDays = Math.floor((currentDate - orderDateTime) / (1000 * 60 * 60 * 24));
 
-  const formatOrderDate = (orderDate) => {
-    const date = new Date(orderDate);
-    return date.toLocaleDateString('en-GB'); // Modify the locale as per your requirement
-  };
+  return diffInDays > 30; // Retourne true si la différence en jours est supérieure à 30
+};
+
+// Formate la date de commande au format 'jour/mois/année' (ex: 01/01/2023)
+const formatOrderDate = (orderDate) => {
+  const date = new Date(orderDate);
+  return date.toLocaleDateString('en-GB'); // Utilise le format 'en-GB' pour obtenir le format souhaité
+};
+
 
   return (
     <View>

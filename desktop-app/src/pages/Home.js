@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useSelector } from 'react-redux'
 import ChartUI from '../components/Chart';
 import "../css/app.css";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -16,6 +18,8 @@ const Home = () => {
   const [orderStats, setorderStats] = useState([]);
   const [LastOrders, setLastOrders] = useState([]);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
+  const navigate = useNavigate();
+
 
   const MONTHS = useMemo(
     () => [
@@ -42,12 +46,11 @@ const Home = () => {
     const getOrderStats = async () => {
       try {
         const res = await axios.get("https://api.nossproducteurslocaux.fr/api/user/stats", config);
-        console.log(res.data)
         setDataUser(res.data)
-        console.log(dataUser)
-  
       } catch(err){
-        console.log(err)
+        if(err.response.status===403){
+          navigate('/login')
+        }
       }
     };
     getOrderStats(); 
@@ -66,7 +69,6 @@ const Home = () => {
     dataUser.map(data =>
       tableau.push({"month": MONTHS[data._id -1], "value": data.total})
       )
-      console.log(tableau)
       setUserStats(tableau)
   }, [dataUser])
 
@@ -75,7 +77,6 @@ const Home = () => {
     const getStats = async () => {
       try {
         const res = await axios.get("https://api.nossproducteurslocaux.fr/api/order/stats", config);
-        console.log(res.data)
         setDataOrder(res.data)
       } catch(err){
         console.log(err)
@@ -89,7 +90,6 @@ const Home = () => {
 
     axios.get("https://api.nossproducteurslocaux.fr/api/order/adminhomepage", config)
       .then(response => {
-        console.log(response.data)
         setLastOrders(response.data)
         
       })
@@ -97,10 +97,6 @@ const Home = () => {
         console.log(error);
       });
   }, []);
-
-  useEffect(()=>{
-    console.log(LastOrders)
-  },[LastOrders])
  
 
 
@@ -133,26 +129,6 @@ const Home = () => {
             />
       </div>     
       </div> 
-
-      {/* <div className="container-c justify-content-around margin-50"> 
-      <div class="container-y container-stats">
-          <h3> Dernières commandes </h3>
-          <div className="container-c justify-content-around"> 
-          {LastOrders.map(order=>(
-            <div class="card" style={{width:"12rem"}}>
-            <div class="card-body">
-              <h5 class="card-title">{order.status}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{order.user[0].email}</h6>
-              <p class="card-text">{order.amount} €</p>
-            </div>
-          </div>
-          ))}
-          </div>
-          <div className="container-c justify-content-around margin-50"> 
-          <button class="button-green"><a href="/order">Voir toute les commandes</a></button>
-          </div>
-      </div>
-      </div>   */}
       
     </div>
   )

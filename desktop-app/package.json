@@ -5,7 +5,7 @@
   "main": "public/electron.js",
   "author": "Marie Espinosa",
   "description": "Admin app for Nos producteurs locaux",
-  "proxy": "http://localhost:3000",
+  "proxy": "http://localhost:3001",
   "homepage": "./",
   "dependencies": {
     "@devexpress/dx-react-chart": "^4.0.3",
@@ -51,11 +51,11 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3001 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3001 && electron .\"",
     "electron": "electron .",
     "electron:package:mac": "npm build && electron-builder -m -c.extraMetadata.main=build/electron.js",
     "electron:package:win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",

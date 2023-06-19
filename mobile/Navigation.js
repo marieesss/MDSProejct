@@ -24,21 +24,18 @@ import WebsiteButton from './components/website';
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
-  const { user } = useContext(UserContext);
-
-  const handleWebsitePress = () => {
-    Linking.openURL('https://www.example.com');
-  };
-
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
       <DrawerItem
-        label="Website"
-        onPress={handleWebsitePress}
-        icon={({ focused, color, size }) => (
-          <Feather name="globe" size={size} color={color} />
-        )}
+        label="Site web"
+        onPress={(()=>Linking.openURL('https://web.nossproducteurslocaux.fr/'))}
+        labelStyle={{ color: 'white' }}
+      />
+       <DrawerItem
+        label="Mentions légales"
+        onPress={(()=>Linking.openURL('https://web.nossproducteurslocaux.fr/mentions-l%C3%A9gales'))}
+        labelStyle={{ color: 'white' }}
       />
     </DrawerContentScrollView>
   );
@@ -51,7 +48,10 @@ export default function NavigationApp() {
 
   return (
       <NavigationContainer>
-        <Drawer.Navigator backBehavior="history" initialRouteName="Welcome" screenOptions={{
+        <Drawer.Navigator 
+        //appelle la fonction pour afficher la liste 
+        drawerContent={CustomDrawerContent}
+        backBehavior="history" initialRouteName="Welcome" screenOptions={{
           drawerActiveBackgroundColor:"#BAC100",
           headerTintColor: 'white',
           headerStyle: {backgroundColor: "#4A5D26"},
@@ -61,15 +61,14 @@ export default function NavigationApp() {
             backgroundColor: "#4A5D26"
           }
         }} 
-        drawerContent={CustomDrawerContent}>
+        >
           <Drawer.Screen name="Welcome" component={Welcome} options={{ title: 'Nos producteurs locaux' }}/>
           <Drawer.Screen name="About" component={About} options={{ headerTitle:'Nos producteurs locaux' }}/>
           <Drawer.Screen name="Fermier" component={Fermiers} options={{ headerTitle:'Nos producteurs locaux',
           title:"Nos producteurs" }}/>
-          <Drawer.Screen name="Website" component={WebsiteButton} options={{title: 'Website'}}/>
           <Drawer.Screen name="Hubs" component={Hubs} options={{ headerTitle:'Nos producteurs locaux' }}/>
           {user ?
-            <Drawer.Screen name="Profile" component={UserProfile} options={{ headerTitle:'Nos producteurs locaux' }}/>          
+            <Drawer.Screen name="Mon profil" component={UserProfile} options={{ headerTitle:'Nos producteurs locaux' }}/>          
           : null}
 
           {user ? <Drawer.Screen name="Logout" component={LogoutButton} options={{title: 'Se déconnecter'}}/>

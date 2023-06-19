@@ -35,114 +35,106 @@ const ShowProducts = () => {
   
     const putDesc = async () => {
       try {
+        // Requête PUT pour mettre à jour la description d'un produit spécifique
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
-            desc: desc,
-           }, 
-           config);
-           console.log(res.data)
+          desc: desc,
+        }, config);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
-  
+    
     const putImg = async () => {
       try {
+        // Requête PUT pour mettre à jour l'image d'un produit spécifique
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
-            img: img,
-           }, 
-           config);
-           console.log(res.data)
+          img: img,
+        }, config);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
-  
-    const putPrice= async (e) => {
+    
+    const putPrice = async (e) => {
       try {
+        // Requête PUT pour mettre à jour le prix d'un produit spécifique
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
-            price: price,
-           }, 
-           config);
-           console.log(res.data)
+          price: price,
+        }, config);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     };
+    
+    // Récupération des données des fermiers lors du chargement initial du composant
     useEffect(() => {
-        const config = {
-            headers: { token: `Bearer ${userToken}` }
-        };
+      const config = {
+        headers: { token: `Bearer ${userToken}` }
+      };
     
-        axios.get(`https://api.nossproducteurslocaux.fr/api/fermier`, config)
-          .then(response => {
-            console.log(response.data)
-            setFermier(response.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }, []);
-
-      useEffect(()=>{
-        console.log(Fermier)
-      }, [Fermier])
-
-      useEffect(() => {
-        const config = {
-            headers: { token: `Bearer ${userToken}` }
-        };
+      axios.get(`https://api.nossproducteurslocaux.fr/api/fermier`, config)
+        .then(response => {
+          setFermier(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []);
     
-        axios.get(`https://api.nossproducteurslocaux.fr/api/product/all`, config)
-          .then(response => {
-            console.log(response.data)
-            setProducts(response.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }, []);
-
-      function deleteProduct (e){
-        const id= e.target.value
+    // Récupération de toutes les données des produits lors du chargement initial du composant
+    useEffect(() => {
+      const config = {
+        headers: { token: `Bearer ${userToken}` }
+      };
     
-        const config = {
-            headers: { token: `Bearer ${userToken}` }
-        };
+      axios.get(`https://api.nossproducteurslocaux.fr/api/product/all`, config)
+        .then(response => {
+          setProducts(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []);
     
-        axios.delete(`https://api.nossproducteurslocaux.fr/api/product/${id}`,config)
-          .then(response => {
-            window.location.reload();
+    function deleteProduct(e) {
+      const id = e.target.value;
     
-          })
-          .catch(error => {
-            console.log(error);
-          });
+      const config = {
+        headers: { token: `Bearer ${userToken}` }
+      };
     
+      // Requête DELETE pour supprimer un produit spécifique
+      axios.delete(`https://api.nossproducteurslocaux.fr/api/product/${id}`, config)
+        .then(response => {
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+    
+    const putFermier = async (e) => {
+      try {
+        // Requête PUT pour mettre à jour l'ID du fermier associé à un produit spécifique
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
+          fermierId: IdFermier,
+        }, config);
+      } catch (error) {
+        console.log(error);
       }
-
-      const putFermier= async (e) => {
-        try {
-          const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
-              fermierId: IdFermier,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
+    };
     
-      const putSize= async () => {
-        try {
-          const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
-              size: quantity,
-             }, 
-             config);
-             console.log(res.data)
-        } catch (error) {
-          console.log(error)
-        }
-      };
+    const putSize = async () => {
+      try {
+        // Requête PUT pour mettre à jour la quantité d'un produit spécifique
+        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/product/${idProduit}`, {
+          size: quantity,
+        }, config);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
 
   return (
     <div class="row align-content-center">

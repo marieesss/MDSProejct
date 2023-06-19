@@ -2,17 +2,21 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/apiCalls';
 import "../css/app.css";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const [email, setEmail]=useState("")
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const {isFetching, error}= useSelector((state)=> state.user)
-  console.log(error)
+  const navigate = useNavigate();
+
 
   const handleClick = (e) =>{
     e.preventDefault();
     login(dispatch, {email, password});
+    navigate('/')
   }
   return (
     <div class="page overflow-hidden">

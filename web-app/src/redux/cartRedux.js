@@ -28,7 +28,6 @@ const cartSlice = createSlice({
       }    
     },
     delProduct: (state, action) => {
-      console.log(action.payload)
       state.quantity -= action.payload.quantity; // baisse la quantité 
       //filtre et retient tout les produits qui ne sont pas égaux à l'id du produit supprimé 
       state.Product = state.Product.filter(item => item._id !== action.payload._id) 

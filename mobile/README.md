@@ -8,7 +8,11 @@ Nos producteurs locaux est une site e-commerce permettant d'acheter des produits
 ```
 npm install
 ```
+- Créer le fichier .env
 - Lancer le serveur
 ```
-npm run dev
+npm run start
 ```
+- Installer l'application Expogo
+- Scanner le QR Code
+

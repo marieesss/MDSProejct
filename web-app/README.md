@@ -10,7 +10,7 @@ npm install
 ```
 - Lancer le serveur
 ```
-npm run dev
+npm run start
 ```
 
 

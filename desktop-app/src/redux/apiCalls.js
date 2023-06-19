@@ -18,6 +18,7 @@ export const login = async (dispatch, user) => {
         }
       }
     );
+    console.log(res)
     dispatch(loginSuccess(res.data));
    
 

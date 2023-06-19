@@ -20,27 +20,36 @@ const Login = () => {
   const { user, dispatch } = useContext(UserContext);
 
 
-  const handleLogin= async() => {
-   try {
-    const res= await axios.post(`https://${BASE_URL}.fr/api/auth/login`, {email,password})
-    const loggedInUser = { username : res.data.username, email:res.data.email, id : res.data._id, token : res.data.accessToken };
-    dispatch({ type: 'LOGIN', payload: loggedInUser });
-    console.log(user)
-
-   } catch (error) {
-    console.log(error)
-    seterrorMsg(error.response.status)
-    
-   }
-  }
-
-  const handleClick = () => {
-    handleLogin();
-    console.log(user)
-    if(user){
-      navigation.navigate('Welcome')
+  const handleLogin = async () => {
+    try {
+      // Requête POST pour se connecter avec l'email et le mot de passe
+      const res = await axios.post(`https://${BASE_URL}.fr/api/auth/login`, { email, password });
+  
+      // Création de l'utilisateur connecté avec les données de la réponse
+      const loggedInUser = {
+        username: res.data.username,
+        email: res.data.email,
+        id: res.data._id,
+        token: res.data.accessToken
+      };
+  
+      // Dispatch de l'action de connexion avec les informations de l'utilisateur connecté
+      dispatch({ type: 'LOGIN', payload: loggedInUser });
+    } catch (error) {
+      // Gestion des erreurs de connexion
+      seterrorMsg(error.response.status);
     }
   };
+  
+  const handleClick = () => {
+    handleLogin();
+  
+    // Si l'utilisateur est connecté, naviguer vers la page "Welcome"
+    if (user) {
+      navigation.navigate('Welcome');
+    }
+  };
+  
 
 
   return (
@@ -72,7 +81,7 @@ const Login = () => {
       </TouchableOpacity>
 
       {errorMsg === 404 ?
-       <Text> Email original non trouvé</Text>
+       <Text> Email non trouvé</Text>
         : errorMsg === 401 ? 
         <Text> Pas le bon mot de passe ou mail, veuillez reessayer</Text> : null }
 

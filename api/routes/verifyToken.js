@@ -46,7 +46,6 @@ const verifyTokenUser = (req, res, next) => {
     if (req.user.id === req.params.userId || req.user.isAdmin) {
       next();
     } else {
-      console.log("tu es dans verifyTokenUser")
       res.status(403).json("You are not alowed to do that!");
     }
   });

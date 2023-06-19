@@ -5,22 +5,22 @@ const jwt =require("jsonwebtoken");
 
 // Inscription
 router.post("/register", async (req, res) => {
+  // Création d'un nouvel utilisateur avec les données du corps de la requête
   const newUser = new User({
-    username: req.body.username,
-    email: req.body.email,
-    //hash le mot de passe
-    password: CryptoJS.AES.encrypt(
-      req.body.password,
-      process.env.PASS_SEC
+    username: req.body.username, // Nom d'utilisateur
+    email: req.body.email, // Adresse e-mail
+    password: CryptoJS.AES.encrypt( // Cryptage du mot de passe
+      req.body.password, // Mot de passe à crypter
+      process.env.PASS_SEC // Clé de chiffrement
     ).toString(),
-    
   });
 
   try {
+    // Enregistrement du nouvel utilisateur dans la base de données
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
+    res.status(201).json(savedUser); // Réponse avec l'utilisateur enregistré
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err); // Erreur interne du serveur en cas d'échec de l'enregistrement
   }
 });
 

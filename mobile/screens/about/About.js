@@ -78,7 +78,7 @@ const About = () => {
         <View style={styles.view1}>
 
         <TouchableOpacity style={styles.button2} onPress={() => {
-        navigation.navigate("Welcome");
+        navigation.navigate("Hubs");
       }}>
         <Text style={styles.buttonText}>Nos hubs</Text>
       </TouchableOpacity>

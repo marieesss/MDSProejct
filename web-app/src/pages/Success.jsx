@@ -28,33 +28,29 @@ const Success = () => {
     const navigate = useNavigate();
 
     const getOrder = async () => {
-  
         try {
+              // Appel à l'API pour récupérer la commande la plus récente de l'utilisateur
           const res = await axios.get(`https://${URL}/api/order/find/last/${user}`, 
              {
                 headers: { token: `Bearer ${userToken}`,
                 userid: `Bearer ${user}`}
              });
+              // Enregistrement des informations de la commande dans l'état
              setInformations(res.data)
-             
-             console.log(res.data)
-             setIdCart(res.data[0]._id)
+                          setIdCart(res.data[0]._id)
              setHubid(res.data[0].hubId)
              setAmount(res.data[0].amount)
              setproductsId(res.data[0].products)
-
         } catch (error) {
           console.log(error)
         }
       };
 
       const getHub = async () => {
-  
+   // Appel à l'API pour récupérer le hub de la commande
         try {
           const res = await axios.get(`https://${URL}/api/hub/find/${hubId}`);
            setHub(res.data[0])
-           console.log(res.data[0])
-
         } catch (error) {
           console.log(error)
         }
@@ -62,32 +58,34 @@ const Success = () => {
 
 
       const getProducts = async () => {
-        console.log(productsId)
-        console.log(productsId.length)
         const products =[]
+        // Boucle pour chaque id du tableau product de la commande
         for(let i=0; i<productsId.length; i++) {
               try {
+                         // Appel à l'API pour récupérer chaque produit en fonction de leur id
                         const res = await axios.get(`https://${URL}/api/product/find/${productsId[i].productId}`, 
                           {
                               headers: { token: `Bearer ${userToken}` }
                           });
+                         // envoie des résultats de l'appel à l'API dans un tableau initialement vide
                           products.push(res.data)
-                          console.log(products)
                          
                       } catch (error) {
                         console.log(error)
                       }
         }
+        // Mise à jour de l'état avec le tableau rempli par la boucle
         setproducts(products)  
-  
-        
       };
 
       const putOrder = async () => {
         try {
+          // Appel à l'API pour modifier la dernière commande
           const res = await axios.put(`https://${URL}/api/order/${idCart}/${informations[0].userId}`,{
             status: "payé",
+            // confirmation de Stripe 
             stripeStatus : stripe.status, 
+            // Adresse de facturation
             billingAdress : {
               adress : {
                 city : stripe.billing_details.address.city,
@@ -96,9 +94,10 @@ const Success = () => {
                 postal_code : stripe.billing_details.address.postal_code
               }
             },
+            // lien du reçu
             receipt_url: stripe.receipt_url
 
-          }, 
+          }, // token et l'id de l'utilisateur
              {
                 headers: { token: `Bearer ${userToken}`,
                 userid: `Bearer ${user}`},

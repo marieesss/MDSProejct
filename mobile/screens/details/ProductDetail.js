@@ -91,9 +91,9 @@ const ProductDetail = ({ navigation, route }) => {
                 <Image source={{uri: product.img}}
             style={{width: 200, height: 200, borderRadius:15}}
             />
-              <View>
-                <Text style={styles.text}> Prix : {product.price} €</Text>
-                <Text style={styles.text}> {product.desc}</Text>
+              <View style={styles.row}>
+                <Text style={styles.desc}> {product.price} €/kg</Text>
+                <Text style={styles.desc}> {product.desc}</Text>
               </View>
             </View>
 
@@ -117,17 +117,18 @@ const ProductDetail = ({ navigation, route }) => {
             
 
                 <View style={styles.row}>
-                    <View>
-                    <Text style={styles.text}> {fermier.name}</Text>
-                    <Text style={styles.text}> {fermier.desc}</Text>
-                    </View>
-                    <TouchableOpacity key={fermier._id} onPress={() => {
+                <TouchableOpacity key={fermier._id} onPress={() => {
         navigation.navigate("FermierDetails", {_id : fermier._id});
       }}>
                       <Image source={{uri: fermier.img}}
                     style={{width: 200, height: 200, borderRadius:15}}
                     />
                     </TouchableOpacity>
+                    <View>
+                    <Text style={styles.name}> {fermier.name}</Text>
+                    <Text style={styles.text}> {fermier.desc}</Text>
+                    </View>
+                    
                 </View>
                 
             

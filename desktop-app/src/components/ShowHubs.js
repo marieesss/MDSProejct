@@ -2,10 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
-import Menu from '../components/Menu';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import NewHub from '../components/NewHub';
 import Form from 'react-bootstrap/Form';
 import "../css/app.css";
 import Table from 'react-bootstrap/Table';
@@ -16,10 +13,7 @@ const ShowHubs = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [adress, setAdress] = useState("");
     const [name, setName] = useState("");
-    const [ville, setVille] = useState("");
-    const [code, setCode] = useState("");
     const [idProduit, setIdproduit] = useState("");
 
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
@@ -30,49 +24,48 @@ const ShowHubs = () => {
    };
 
 
-    useEffect(() => {
-        axios.get(`https://api.nossproducteurslocaux.fr/api/hub/`, config)
-          .then(response => {
-            console.log(response)
-            setHub(response.data)
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }, []);
-    
+   useEffect(() => {
+    // Récupération des données des hubs lors du chargement initial du composant
+    axios.get(`https://api.nossproducteurslocaux.fr/api/hub/`, config)
+      .then(response => {
+        // Mise à jour de l'état avec les données des hubs
+        setHub(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
   
-    const putName = async () => {
-      try {
-        const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/hub/${idProduit}`, {
-            name: name,
-           }, 
-           config);
-           console.log(res.data)
-      } catch (error) {
-        console.log(error)
-      }
-    };
-
-    function handleDelete (e){
-      console.log(e.target.value)
-      const id= e.target.value
-  
-      const config = {
-          headers: { token: `Bearer ${userToken}` }
-      };
-  
-      axios.delete(`https://api.nossproducteurslocaux.fr/api/hub/${id}`,config)
-        .then(response => {
-          console.log(response)
-          window.location.reload()
-  
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  
+  const putName = async () => {
+    try {
+      // Requête PUT pour mettre à jour le nom d'un hub spécifique
+      const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/hub/${idProduit}`, {
+        name: name,
+      }, config);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+  
+  function handleDelete(e) {
+    const id = e.target.value;
+  
+    const config = {
+      headers: { token: `Bearer ${userToken}` }
+    };
+  
+    // Requête DELETE pour supprimer un hub spécifique
+    axios.delete(`https://api.nossproducteurslocaux.fr/api/hub/${id}`, config)
+      .then(response => {
+        // Rechargement de la page après la suppression du hub
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  
 
 
   return (

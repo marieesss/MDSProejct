@@ -14,7 +14,9 @@ const Menu = () => {
     const quantity= useSelector(state=> state.cart.quantity)
     const user = useSelector((state) => state.user.currentUser);
     
-    const logoutHandler = (e) =>{
+
+  // envoie l'action au réducer logout pour se déconnecter
+  const logoutHandler = (e) =>{
       e.preventDefault();
       dispatch(logout());
       dispatch(resetCart())

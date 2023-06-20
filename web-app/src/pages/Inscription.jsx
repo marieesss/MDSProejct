@@ -95,7 +95,7 @@ const Inscription = () => {
             } else {
               // Si une autre erreur survient, affichage d'un message générique et affichage de l'erreur dans la console
               setErrMsg('Veuillez choisir un autre nom d\'utilisateur ou une autre adresse email');
-              console.log(err);
+              console.log("erreur");
             }
           }
         }

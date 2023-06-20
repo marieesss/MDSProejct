@@ -10,6 +10,7 @@ const Menu = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
 
+  // envoie l'action au réducer logout pour se déconnecter
   const logoutHandler = (e) =>{
     e.preventDefault();
     dispatch(logout());

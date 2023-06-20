@@ -34,7 +34,6 @@ router.put("/:id", verifyTokenAdmin, async (req, res) => {
 //User can modify his profile
 
 router.put("/updatebyuser/:userId", verifyToken,verifyTokenAuth, async (req, res) => {
-  console.log("salut")
   try {
 
      // Rechercher l'utilisateur dans la base de données par nom d'utilisateur
@@ -149,7 +148,6 @@ router.get("/stats", verifyTokenAdmin, async (req, res) => {
 //User can modify his profile
 
 router.put("/updatebyuser/:userId", verifyToken,verifyTokenAuth, async (req, res) => {
-  console.log("salut")
   try {
 
      // Rechercher l'utilisateur dans la base de données par nom d'utilisateur
@@ -186,7 +184,7 @@ router.put("/updatebyuser/:userId", verifyToken,verifyTokenAuth, async (req, res
     res.status(200).json(updatedUser);
   } catch (err) {
     res.status(500).json(err);
-    console.log(err)
+    console.log("erreur")
   }
 });
 

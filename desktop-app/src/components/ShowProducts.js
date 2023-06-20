@@ -40,7 +40,7 @@ const ShowProducts = () => {
           desc: desc,
         }, config);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -51,7 +51,7 @@ const ShowProducts = () => {
           img: img,
         }, config);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -62,7 +62,7 @@ const ShowProducts = () => {
           price: price,
         }, config);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -77,7 +77,7 @@ const ShowProducts = () => {
           setFermier(response.data);
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }, []);
     
@@ -92,7 +92,7 @@ const ShowProducts = () => {
           setProducts(response.data);
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }, []);
     
@@ -109,7 +109,7 @@ const ShowProducts = () => {
           window.location.reload();
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }
     
@@ -120,7 +120,7 @@ const ShowProducts = () => {
           fermierId: IdFermier,
         }, config);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -131,7 +131,7 @@ const ShowProducts = () => {
           size: quantity,
         }, config);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     

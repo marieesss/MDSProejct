@@ -26,10 +26,10 @@ describe('Hub', () => {
 
       test("Add hub", async () => { 
         const hub = {
-          name: "Nice Jean Medecin",
-          adress: "1 avenue Jean Medecin",
-            ville: "Nice",
-            code:"06000"
+          name: "St laurent du Var",
+          adress: "1176 Rte de Saint-Laurent",
+            ville: "La Gaude",
+            code:"06610"
         }
 
         
@@ -39,28 +39,27 @@ describe('Hub', () => {
           .set('token', `Bearer ${token}`);
           expect(response.status).toBe(201); // Définit le code de retour attendu
           hubId = response.body._id;
-          expect(response.body.code).toBe("06000");
+          expect(response.body.code).toBe("06610");
 
       });
 
 
       test("putHub", async () => { 
         const hub = {
-          name : "Jean"
+          name : "St Laurent du Var"
         }
         const response = await request("https://api.nossproducteurslocaux.fr") 
           .put(`/api/hub/${hubId}`)
           .send(hub)
           .set('token', `Bearer ${token}`);
         expect(response.statusCode).toBe(200); 
-        expect(response.body.name).toBe("Jean");
+        expect(response.body.name).toBe("St Laurent du Var");
       });
 
       test("deleteHub", async () => { 
         const response = await request("https://api.nossproducteurslocaux.fr") 
           .delete(`/api/hub/${hubId}`)
           .set('token', `Bearer ${token}`);
-          console.log(hubId)
         expect(response.statusCode).toBe(200); 
       });
 

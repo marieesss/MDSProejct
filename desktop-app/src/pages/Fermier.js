@@ -27,7 +27,7 @@ const Fermier = () => {
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
 
-    
+    // refresh la page si le fermier est bien ajouté a la base de donnée pour le récupérer
     useEffect(()=>{
       if(successMessage===200){
         window.location.reload()
@@ -38,15 +38,14 @@ const Fermier = () => {
        headers: { token: `Bearer ${userToken}` }
    };
 
-
+ // recupérer tout les fermiers
     useEffect(() => {
         axios.get(`https://api.nossproducteurslocaux.fr/api/fermier/`, config)
           .then(response => {
-            console.log(response)
             setFermier(response.data)
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 
@@ -60,7 +59,7 @@ const Fermier = () => {
   </div>  
 
         <button onClick={handleShow} class="button-green margin-50 margin-left">Ajouter un fermier</button>
-
+      {/* affiche un message si il y a une erreur lors de l'enregistrement des données */}
         {errorMessage ? <div class="errMsg"> {errorMessage}</div>:  null}
 
 

@@ -64,7 +64,7 @@ router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => 
       );
       res.status(200).json(updatedOrder);
     } catch (err) {
-      console.log(err)
+      console.log("erreur")
       res.status(500).json(err);
     }
   });
@@ -106,7 +106,6 @@ router.put("/:id/:userId", verifyTokenAuth,verifyTokenUser, async (req, res) => 
        //GET USER Order TO modifyr
 
        router.get("/find/last/:userId", verifyTokenAuth, verifyTokenUser, async (req, res) => {
-        console.log(req.params.userId)
         try {
           const orders = await Order.find({ userId: req.params.userId })
             .sort({ updatedAt: -1 })

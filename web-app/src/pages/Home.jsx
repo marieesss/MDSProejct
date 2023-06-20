@@ -19,17 +19,20 @@ const Home = () => {
     const navigate = useNavigate();
     const URL = process.env.REACT_APP_API_URL;
 
+    // récupération des quatres derniers produits
     useEffect(() => {
         axios.get(`https://${URL}/api/product`)
           .then(response => {
+            // je garde les 4 produits les plus récents
             const productsData = response.data.slice(0,4);
             setProducts(productsData);
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 
+          // récupération des quatres derniers fermiers
       useEffect(() => {
         axios.get(`https://${URL}/api/fermier`)
           .then(response => {
@@ -37,7 +40,7 @@ const Home = () => {
             setFermier(productsData);
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 
@@ -45,9 +48,9 @@ const Home = () => {
         setFermierId(id)
       }
 
+      // envoie l'utilisateur vers la page des produits
       useEffect(() => {
         if (fermierId) {
-          console.log(fermierId);
           navigate('/productf', {state : {fermierId: fermierId}});
         }
       }, [fermierId]);

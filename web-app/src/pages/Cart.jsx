@@ -22,7 +22,6 @@ const Cart = () => {
   const [stripe, setStripe]= useState("")
   const [OrderId, setOrderId]= useState("")
   const cart= useSelector(state=> state.cart)
-  console.log(cart)
   const user = useSelector((state) => state.user.currentUser._id);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
@@ -37,14 +36,15 @@ const Cart = () => {
     setStripeToken(token);
   };
 
+  //méthode pour créer une commande a
   const registerOrderFirst = async () => {
     if(hubChoisi !== ""){
-      console.log(hubChoisi)
     const config = {
       headers: { token: `Bearer ${userToken}`,
       userid: `Bearer ${user}` }
   };
 
+  // ajoute tout les id des produits du panier dans la commande
     const produitarray= []
       for(let i = 0; i < cart.Product.length; i++){
         const array= {
@@ -54,7 +54,7 @@ const Cart = () => {
         produitarray.push(array)
       }
     
-
+//appel à l'API pour créer une commande
     try {
       const res = await axios.post(`https://${URL}/api/order`, {
           userId: user,
@@ -64,15 +64,16 @@ const Cart = () => {
           Status: "En attente de paiement",
          }, 
          config);
-         console.log(res.data)
       
     } catch (error) {
-      console.log(error)
+      console.log("erreur")
     }
   }else{
     window.alert('pas de hub choisi, veuillez recommencer, vous aurez pas une adresse de livraison')
   }};
 
+  //ajoute des frais de livraisons si la commande est inférieur à 50 euros
+  //calcule la TVA 
   useEffect(()=> {
     if(cart.total<50){
       setLivraisonFees(true);
@@ -84,10 +85,6 @@ const Cart = () => {
       setTVA(((cart.total)*0.2).toFixed(2))
     }
   },[cart.total])
-
-  useEffect(()=> {
-    console.log((total*100).toFixed(0))
-  },[total])
 
 
   useEffect(()=>{
@@ -104,7 +101,7 @@ const Cart = () => {
         setOrderId(res.data._id)
       }catch(err){
         // si une erreur se produit lors de la demande de paiement, affiche l'erreur dans la console
-        console.log(err.response.data)
+        console.log("erreur")
       }
     }
     // appelle uniquement si un token de paiement est disponible et que le montant total du panier a changé
@@ -125,21 +122,23 @@ const Cart = () => {
       });
     }
   }, [stripe, navigate]);
+
+  //récupère tout les hubs
   useEffect (()=>{
     const getHub = async ()=> {
       try{
         const res =  await axios.get(`https://${URL}/api/hub`)
         setHub(res.data);
-        console.log(hub)
       }catch(err){}
     }
     getHub();
   }, [])
 
+
+  //stocke l'id du hub choisi
   const handleFilter = (e) => {
     const value = e.target.value;
         setHubChoisi(value)
-        console.log(value)
   };
 
   return (

@@ -1,6 +1,6 @@
 # Nos producteurs locaux
 
-Nos producteurs locaux est une site e-commerce permettant d'acheter des produits dans la région SUD et faire valoir le travail des fermiers locaux
+Nos producteurs locaux est une site e-commerce permettant d'acheter des produits dans les Alpes Maritimes et faire valoir le travail des fermiers locaux
 
 ## Vous trouverez dans ce repository
 - API

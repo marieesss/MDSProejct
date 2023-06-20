@@ -54,7 +54,7 @@ router.post("/", verifyTokenAdmin ,async (req, res) => {
      res.status(400).json({ message: 'Adresse invalide' });
    }
  } catch (error) {
-   console.log("erreur");
+   console.log(error);
    res.status(500).json({ message: 'Erreur serveur' });
  }
 

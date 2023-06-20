@@ -39,7 +39,7 @@ describe('Product', () => {
           .post("/api/product")
           .send(product)
           .set('token', `Bearer ${token}`);
-          expect(response.statusCode).toBe(200); // Définit le code de retour attendu
+          expect(response.statusCode).toBe(201); // Définit le code de retour attendu
           productId = response.body._id;
 
       });

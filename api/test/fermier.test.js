@@ -58,6 +58,7 @@ describe('Fermier', () => {
         const response = await request("https://api.nossproducteurslocaux.fr") 
           .delete(`/api/hub/${fermierId}`)
           .set('token', `Bearer ${token}`);
+	console.log(fermierId)
         expect(response.statusCode).toBe(200); 
       });
 

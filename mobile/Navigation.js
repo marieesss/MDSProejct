@@ -68,7 +68,7 @@ export default function NavigationApp() {
           title:"Nos producteurs" }}/>
           <Drawer.Screen name="Hubs" component={Hubs} options={{ headerTitle:'Nos producteurs locaux' }}/>
           {user ?
-            <Drawer.Screen name="Mon profil" component={UserProfile} options={{ headerTitle:'Nos producteurs locaux' }}/>          
+            <Drawer.Screen name="Profile" component={UserProfile} options={{ headerTitle:'Nos producteurs locaux' }}/>          
           : null}
 
           {user ? <Drawer.Screen name="Logout" component={LogoutButton} options={{title: 'Se déconnecter'}}/>

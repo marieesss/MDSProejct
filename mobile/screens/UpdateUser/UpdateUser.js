@@ -7,6 +7,7 @@ import axios from 'axios'
 
 
 import styles from './UpdateUser.style'
+import HeaderMenu from '../../components/header/Header';
 
 const UpdateUser = () => {
   const BASE_URL = process.env.BASE_URL
@@ -51,8 +52,9 @@ const UpdateUser = () => {
 
 
   return (
+    <View>
+    <HeaderMenu title="Modification du profil"/>
     <View style={styles.container}>
-      <Text style={styles.title}>Modification</Text>
       <TextInput
         style={styles.input}
         placeholder="Nouvelle adresse mail"
@@ -98,6 +100,7 @@ const UpdateUser = () => {
        <Text> Email original non trouvé</Text>
         : errorMsg === 401 ? 
         <Text> Pas le bon mot de passe</Text> : null }
+    </View>
     </View>
 
 

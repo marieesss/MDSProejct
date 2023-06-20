@@ -12,9 +12,10 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-
+//méthode pour se connecter
   const handleClick = async (e) => {
     try {
+      // envoie l'action au réducer login pour se connecter
       await login(dispatch, { email, password });
       navigate("/");
     } catch (error) {

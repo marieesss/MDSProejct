@@ -7,15 +7,14 @@ const Hubs = () => {
     const [hubs, setHubs] = useState([]);
     const URL = process.env.REACT_APP_API_URL;
 
+    // récupérer tout les hubs
     useEffect(() => {
         axios.get(`https://${URL}/api/hub`)
           .then(response => {
-            console.log(response.data)
             setHubs(response.data);
-            console.log(hubs)
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 

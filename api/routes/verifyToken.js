@@ -30,12 +30,9 @@ const verifyTokenAuth = (req, res, next) => {
     const authHeader = req.headers.userid;
     const userid = authHeader.split(" ")[1];
     if (req.user.id === userid || req.user.isAdmin) {
-      console.log("youpi")
       next();
 
     } else {
-      console.log(req.user.id)
-      console.log(userid)
       res.status(403).json("You are not alowed to do that!");
     }
   });

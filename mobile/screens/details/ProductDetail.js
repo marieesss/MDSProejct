@@ -13,52 +13,45 @@ const ProductDetail = ({ navigation, route }) => {
     const [fermier, setFermier] = useState({});
     const [products, setProducts] = useState([]);
 
+
+    // méthode pour récupérer le détail des produits
     useEffect(()=>{
         const getProduct = async ()=> {
           try{
             const res = await axios.get(`https://${BASE_URL}.fr/api/product/find/`+route.params._id);
             setProduct(res.data)
             setFermierId(res.data.fermierId)
-            console.log(fermierId)
             
           }catch(err){
-            console.log(err)
+            console.log("erreur")
           }
         };
         getProduct();
-       
-      
-        
     }, [route.params])
 
+    // récupération des données du fermier
     useEffect(()=>{
-        const getProduct = async ()=> {
+        const getFermier = async ()=> {
           try{
             const res = await axios.get(`https://${BASE_URL}.fr/api/fermier/find/`+fermierId);
-            console.log(res.data)
-            setFermier(res.data)
-
-            
+            setFermier(res.data)  
           }catch(err){
-            console.log(err)
+            console.log("erreur")
           }
         };
-        getProduct();
-       
-      
-        
+        getFermier();
     }, [fermierId])
 
+        // récupération des autres produits du fermier
     useEffect(()=>{
       const getProducts = async ()=> {
         try{
           const res = await axios.get(`https://${BASE_URL}.fr/api/product?fermier=`+fermierId);
-          console.log(res.data)
           setProducts(res.data)
 
           
         }catch(err){
-          console.log(err)
+          console.log("erreur")
         }
       };
       getProducts();

@@ -24,21 +24,21 @@ const Hub = () => {
     const config = {
        headers: { token: `Bearer ${userToken}` }
    };
-
+    // refresh la page si le hub est bien ajouté a la base de donnée pour le récupérer
    useEffect(()=>{
     if(successMessage===201){
       window.location.reload()
     }
    },[successMessage])
 
+    // recupérer tout les hubs
     useEffect(() => {
         axios.get(`https://api.nossproducteurslocaux.fr/api/hub/`, config)
           .then(response => {
-            console.log(response)
             setHub(response.data)
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 
@@ -49,10 +49,6 @@ const Hub = () => {
       const handleClose = () => {
         setShowModal(false); // Mettre à jour la variable d'état pour fermer le modal
       };
-
-      useEffect(() => {
-        console.log(errorMessage)
-      }, [errorMessage]);
       
 
   return (

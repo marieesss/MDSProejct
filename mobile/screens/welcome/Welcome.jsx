@@ -19,6 +19,7 @@ const Welcome = () => {
 
   const BASE_URL = process.env.BASE_URL
 
+    //récupération des produits
   useEffect(() => {
     axios.get(`https://${BASE_URL}.fr/api/product`)
       .then(response => {
@@ -26,10 +27,11 @@ const Welcome = () => {
         
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 
+    //récupération des produits en fonction de la catégorie fruit
   useEffect(() => {
     axios.get(`https://${BASE_URL}.fr/api/product?category=fruit`)
       .then(response => {
@@ -37,10 +39,12 @@ const Welcome = () => {
         
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 
+
+  //récupération des produits en fonction de la catégorie légume
   useEffect(() => {
     axios.get(`https://${BASE_URL}.fr/api/product?category=legume`)
       .then(response => {
@@ -48,7 +52,7 @@ const Welcome = () => {
         
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 

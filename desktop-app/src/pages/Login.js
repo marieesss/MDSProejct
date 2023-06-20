@@ -15,7 +15,9 @@ const Login = () => {
 
   const handleClick = (e) =>{
     e.preventDefault();
+      // envoie l'action au réducer login pour se connecter
     login(dispatch, {email, password});
+      // envoie vers la page principale
     navigate('/')
   }
   return (

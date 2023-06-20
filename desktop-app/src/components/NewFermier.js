@@ -15,10 +15,12 @@ const NewFermier = ({handleClose, setErrorMessage, setSuccessMessage}) => {
     const [img, setImg] = useState("");
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
+    // configuration pour l'appel à l'API
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
 
+        // méthode pour envoyer les données et créer un fermier dans l'API
         const newFermier = async () => {
             try {
               const res = await axios.post("https://api.nossproducteurslocaux.fr/api/fermier/", {

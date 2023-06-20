@@ -24,11 +24,10 @@ const Commandes = () => {
       const res = await axios.get(`https://${BASE_URL}.fr/api/order/find/${user.id}`, {
         headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
       });
-      console.log(res.data)
       setInformations(res.data);
       setHasDataLoaded(true);
     } catch (error) {
-      console.log(error);
+      console.log("erreur");
     }
   };
 

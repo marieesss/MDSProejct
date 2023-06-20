@@ -20,34 +20,34 @@ const UpdateUser = () => {
   const { user, dispatch } = useContext(UserContext);
 
 
-  const handleUpdate= async() => {
-   try {
-    const res= await axios.put(`https://${BASE_URL}.fr/api/user/updatebyuser/${user.id}`,
-     {
-      email : email, 
-      password : password,
-      username :username,
-      newemail: newEmail
-
-    },
-    {
-      headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` },
-    })
-    const loggedInUser = { username : res.data.username, email:res.data.email, id : res.data._id, token : res.data.accessToken };
-    dispatch({ type: 'LOGIN', payload: loggedInUser });
-    console.log(user)
-    navigation.navigate('Profile')
-
-   } catch (error) {
-    console.log(error)
-    seterrorMsg(error.response.status)
-    
-   }
+  const handleUpdate = async () => {
+    try {
+      // Effectue une requête PUT vers l'URL de mise à jour de l'utilisateur avec les données de mise à jour
+      const res = await axios.put(`https://${BASE_URL}.fr/api/user/updatebyuser/${user.id}`, {
+        email: email,
+        password: password,
+        username: username,
+        newemail: newEmail
+      }, {
+        headers: { token: `Bearer ${user.token}`, userid: `Bearer ${user.id}` }
+      });
+      // Met à jour les informations de l'utilisateur dans le state global
+      const loggedInUser = { username: res.data.username, email: res.data.email, id: res.data._id, token: res.data.accessToken };
+      dispatch({ type: 'LOGIN', payload: loggedInUser });
+      // Navigue vers la page du profil
+      navigation.navigate('Profile');
+    } catch (error) {
+      console.log("erreur");
+      // Gère les erreurs lors de la requête
+      seterrorMsg(error.response.status);
+    }
   }
-
+  
   const handleClick = () => {
+    // Appelle la fonction handleUpdate pour mettre à jour les informations de l'utilisateur
     handleUpdate();
   };
+  
 
 
   return (

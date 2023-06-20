@@ -13,35 +13,33 @@ const FermierDetails = ({ navigation, route }) => {
     const [fermier, setFermier] = useState({});
     const [products, setProducts] = useState([]);
 
-    console.log(route.params._id)
 
+    // récupération des données du fermier en fonction de son id
     useEffect(()=>{
-        const getProduct = async ()=> {
+        const getFermier = async ()=> {
           try{
             const res = await axios.get(`https://${BASE_URL}.fr/api/fermier/find/`+ route.params._id);
-            // console.log(res.data)
             setFermier(res.data)
             setFermierId(res.data._id)
 
             
           }catch(err){
-            console.log(err)
+            console.log("erreur")
           }
         };
-        getProduct();
+        getFermier();
         
     }, [route.params._id])
 
+
+    //récupération des produits en fonction de l'id du producteur
     useEffect(()=>{
       const getProducts = async ()=> {
         try{
           const res = await axios.get(`https://${BASE_URL}.fr/api/product?fermier=`+fermierId);
-          // console.log(res.data)
           setProducts(res.data)
-
-          
         }catch(err){
-          console.log(err)
+          console.log("erreur")
         }
       };
       getProducts();

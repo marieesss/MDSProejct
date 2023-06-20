@@ -41,12 +41,11 @@ const ShowFermier = () => {
       // Récupération des données des fermiers lors du chargement initial du composant
       axios.get(`https://api.nossproducteurslocaux.fr/api/fermier/`, config)
         .then(response => {
-          console.log(response);
           // Mise à jour de l'état avec les données des fermiers
           setFermier(response.data);
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }, []);
     
@@ -56,9 +55,8 @@ const ShowFermier = () => {
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/fermier/${idFermier}`, {
           name: name,
         }, config);
-        console.log(res.data);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -68,9 +66,8 @@ const ShowFermier = () => {
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/fermier/${idFermier}`, {
           desc: desc,
         }, config);
-        console.log(res.data);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -80,9 +77,8 @@ const ShowFermier = () => {
         const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/fermier/${idFermier}`, {
           img: img,
         }, config);
-        console.log(res.data);
       } catch (error) {
-        console.log(error);
+        console.log("erreur");
       }
     };
     
@@ -96,12 +92,11 @@ const ShowFermier = () => {
       // Requête DELETE pour supprimer un fermier spécifique
       axios.delete(`https://api.nossproducteurslocaux.fr/api/fermier/${id}`, config)
         .then(response => {
-          console.log(response);
           // Rechargement de la page après la suppression du fermier
           window.location.reload();
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }
     

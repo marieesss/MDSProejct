@@ -42,7 +42,7 @@ const Success = () => {
              setAmount(res.data[0].amount)
              setproductsId(res.data[0].products)
         } catch (error) {
-          console.log(error)
+          console.log("erreur")
         }
       };
 
@@ -52,7 +52,7 @@ const Success = () => {
           const res = await axios.get(`https://${URL}/api/hub/find/${hubId}`);
            setHub(res.data[0])
         } catch (error) {
-          console.log(error)
+          console.log("erreur")
         }
       };
 
@@ -71,7 +71,7 @@ const Success = () => {
                           products.push(res.data)
                          
                       } catch (error) {
-                        console.log(error)
+                        console.log("erreur")
                       }
         }
         // Mise à jour de l'état avec le tableau rempli par la boucle
@@ -104,7 +104,7 @@ const Success = () => {
              });
           
         } catch (error) {
-          console.log(error)
+          console.log("erreur")
         }
       };
       
@@ -122,7 +122,6 @@ useEffect(()=>{
 
 
 useEffect(()=>{
-  console.log(hubId)
   getHub()
 }, [hubId])
 

@@ -14,60 +14,59 @@ import Menu from './Menu';
 function ProductListTest() {
   const [produitsFiltres, setProduitsFiltres] = useState([]);
   const [fermier, setFermier] = useState([]);
-  const [products, setProducts] = useState ([]) // championSort, setChampionsSort
+  const [products, setProducts] = useState ([]) 
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation();
 
+  //récupération de l'url de l'API
   const URL = process.env.REACT_APP_API_URL;
-  
+  //récupération du state envoyé par la page fermier
   const url= location.state?.fermierId;
  
 
   useEffect(() => {
-    
+    // si j'ai l'id du fermier, méthode pour récupérer les produits en fonction du fermier
     url ? axios.get(`https://${URL}/api/product?fermier=${url}`)
     .then(response => {
-      console.log(response)
       const productsData = response.data;
       const productsList = Object.keys(productsData).map(key => productsData[key]);
-      console.log(productsList)
       setProducts(productsList);
     })
     .catch(error => {
-      console.log(error);
+      console.log("erreur");
     })
     :
+    //sinon méthode pour récupérer tout les produits
     axios.get(`https://${URL}/api/product`)
       .then(response => {
-        console.log(response)
         const productsData = response.data;
         const productsList = Object.keys(productsData).map(key => productsData[key]);
-        console.log(productsList)
         setProducts(productsList);
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, [url]);
 
+  //méthode pour récupérer tout les fermiers
   useEffect(() => {
     axios.get(`https://${URL}/api/fermier`)
       .then(response => {
-        console.log(response.data)
         setFermier(response.data);
-        console.log(fermier)
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 
 
-
+//méthode pour filtrer en fonction de la valeur du select
   const sort = () => {
     setProduitsFiltres(products.filter(product => product.categories.includes(document.getElementById("select").value)));
   }
 
+
+  //méthode pour filtrer en fonction de la valeur dans la barre de recherche
 const searchItems = (searchValue) => {
   setSearchInput(searchValue)
   if (searchInput !== '') {

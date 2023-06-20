@@ -15,7 +15,7 @@ const NewHub = ({handleClose, setErrorMessage, setSuccessMessage}) => {
 
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
 
-
+    // configuration pour l'appel à l'API
   const config = {
      headers: { token: `Bearer ${userToken}` }
  };
@@ -28,7 +28,7 @@ const hancleCreate = (e)=>{
 }
 
 
-
+ // méthode pour envoyer les données vers l'API et créer un hub
 const newhub = async () => {
   try {
     const res = await axios.post("https://api.nossproducteurslocaux.fr/api/hub/", {

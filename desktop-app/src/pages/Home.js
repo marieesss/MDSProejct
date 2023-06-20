@@ -16,11 +16,10 @@ const Home = () => {
   const [dataOrder, setDataOrder] = useState([]);
   const [dataUser, setDataUser] = useState([]);
   const [orderStats, setorderStats] = useState([]);
-  const [LastOrders, setLastOrders] = useState([]);
   const userToken = useSelector((state) => state.user.currentUser.accessToken);
   const navigate = useNavigate();
 
-
+ // création du tableau avec les mois
   const MONTHS = useMemo(
     () => [
       "Janvier",
@@ -42,8 +41,9 @@ const Home = () => {
     headers: { token: `Bearer ${userToken}` }
 };
 
+//récupération des statistiques des utilisateurs des trois derniers mois
   useEffect(() => {
-    const getOrderStats = async () => {
+    const getUserStats = async () => {
       try {
         const res = await axios.get("https://api.nossproducteurslocaux.fr/api/user/stats", config);
         setDataUser(res.data)
@@ -53,50 +53,45 @@ const Home = () => {
         }
       }
     };
-    getOrderStats(); 
+    getUserStats(); 
   }, [MONTHS]);
 
+    // associe les donnnées des commandes créés à un mois
   useEffect(()=>{
     const tableau = []
     dataOrder.map(data =>
+       // ajoute dans le tableau un objet avec la valeur et le mois correspond à l'id
+       // l'id est de 1 à 12 alors que le tableau commence par 0 donc on fait -1 
       tableau.push({"month": MONTHS[data._id -1], "value": data.total})
       )
       setorderStats(tableau)
   },[dataOrder])
 
+
+  // associe les donnnées des utilisateurs créés à un mois
   useEffect(()=>{
      const tableau = []
     dataUser.map(data =>
+       // ajoute dans le tableau un objet avec la valeur et le mois correspond à l'id
+       // l'id est de 1 à 12 alors que le tableau commence par 0 donc on fait -1 
       tableau.push({"month": MONTHS[data._id -1], "value": data.total})
       )
       setUserStats(tableau)
   }, [dataUser])
 
-
+//récupération des statistiques des commandes des trois derniers mois
   useEffect(() => {
     const getStats = async () => {
       try {
         const res = await axios.get("https://api.nossproducteurslocaux.fr/api/order/stats", config);
         setDataOrder(res.data)
       } catch(err){
-        console.log(err)
+        console.log("erreur")
       }
     };
     getStats(); 
   }, [MONTHS]);
 
-
-  useEffect(() => {
-
-    axios.get("https://api.nossproducteurslocaux.fr/api/order/adminhomepage", config)
-      .then(response => {
-        setLastOrders(response.data)
-        
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, []);
  
 
 

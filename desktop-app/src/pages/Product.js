@@ -17,6 +17,7 @@ const Product = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //reload si le produit est bien créé pour afficher le nouveau produit 
   useEffect(()=>{
     if(successMessage===200){
       window.location.reload()

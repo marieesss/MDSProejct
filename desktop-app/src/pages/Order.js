@@ -7,9 +7,6 @@ import "../css/app.css";
 import axios from 'axios';
 
 const Order = () => {
-    const [order, setOrder] = useState([]);
-    const [productId, setProductId] = useState({});
-    const [product, setProduct] = useState([]);
     const [OrderListe, setOrderListe] = useState([]);
     const userToken = useSelector((state) => state.user.currentUser.accessToken);
     const user = useSelector((state) => state.user.currentUser._id);
@@ -49,50 +46,49 @@ const Order = () => {
           setOrderListe(updatedOrders);
         })
         .catch(error => {
-          console.log(error);
+          console.log("erreur");
         });
     }, []);
     
     
 
-
+// modifie la commande pour mettre à jour le statut comme étant envoyé 
   function handleEnvoie (e){
-    console.log(e.target.value)
+    //récupération de l'id 
     const id= e.target.value
-
+//mis en place de la config avec le token admin
     const config = {
         headers: { token: `Bearer ${userToken}`,
         userid: `Bearer ${user}` }
     };
-
+//appel à l'API pour modifier la commande
     axios.put(`https://api.nossproducteurslocaux.fr/api/order/${id}/${user}`, {
         status : "envoyé"
     },config)
       .then(response => {
         window.location.reload();
-
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
 
   }
 
+  // Supprimer une commande 
   function handleDelete (e){
-    console.log(e.target.value)
+    //récupération de l'id de la commande
     const id= e.target.value
-
     const config = {
         headers: { token: `Bearer ${userToken}` }
     };
-
+    //appel à l'API pour supprimer la commande
     axios.delete(`https://api.nossproducteurslocaux.fr/api/order/${id}`,config)
       .then(response => {
         window.location.reload();
 
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
 
   }

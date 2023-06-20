@@ -25,6 +25,8 @@ const User = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  //récupération de tout les utilisateurs
     useEffect(() => {
         const config = {
             headers: { token: `Bearer ${userToken}` }
@@ -35,17 +37,20 @@ const User = () => {
             setUserListe(response.data);
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 
+
+// méthode pour supprimer l'utilisateur
       function handleDelete (e){
+        //récupération de l'id de l'utilisateur
         const id= e.target.value
     
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
-    
+    //appel à l'API pour supprimer en fonction de l'id
         axios.delete(`https://api.nossproducteurslocaux.fr/api/user/${id}`,config)
           .then(response => {
             setMessage("User bien supprimé")
@@ -54,16 +59,19 @@ const User = () => {
     
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
     
       }
 
+      // méthode pour attribuer le statut d'administrateur
       function handleAdmin (e){
+        //récupération de l'id
         const id= e.target.value
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
+        //appel à l'API avec le verbe PUT pour modifier
         axios.put(`https://api.nossproducteurslocaux.fr/api/user/${id}`,
         {
             isAdmin:true
@@ -75,16 +83,18 @@ const User = () => {
     
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
     
       }
-
+      // méthode pour destituer le statut d'administrateur
       function DeleteAdmin (e){
+      //récupération de l'id
         const id= e.target.value
         const config = {
             headers: { token: `Bearer ${userToken}` }
         };
+        //appel à l'API avec le verbe PUT pour modifier
         axios.put(`https://api.nossproducteurslocaux.fr/api/user/${id}`,
         {
             isAdmin:false
@@ -95,11 +105,12 @@ const User = () => {
     
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
     
       }
 
+      // filtre en fontion de la valeur de l'input pour chercher un utilisateur
       const searchItems = (searchValue) => {
         setSearchInput(searchValue)
         if (searchInput !== '') {
@@ -113,16 +124,22 @@ const User = () => {
         }
       }
 
+      // Voir tout les utilisateurs admin
       const handleClickAdmin = () => {
+        // Si le rendu montre tout les utilisateurs
         if (searchAdmin === false) {
+          // filtre les utilisateurs et récupérer que ce qui sont admin
             const filteredData = userListe.filter((item) => {
                 return item.isAdmin === true
             })
+            //change la classe et le style du bouton
             document.getElementById('btn-Admin').className = "btnAdminTrue col-3";
             setuserFiltres(filteredData)
             setSearchAdmin(true)
         }
+      // Si le rendu montre tout les admins
         else{
+        //change la classe et le style du bouton
           document.getElementById('btn-Admin').className = "btnAdminFalse col-3";
           setuserFiltres(userListe)
           setSearchAdmin(false)

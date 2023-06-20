@@ -25,24 +25,18 @@ const NewProduct = ({handleClose, setErrorMessage, setSuccessMessage}) => {
         headers: { token: `Bearer ${userToken}` }
     };
 
+    //récupérer les informations des fermiers pour les sélectionner dans le formulaire
     axios.get(`https://api.nossproducteurslocaux.fr/api/fermier`, config)
       .then(response => {
-        console.log(response.data)
         setFermier(response.data)
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 
-  useEffect(()=>{
-    console.log(fermier)
-  }, [fermier])
 
-  useEffect(()=>{
-    console.log(categorie)
-  }, [categorie])
-
+  // méthode pour envoyer les données vers l'API pour créer un produit
   const newProduct = async () => {
     const config = {
       headers: { token: `Bearer ${userToken}` }

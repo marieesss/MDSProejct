@@ -32,48 +32,47 @@ const Register = () => {
 
 
   useEffect(() => {
+    // Vérifie si l'email est valide en utilisant une expression régulière
     setValidEmail(EMAIL_REGEX.test(email));
-    console.log(validEmail)
-}, [email])
-
-useEffect(() => {
+  }, [email]);
+  
+  useEffect(() => {
+    // Vérifie si le mot de passe est valide en utilisant une expression régulière
     setValidPwd(PWD_REGEX.test(password));
+    // Vérifie si le mot de passe correspond à la confirmation du mot de passe
     setValidMatch(password === matchPwd);
-    console.log(validPwd)
-}, [password, matchPwd])
-
-useEffect(() => {
+  }, [password, matchPwd]);
+  
+  useEffect(() => {
+    // Vérifie si le nom d'utilisateur est valide en utilisant une expression régulière
     setValidName(USER_REGEX.test(username));
-    console.log( "Valid name", validName)
-}, [username])
-
-
-
-
-  const handleRegister= async() => {
-
-   try {
-    const res= await axios.post(`https://${BASE_URL}.fr/api/auth/register`, {email,password, username})
-    navigation.navigate('Connexion')
-
-   } catch (error) {
-    if (!err?.response) {
-      seterrorMsg('No Server Response');
-      console.log(err)
-  } else if (err.response?.data?.message) {
-    seterrorMsg(err.response?.data?.message)
-  } else {
-    seterrorMsg('Veuillez choisir un autre username ou adresse email')
-      console.log(err)
+  }, [username]);
+  
+  const handleRegister = async () => {
+    try {
+      // Effectue une requête POST vers l'URL d'inscription avec les données utilisateur
+      const res = await axios.post(`https://${BASE_URL}.fr/api/auth/register`, { email, password, username });
+      // Navigue vers la page de connexion
+      navigation.navigate('Connexion');
+    } catch (err) {
+      // Gère les erreurs lors de la requête
+      if (!err?.response) {
+        seterrorMsg('No Server Response');
+        console.log("erreur");
+      } else if (err.response?.data?.message) {
+        seterrorMsg(err.response?.data?.message);
+      } else {
+        seterrorMsg('Veuillez choisir un autre username ou adresse email');
+        console.log("erreur");
+      }
+    }
   }
-    
-   }
-  }
-
+  
   const handleClick = () => {
+    // Appelle la fonction handleRegister pour gérer l'inscription de l'utilisateur
     handleRegister();
   };
-
+  
 
   return (
 <ScrollView>

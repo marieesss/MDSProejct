@@ -14,15 +14,15 @@ const Fermiers = () => {
   const [data, Setdata] = useState([]);
   const navigation = useNavigation();
 
+  //récupération des fermiers
   useEffect(() => {
     axios.get(`https://${BASE_URL}.fr/api/fermier`)
       .then(response => {
-        console.log(response.data)
         Setdata(response.data);
         
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
 

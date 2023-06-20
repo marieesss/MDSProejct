@@ -32,7 +32,7 @@ const ShowHubs = () => {
         setHub(response.data);
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
   
@@ -42,9 +42,8 @@ const ShowHubs = () => {
       const res = await axios.put(`https://api.nossproducteurslocaux.fr/api/hub/${idProduit}`, {
         name: name,
       }, config);
-      console.log(res.data);
     } catch (error) {
-      console.log(error);
+      console.log("erreur");
     }
   };
   
@@ -62,7 +61,7 @@ const ShowHubs = () => {
         window.location.reload();
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }
   

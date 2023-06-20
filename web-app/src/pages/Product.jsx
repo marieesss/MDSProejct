@@ -24,25 +24,26 @@ const Product = () => {
   const dispatch = useDispatch();
   const URL = process.env.REACT_APP_API_URL;
 
+
+  //récupération de l'id du produit dans l'url
   useEffect(()=>{
+    // je veux récupérer la deuxième partie de l'url séparé par un /
     setId(location.pathname.split('/')[2]);
     window.scrollTo(0, 0)
 }, [location.pathname])
 
+
+//récupération du produit
   useEffect(()=>{
       const getProduct = async ()=> {
         try{
           const res = await axios.get(`https://${URL}/api/product/find/`+ id);
-          console.log(res.data)
           setProduct(res.data)
-          console.log(res.data.categories)
           setCategorie(res.data.categories.toString())
-          console.log(categorie)
           setFermierId(res.data.fermierId)
           setSize(res.data.size)
-          
         }catch(err){
-            console.log(err)
+            console.log("erreur")
         }
       };
       getProduct();
@@ -54,56 +55,52 @@ const Product = () => {
 
 
 
-
+  // récupération des quatres derniers produits de la même catégorie
   useEffect(()=>{
     const getProductCategorie = async ()=> {
       try{
         const res = await axios.get(`https://${URL}/api/product?category=${categorie}` );
         setProductCategorie(res.data.slice(0,4))
-        console.log(ProductCategorie)
       }catch(err){
-        console.log(err)
+        console.log("erreur")
       }
     };
     getProductCategorie();
-   
-  
-    
 }, [categorie])
 
 
-
+// récupération des informations du fermier du produit
   useEffect(()=>{
-    console.log(FermierId)
     const getFermier = async ()=> {
       try{
         const res = await axios.get(`https://${URL}/api/fermier/find/${FermierId}` );
-  
         setFermier(res.data)
       }catch(err){
-        console.log(err)
+        console.log("erreur")
       }
     };
-    getFermier();
-   
-  
-    
+    getFermier(); 
 }, [FermierId])
 
 
+// méthode pour gérer la quantité
   const handleQuantity = (type) => {
+    // baisser la qauntité
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
       setMsg("")
+      //augmenter la quantité
     } else {
       if (quantity < size) {
         setQuantity(quantity + 1);
+        //si le produit n'a pas assez de stock pour autant de quantité
       }else{
         setMsg(`Nous n'avons que ${quantity} kilo(s) restant`)
       }
     }
   };
 
+    // envoie l'action au réducer addProduct pour ajouter un produit au panier
   const handleClick = () => {
     dispatch(
     addProduct({...Product, quantity })

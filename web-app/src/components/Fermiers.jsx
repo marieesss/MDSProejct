@@ -8,29 +8,28 @@ const Fermiers = () => {
    const[fermierId, setFermierId]= useState({});
    const URL = process.env.REACT_APP_API_URL;
 
+
+   //récupération de tout les fermiers
    useEffect (()=>{
     const getFermiers = async ()=> {
       try{
+        // appel à l'API pour récupérer les fermiers
         const res =  await axios.get(`https://${URL}/api/fermier`)
         setFarmer(res.data[0]);
-        console.log(Fermiers)
         setFermierId(res.data[0]._id);
-        console.log(fermierId)
       }catch(err){}
     }
     getFermiers();
   }, [])
 
   useEffect(()=>{
-    
+    //méthode pour récupérer les produits en fontion de l'id du producteur
     const getProducts = async ()=> {
       try{
-        console.log(fermierId)
         const res = await axios.get(`https://${URL}/api/product?fermier=${fermierId}` );
         setProducts(res.data)
-        console.log(products)
       }catch(err){
-        console.log(err)
+        console.log("erreur")
       }
     };
     getProducts();

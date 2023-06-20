@@ -14,6 +14,8 @@ const Fermier = () => {
     const navigate = useNavigate();
     const URL = process.env.REACT_APP_API_URL;
 
+
+    // méthode pour récupérer tout les producteurs
     useEffect(() => {
         axios.get(`https://${URL}/api/fermier`)
           .then(response => {
@@ -21,7 +23,7 @@ const Fermier = () => {
             setFermier(productsData);
           })
           .catch(error => {
-            console.log(error);
+            console.log("erreur");
           });
       }, []);
 

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { View,Text,TouchableOpacity, Image, FlatList, ScrollView} from 'react-native'
 import axios from 'axios'
-import { useNavigation } from '@react-navigation/native';
 import { Linking } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
 
@@ -13,24 +12,19 @@ import HeaderMenu from '../../components/header/Header';
 const Hubs = () => {
   const BASE_URL = process.env.BASE_URL
   const [data, Setdata] = useState([]);
-  const navigation = useNavigation();
 
+
+  // récupération des hubs
   useEffect(() => {
     axios.get(`https://${BASE_URL}.fr/api/hub`)
       .then(response => {
-        console.log(response.data)
         Setdata(response.data);
         
       })
       .catch(error => {
-        console.log(error);
+        console.log("erreur");
       });
   }, []);
-
-  const Navigate =()=>{
-    
-  }
-
 
   return (
     <View>

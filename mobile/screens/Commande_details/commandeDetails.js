@@ -41,7 +41,7 @@ const CommandeDetails = ({ navigation, route }) => {
       setproductsId(res.data[0].products);
       setHubId(res.data[0].hubId);
     } catch (error) {
-      console.log(error);
+      console.log("erreur");
     }
   };
   
@@ -50,9 +50,8 @@ const CommandeDetails = ({ navigation, route }) => {
           try {
             const res = await axios.get(`https://${BASE_URL}.fr/api/hub/find/${hubId}`);
                setHub(res.data[0])
-               console.log(res.data[0])
           } catch (error) {
-            console.log(error)
+            console.log("erreur")
           }
   
         };
@@ -74,7 +73,7 @@ const CommandeDetails = ({ navigation, route }) => {
               products.push({ product: res.data, quantity: productsId[i].quantity });
   
             } catch (error) {
-              console.log(error);
+              console.log("erreur");
             }
           }
           // Met à jour l'état "products" avec les produits récupérés

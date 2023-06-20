@@ -11,7 +11,6 @@ const WebsiteButton = () => {
     Linking.openURL("https://web.nossproducteurslocaux.fr/")
     navigation.navigate('Welcome')
 
-
 };
 
 export default WebsiteButton;
